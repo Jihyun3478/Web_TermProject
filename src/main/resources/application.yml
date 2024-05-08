@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/TermProject?serverTimezone=UTC&characterEncoding=UTF-8
+
+    username: root
+    password: hoon@0815!!
+    hikari:
+      maximum-pool-size: 20
+  mustache:
+    suffix: .html
+  profiles:
+    include: jwt
+
+  jpa:
+    hibernate:
+      # ?? ?? ?? ?? ???? ???: create ?? update
+      # ??? ??: update ?? validate
+      # ???? ? ?? ??: validate ?? none
+      ddl-auto: create
+    open-in-view: false
+    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging.level:
+  org:
+    #    springframework.security: DEBUG
+    hibernate:
+      SQL: DEBUG
+      type:
+        descriptor:
+          sql:
+            BasicBinder: TRACE
