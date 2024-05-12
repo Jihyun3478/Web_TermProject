@@ -21,6 +21,7 @@ public class Club {
     @Column(name = "CLUB_ID")
     private Long id;
     private ClubType clubType;
+    private String name;
 
     @Column(columnDefinition = "LONGTEXT", length = 2000)
     private String introduce;
