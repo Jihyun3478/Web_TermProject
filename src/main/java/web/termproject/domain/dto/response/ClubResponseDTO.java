@@ -1,15 +1,10 @@
 package web.termproject.domain.dto.response;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import web.termproject.domain.entity.ApplyClub;
-import web.termproject.domain.entity.ClubType;
-import web.termproject.domain.entity.Professor;
+import web.termproject.domain.status.ClubType;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

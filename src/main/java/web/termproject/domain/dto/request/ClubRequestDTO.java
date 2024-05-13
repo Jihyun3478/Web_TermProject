@@ -2,8 +2,7 @@ package web.termproject.domain.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import web.termproject.domain.entity.ClubType;
-import web.termproject.domain.entity.Professor;
+import web.termproject.domain.status.ClubType;
 
 import java.util.Date;
 
