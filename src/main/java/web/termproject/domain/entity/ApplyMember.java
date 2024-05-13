@@ -1,15 +1,11 @@
 package web.termproject.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import web.termproject.domain.status.ApplyMemberStatus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -27,7 +23,8 @@ public class ApplyMember {
     @JsonBackReference
     private Member member;
 
-    @OneToMany(mappedBy = "applyMember", fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference
-    private List<Club> clubList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "club_id")
+    @JsonBackReference
+    private Club club;
 }

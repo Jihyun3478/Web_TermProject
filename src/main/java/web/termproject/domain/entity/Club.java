@@ -1,6 +1,5 @@
 package web.termproject.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -40,8 +39,7 @@ public class Club {
     @JoinColumn(name = "apply_club_id")
     private ApplyClub applyClub;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "apply_member_id")
-    @JsonBackReference
-    private ApplyMember applyMember;
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
+    private List<ApplyMember> applyMemberList = new ArrayList<>();
 }
