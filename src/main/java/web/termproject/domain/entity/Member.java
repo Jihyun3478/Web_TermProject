@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import web.termproject.domain.status.RoleType;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +39,7 @@ public class Member {
     @Column(nullable = false)
     private String major;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String phoneNum;
 
     @Column(unique = true)
@@ -47,20 +48,23 @@ public class Member {
     private Date birthDate;
 
     @Enumerated(STRING)
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private RoleType role;
-
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference
-    private List<ApplyClub>  applyClubList = new ArrayList<>();
 
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
     private Board board;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ApplyClub applyClub;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
+    private List<ApplyMember> applyMemberList = new ArrayList<>();
 
     public void encodePassword(PasswordEncoder passwordEncoder){
         this.loginPw = passwordEncoder.encode(loginPw);
     }
     public void addUserAuthority() {
-        this.role = RoleType.USER;
+        this.role = RoleType.MEMBER;
     }
 }

@@ -1,10 +1,11 @@
 package web.termproject.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import web.termproject.domain.status.ApplyClubStatus;
+import web.termproject.domain.status.ClubType;
 
 @Entity
 @Getter
@@ -15,16 +16,20 @@ public class ApplyClub {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "APPLY_CLUB_ID")
     private Long id;
-    private ApplyStatus applyStatus;
+
+    private ClubType clubType;
+    private String clubName;
+    private ApplyClubStatus applyClubStatus;
     private String refuseReason;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    @JsonBackReference
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "club_id")
-    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
+    @OneToOne(mappedBy = "applyClub")
     private Club club;
 }

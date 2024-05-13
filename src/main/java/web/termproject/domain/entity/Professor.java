@@ -33,6 +33,6 @@ public class Professor {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "professor", fetch = FetchType.LAZY)
-    private Club club;
+    @OneToOne(mappedBy = "professor")
+    private ApplyClub applyClub;
 }
