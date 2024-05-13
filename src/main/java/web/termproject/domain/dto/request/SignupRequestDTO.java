@@ -1,12 +1,11 @@
 package web.termproject.domain.dto.request;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import web.termproject.domain.entity.Member;
-import web.termproject.domain.entity.RoleType;
+import web.termproject.domain.status.RoleType;
 
 import java.util.Date;
 
@@ -54,7 +53,7 @@ public class SignupRequestDTO {
                 .email(email)
                 .gender(gender)
                 .birthDate(birthDate)
-                .role(RoleType.USER)
+                .role(RoleType.MEMBER)
                 .build();
     }
 }

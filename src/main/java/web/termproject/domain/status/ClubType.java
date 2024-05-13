@@ -1,4 +1,4 @@
-package web.termproject.domain.entity;
+package web.termproject.domain.status;
 
 public enum ClubType {
     CENTRAL,

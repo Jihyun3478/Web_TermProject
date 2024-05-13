@@ -1,11 +1,12 @@
 package web.termproject.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.w3c.dom.Text;
+import web.termproject.domain.status.ClubType;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,17 +27,21 @@ public class Club {
     @Column(columnDefinition = "LONGTEXT", length = 2000)
     private String introduce;
 
+    @Column(columnDefinition = "LONGTEXT", length = 2000)
+    private String history;
+
     private String imageRoute;
     private Date meetingTime;
     private String president;
     private String vicePresident;
     private String generalAffairs;
 
-    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference
-    private List<ApplyClub> applyClubList = new ArrayList<>();
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "professor_id")
-    private Professor professor;
+    @JoinColumn(name = "apply_club_id")
+    private ApplyClub applyClub;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "apply_member_id")
+    @JsonBackReference
+    private ApplyMember applyMember;
 }
