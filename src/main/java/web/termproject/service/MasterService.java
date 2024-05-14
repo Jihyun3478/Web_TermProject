@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface MasterService {
     List<ClubResponseDTO> getMasterClubsInfo(Long memberId);
-    ClubResponseDTO findMasterClubInfo(Long clubId);
-    ClubResponseDTO updateMasterClubInfo(Long clubId, ClubRequestDTO clubRequestDTO);
+    ClubResponseDTO findMasterClubInfo(Long clubId, Long memberId);
+    ClubResponseDTO updateMasterClubInfo(Long clubId, Long memberId, ClubRequestDTO clubRequestDTO);
 }

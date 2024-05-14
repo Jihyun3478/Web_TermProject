@@ -13,23 +13,23 @@ import java.util.List;
  *
  * 동아리 승인 이후의 시나리오로 작성함
  */
-@RestController("/master")
+@RestController("/master/club")
 @RequiredArgsConstructor
 public class MasterController {
     private final MasterService masterService;
 
-    @GetMapping("/{memberId}/list")
+    @GetMapping("/list/{memberId}/")
     public List<ClubResponseDTO> clubs(@PathVariable("memberId") Long memberId) {
         return masterService.getMasterClubsInfo(memberId);
     }
 
     @GetMapping("/{clubId}")
-    public ClubResponseDTO club(@PathVariable("clubId") Long clubId) {
-        return masterService.findMasterClubInfo(clubId);
+    public ClubResponseDTO club(@PathVariable("clubId") Long clubId, @RequestParam("memberId") Long memberId) {
+        return masterService.findMasterClubInfo(clubId, memberId);
     }
 
     @PostMapping("/{clubId}")
-    public ClubResponseDTO updateMasterClubInfo(@PathVariable("clubId") Long clubId, @RequestBody ClubRequestDTO clubRequestDTO) {
-        return masterService.updateMasterClubInfo(clubId, clubRequestDTO);
+    public ClubResponseDTO updateMasterClubInfo(@PathVariable("clubId") Long clubId, @RequestParam("memberId") Long memberId, @RequestBody ClubRequestDTO clubRequestDTO) {
+        return masterService.updateMasterClubInfo(clubId, memberId, clubRequestDTO);
     }
 }
