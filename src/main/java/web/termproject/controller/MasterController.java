@@ -13,12 +13,13 @@ import java.util.List;
  *
  * 동아리 승인 이후의 시나리오로 작성함
  */
-@RestController("/master/club")
+@RestController
+@RequestMapping("/master/club")
 @RequiredArgsConstructor
 public class MasterController {
     private final MasterService masterService;
 
-    @GetMapping("/list/{memberId}/")
+    @GetMapping("/list/{memberId}")
     public List<ClubResponseDTO> clubs(@PathVariable("memberId") Long memberId) {
         return masterService.getMasterClubsInfo(memberId);
     }
