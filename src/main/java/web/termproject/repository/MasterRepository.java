@@ -18,4 +18,7 @@ public interface MasterRepository extends JpaRepository<Club, Long> {
 
     @Query("SELECT c, p, ac, m FROM Club c JOIN c.applyClub ac JOIN ac.professor p JOIN ac.member m WHERE c.id = :clubId AND ac.applyClubStatus = 0 AND ac.member.id = :memberId")
     Optional<Club> findClubByClubIdAndMemberId(@Param("clubId") Long clubId, @Param("memberId") Long memberId);
+
+    @Query("SELECT am FROM ApplyMember am WHERE am.id = :applyMemberId")
+    Optional<ApplyMember> findApplyMemberByApplyMemberId(@Param("applyMemberId") Long applyMemberId);
 }
