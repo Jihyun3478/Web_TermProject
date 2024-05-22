@@ -39,7 +39,7 @@ public class SignupRequestDTO {
 
     private String email;
     private String gender;
-    private Date birthDate;
+    private String birthDate;
     private RoleType roleType;
 
     public Member toEntity() {

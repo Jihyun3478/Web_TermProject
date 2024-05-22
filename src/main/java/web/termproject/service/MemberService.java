@@ -55,4 +55,9 @@ public class MemberService {
 
         return jwtTokenProvider.generateToken(authentication);
     }
+
+    @Transactional
+    public Member findByLoginId(String loginId) throws BadRequestException {
+        return memberRepository.findByLoginId(loginId).orElseThrow(() -> new BadRequestException("존재하지 않는 사용자입니다."));
+    }
 }

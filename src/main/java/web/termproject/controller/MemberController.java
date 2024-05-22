@@ -1,6 +1,7 @@
 package web.termproject.controller;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,10 @@ import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.LoginRequestDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.ApiResponse;
+import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.dto.response.ResponseCode;
+import web.termproject.domain.entity.Member;
+import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.MemberService;
 
 @RestController
@@ -59,5 +63,42 @@ public class MemberController {
         log.info("jwtToken accessToken = {}, refreshToken = {}", jwtToken.getAccessToken(), jwtToken.getRefreshToken());
 
         return jwtToken;
+    }
+
+    @GetMapping("/api/memberInfo")
+    public ResponseEntity<MemberResponseDTO> getMemberInfo() throws BadRequestException {
+        String loginId = SecurityUtil.getLoginId();
+        Member findMember = memberService.findByLoginId(loginId);
+        MemberResponseDTO memberResponseDTO = MemberResponseDTO.builder()
+                .id(findMember.getId())
+                .loginId(findMember.getLoginId())
+                .loginPw(findMember.getLoginPw())
+                .name(findMember.getName())
+                .stuNum(findMember.getStuNum())
+                .major(findMember.getMajor())
+                .phoneNum(findMember.getPhoneNum())
+                .email(findMember.getEmail())
+                .gender(findMember.getGender())
+                .birthDate(findMember.getBirthDate())
+                .build();
+
+        return ResponseEntity.ok(memberResponseDTO);
+    }
+
+    @PostConstruct
+    public void initData() throws BadRequestException {
+        SignupRequestDTO member1 = SignupRequestDTO.builder()
+                .loginId("test1234")
+                .loginPw("test1234")
+                .name("홍길동")
+                .stuNum("2024")
+                .major("컴퓨터소프트웨어공학과")
+                .phoneNum("00000000000")
+                .email("홍길동@kumoh.ac.kr")
+                .gender("남")
+                .birthDate("2000-01-01")
+                .build();
+
+        memberService.createMember(member1);
     }
 }

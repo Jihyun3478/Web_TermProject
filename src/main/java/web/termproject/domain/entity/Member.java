@@ -45,7 +45,7 @@ public class Member {
     @Column(unique = true)
     private String email;
     private String gender;
-    private Date birthDate;
+    private String birthDate;
 
     @Enumerated(STRING)
     @Column(nullable = false)
