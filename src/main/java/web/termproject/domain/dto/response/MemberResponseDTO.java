@@ -7,6 +7,8 @@ import lombok.Getter;
 @Getter
 public class MemberResponseDTO {
     private Long id;
+    private String loginId;
+    private String loginPw;
     private String name;
     private String stuNum;
     private String major;
