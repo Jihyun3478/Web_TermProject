@@ -9,8 +9,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class ClubRequestDTO {
-    private Long id;
-    private ClubType clubType;
     private String name;
     private String introduce;
     private String imageRoute;
