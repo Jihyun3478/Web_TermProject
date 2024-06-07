@@ -29,7 +29,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-        configuration.setAllowedMethods(List.of("OPTIONS", "GET", "POST", "PATCH", "DELETE"));
+        configuration.setAllowedMethods(List.of("OPTIONS", "GET", "POST", "PATCH", "DELETE", "PUT"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
