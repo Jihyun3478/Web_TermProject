@@ -1,10 +1,14 @@
 package web.termproject.domain.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberResponseDTO {
     private Long id;
     private String loginId;
