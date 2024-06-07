@@ -29,10 +29,7 @@ public interface ApplyMemberRepository extends JpaRepository<ApplyMember, Long> 
             ")")
     List<Club> findClubByNotMemberClubId(@Param("memberId") Long memberId);
 
-    @Query("SELECT CASE\n" +
-            "           WHEN (SELECT COUNT(am) FROM ApplyMember am WHERE am.member.id = :memberId AND am.club.id = :clubId) > 0 THEN TRUE\n" +
-            "           ELSE FALSE\n" +
-            "       END\n" +
-            "FROM ApplyMember am\n")
-    boolean existsApplyMemberByMemberIdAndClubId(@Param("clubId") Long clubId, @Param("memberId") Long memberId);
+    @Query("SELECT CASE WHEN COUNT(am) > 0 THEN TRUE ELSE FALSE END FROM ApplyMember am WHERE am.member.id = :memberId AND am.club.id = :clubId")
+    boolean existsApplyMemberByMemberIdAndClubId(@Param("memberId") Long memberId, @Param("clubId") Long clubId);
+
 }
