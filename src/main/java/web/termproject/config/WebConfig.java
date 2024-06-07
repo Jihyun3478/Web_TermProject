@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowedHeaders("*")  // 모든 헤더 허용
-                .allowedMethods("OPTIONS", "GET", "POST", "PATCH", "DELETE")
+                .allowedMethods("OPTIONS", "GET", "POST", "PATCH", "DELETE", "PUT")
                 .allowCredentials(true)
                 .maxAge(3000);
     }

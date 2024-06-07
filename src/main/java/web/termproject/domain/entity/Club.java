@@ -42,4 +42,8 @@ public class Club {
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<ApplyMember> applyMemberList = new ArrayList<>();
+
+    public void updateImageRouteInfo(String imageRoute) {
+        this.imageRoute = imageRoute;
+    }
 }
