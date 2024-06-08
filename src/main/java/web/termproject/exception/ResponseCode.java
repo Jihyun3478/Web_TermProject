@@ -1,4 +1,4 @@
-package web.termproject.domain.dto.response.status;
+package web.termproject.exception;
 
 import lombok.Getter;
 

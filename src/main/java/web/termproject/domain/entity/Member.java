@@ -54,7 +54,7 @@ public class Member {
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
     private Board board;
 
-    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "member")
     private ApplyClub applyClub;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, orphanRemoval = true)

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
 import web.termproject.domain.dto.response.ApiResponse;
 import web.termproject.domain.dto.response.ApplyClubResponseDTO;
-import web.termproject.domain.dto.response.status.ResponseCode;
 import web.termproject.domain.entity.ApplyClub;
+import web.termproject.exception.ResponseCode;
 import web.termproject.service.ApplyClubService;
 
 import java.util.List;
@@ -22,12 +22,10 @@ public class ApplyClubController {
     /**
      * 동아리 등록 신청
      * @param requestDTO
-     * @param memberId
-     * @param professorId
      */
     @PostMapping("/create")
-    public ResponseEntity<?> createApplyClub(ApplyClubRequestDTO requestDTO, @RequestParam(name = "memberId") String memberId, @RequestParam(name = "professorId") String professorId) {
-        ApplyClub applyClub = applyClubService.createApplyClub(requestDTO, memberId, professorId);
+    public ResponseEntity<?> createApplyClub(@RequestBody ApplyClubRequestDTO requestDTO) {
+        ApplyClub applyClub = applyClubService.createApplyClub(requestDTO);
         ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
                 .clubType(applyClub.getClubType())
                 .clubName(applyClub.getClubName())
