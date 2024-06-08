@@ -25,7 +25,7 @@ public class ApplyClubController {
      * @param memberId
      * @param professorId
      */
-    @PostMapping("/applyClub/create")
+    @PostMapping("/create")
     public ResponseEntity<?> createApplyClub(ApplyClubRequestDTO requestDTO, @RequestParam(name = "memberId") String memberId, @RequestParam(name = "professorId") String professorId) {
         ApplyClub applyClub = applyClubService.createApplyClub(requestDTO, memberId, professorId);
         ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()

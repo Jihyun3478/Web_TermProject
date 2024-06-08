@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.LoginRequestDTO;
+import web.termproject.domain.dto.request.PSignupRequestDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.ApiResponse;
 import web.termproject.domain.dto.response.MemberResponseDTO;
@@ -17,6 +18,7 @@ import web.termproject.domain.dto.response.status.ResponseCode;
 import web.termproject.domain.entity.Member;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.MemberService;
+import web.termproject.service.ProfessorService;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ import web.termproject.service.MemberService;
 public class MemberController {
 
     private final MemberService memberService;
+    private final ProfessorService professorService;
 
     /* 회원가입 */
     @PostMapping("/api/signup")
@@ -98,5 +101,16 @@ public class MemberController {
                 .build();
 
         memberService.createMember(member1);
+
+        PSignupRequestDTO professor1 = PSignupRequestDTO.builder()
+                .loginId("pTest1234")
+                .loginPw("pTest1234")
+                .name("교수님1")
+                .major("컴퓨터소프트웨어공학과")
+                .phoneNum("11111111111")
+                .email("교수님@kumoh.ac.kr")
+                .build();
+
+        professorService.createProfessor(professor1);
     }
 }
