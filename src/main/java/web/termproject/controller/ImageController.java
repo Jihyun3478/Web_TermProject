@@ -21,10 +21,4 @@ public class ImageController {
     public Resource getImage(String imagePath) throws MalformedURLException {
         return imageService.getImage(imagePath);
     }
-
-    @PostMapping(value = "/upload",
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, String> uploadImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("imagePath") String imagePath) throws IOException {
-        return imageService.uploadImage(file, imagePath);
-    }
 }

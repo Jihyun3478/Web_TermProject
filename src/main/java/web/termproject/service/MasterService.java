@@ -12,10 +12,7 @@ import java.util.List;
 
 public interface MasterService {
     List<ClubResponseDTO> getMasterClubsInfo(String loginId) throws BadRequestException;
-    ClubResponseDTO findMasterClubInfo(Long clubId, Long memberId);
     ClubResponseDTO updateMasterClubInfo(Long clubId, String memberId, ClubRequestDTO clubRequestDTO) throws BadRequestException;
-    List<ApplyMemberReponseDTO> getApplyMemberList(Long clubId);
-
     ResponseEntity<String> updateApplyMemberStatus(Long applyMemberId, ApplyMemberStatus applyMemberStatus);
 
     void updateMasterClubImgUrl(Long clubId, String imgUrl);

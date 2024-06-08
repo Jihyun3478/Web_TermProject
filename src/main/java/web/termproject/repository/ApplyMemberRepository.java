@@ -8,6 +8,7 @@ import web.termproject.domain.entity.Club;
 import web.termproject.domain.entity.Member;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ApplyMemberRepository extends JpaRepository<ApplyMember, Long> {
     @Query("SELECT DISTINCT c, p, m\n" +
@@ -30,6 +31,6 @@ public interface ApplyMemberRepository extends JpaRepository<ApplyMember, Long> 
     List<Club> findClubByNotMemberClubId(@Param("memberId") Long memberId);
 
     @Query("SELECT CASE WHEN COUNT(am) > 0 THEN TRUE ELSE FALSE END FROM ApplyMember am WHERE am.member.id = :memberId AND am.club.id = :clubId")
-    boolean existsApplyMemberByMemberIdAndClubId(@Param("memberId") Long memberId, @Param("clubId") Long clubId);
+    boolean existsApplyMemberByMemberIdAndClubId(@Param("clubId") Long clubId, @Param("memberId") Long memberId);
 
 }
