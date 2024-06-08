@@ -14,8 +14,8 @@ import web.termproject.domain.dto.request.PSignupRequestDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.ApiResponse;
 import web.termproject.domain.dto.response.MemberResponseDTO;
-import web.termproject.domain.dto.response.status.ResponseCode;
 import web.termproject.domain.entity.Member;
+import web.termproject.exception.ResponseCode;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.MemberService;
 import web.termproject.service.ProfessorService;
@@ -103,7 +103,7 @@ public class MemberController {
         memberService.createMember(member1);
 
         PSignupRequestDTO professor1 = PSignupRequestDTO.builder()
-                .loginId("pTest1234")
+                .pLoginId("pTest1234")
                 .loginPw("pTest1234")
                 .name("교수님1")
                 .major("컴퓨터소프트웨어공학과")

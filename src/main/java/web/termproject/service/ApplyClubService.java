@@ -6,6 +6,6 @@ import web.termproject.domain.entity.ApplyClub;
 import java.util.List;
 
 public interface ApplyClubService {
-    ApplyClub createApplyClub(ApplyClubRequestDTO requestDTO, String memberId, String professorId);
+    ApplyClub createApplyClub(ApplyClubRequestDTO requestDTO);
     List<ApplyClub> findAll();
 }
