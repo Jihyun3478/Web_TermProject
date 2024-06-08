@@ -1,21 +1,19 @@
 package web.termproject.controller;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.LoginRequestDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.ApiResponse;
 import web.termproject.domain.dto.response.MemberResponseDTO;
-import web.termproject.domain.dto.response.ResponseCode;
+import web.termproject.domain.dto.response.status.ResponseCode;
 import web.termproject.domain.entity.Member;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.MemberService;
@@ -29,25 +27,25 @@ public class MemberController {
 
     /* 회원가입 */
     @PostMapping("/api/signup")
-    public ResponseEntity<ApiResponse> signup(@Valid @RequestBody SignupRequestDTO requestDTO) throws BadRequestException {
+    public ResponseEntity<ApiResponse> signup(@Valid @RequestBody SignupRequestDTO requestDTO) {
         memberService.createMember(requestDTO);
 
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.Created, "회원가입 완료", requestDTO));
     }
 
     @GetMapping("/confirmLoginId/{loginId}")
-    public ResponseEntity<String> confirmId(@PathVariable("loginId") String loginId) throws BadRequestException {
+    public ResponseEntity<String> confirmId(@PathVariable("loginId") String loginId) {
         if(memberService.confirmId(loginId)) {
-            throw new BadRequestException("이미 사용중인 아이디입니다.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } else {
             return ResponseEntity.ok("사용 가능한 아이디 입니다.");
         }
     }
 
     @GetMapping("/confirmNickname/{nickname}")
-    public ResponseEntity<String> confirmNickname(@PathVariable("nickname") String nickname) throws BadRequestException {
+    public ResponseEntity<String> confirmNickname(@PathVariable("nickname") String nickname) {
         if(memberService.confirmNickname(nickname)) {
-            throw new BadRequestException("이미 사용중인 닉네임입니다.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } else {
             return ResponseEntity.ok("사용 가능한 닉네임 입니다.");
         }
@@ -66,7 +64,7 @@ public class MemberController {
     }
 
     @GetMapping("/api/memberInfo")
-    public ResponseEntity<MemberResponseDTO> getMemberInfo() throws BadRequestException {
+    public ResponseEntity<MemberResponseDTO> getMemberInfo() {
         String loginId = SecurityUtil.getLoginId();
         Member findMember = memberService.findByLoginId(loginId);
         MemberResponseDTO memberResponseDTO = MemberResponseDTO.builder()
@@ -86,7 +84,7 @@ public class MemberController {
     }
 
     @PostConstruct
-    public void initData() throws BadRequestException {
+    public void initData() {
         SignupRequestDTO member1 = SignupRequestDTO.builder()
                 .loginId("test1234")
                 .loginPw("test1234")

@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import web.termproject.domain.dto.request.ClubRequestDTO;
 import web.termproject.domain.dto.response.*;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MasterServiceImpl implements MasterService {
     private final MasterRepository masterRepository;
     private final ModelMapper modelMapper;

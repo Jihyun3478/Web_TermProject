@@ -3,6 +3,7 @@ package web.termproject.service;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class ImageServiceImpl implements ImageService {
     private static String uploadDirectory = System.getProperty("user.dir") + "/img";
     @Override
