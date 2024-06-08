@@ -1,13 +1,15 @@
 package web.termproject.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import web.termproject.domain.dto.request.BoardRequestDTO;
 import web.termproject.domain.status.BoardType;
 
 @Entity
 @Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BaseTimeEntity{
 
@@ -29,4 +31,8 @@ public class Board extends BaseTimeEntity{
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    private String imageRoute;
+    private String videoRoute;
+
 }
