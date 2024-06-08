@@ -40,11 +40,6 @@ public class MasterController {
         return masterService.getMasterClubsInfo(loginId);
     }
 
-    @GetMapping("/{clubId}")
-    public ClubResponseDTO club(@PathVariable("clubId") Long clubId, @RequestParam("memberId") Long memberId) {
-        return masterService.findMasterClubInfo(clubId, memberId);
-    }
-
     @PutMapping("/{clubId}")
     public ClubResponseDTO updateMasterClubInfo(@PathVariable("clubId") Long clubId, @RequestBody ClubRequestDTO clubRequestDTO) throws BadRequestException {
         String loginId = SecurityUtil.getLoginId();
@@ -57,11 +52,6 @@ public class MasterController {
         Map<String, String> imgUrl = imageService.uploadImage(image, "club/" + clubId);
         masterService.updateMasterClubImgUrl(clubId, imgUrl.get("url"));
         return imgUrl;
-    }
-
-    @GetMapping("/applyMember/{clubId}")
-    public List<ApplyMemberReponseDTO> getApplyMemberList(@PathVariable("clubId") Long clubId) {
-        return masterService.getApplyMemberList(clubId);
     }
 
     @PostMapping("/applyMember/{applyMemberId}")
