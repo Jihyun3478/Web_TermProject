@@ -1,5 +1,6 @@
 package web.termproject.service;
 
+import org.springframework.security.core.Authentication;
 import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.entity.Member;
@@ -10,4 +11,5 @@ public interface MemberService {
     boolean confirmNickname(String nickname);
     JwtTokenDTO signIn(String username, String password);
     Member findByLoginId(String loginId);
+    Member processOAuthPostLogin(Authentication authentication);
 }
