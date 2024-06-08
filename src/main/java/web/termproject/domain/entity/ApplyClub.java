@@ -1,15 +1,15 @@
 package web.termproject.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import web.termproject.domain.status.ApplyClubStatus;
 import web.termproject.domain.status.ClubType;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ApplyClub {
 
     @Id
@@ -19,7 +19,7 @@ public class ApplyClub {
 
     private ClubType clubType;
     private String clubName;
-    private ApplyClubStatus applyClubStatus;
+    private ApplyClubStatus applyClubStatus = ApplyClubStatus.WAIT;
     private String refuseReason;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -32,4 +32,13 @@ public class ApplyClub {
 
     @OneToOne(mappedBy = "applyClub")
     private Club club;
+
+    public ApplyClub createApplyClub(ClubType clubType, String clubName, Member member, Professor professor) {
+        return ApplyClub.builder()
+                .clubType(clubType)
+                .clubName(clubName)
+                .member(member)
+                .professor(professor)
+                .build();
+    }
 }

@@ -1,4 +1,4 @@
-package web.termproject.domain.dto.response;
+package web.termproject.domain.dto.response.status;
 
 import lombok.Getter;
 
