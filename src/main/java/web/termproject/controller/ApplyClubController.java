@@ -10,6 +10,7 @@ import web.termproject.domain.entity.ApplyClub;
 import web.termproject.exception.ResponseCode;
 import web.termproject.service.ApplyClubService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,7 @@ public class ApplyClubController {
     public ResponseEntity<?> createApplyClub(@RequestBody ApplyClubRequestDTO requestDTO) {
         ApplyClub applyClub = applyClubService.createApplyClub(requestDTO);
         ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
+                .applyClubStatus(applyClub.getApplyClubStatus())
                 .clubType(applyClub.getClubType())
                 .clubName(applyClub.getClubName())
                 .name(applyClub.getMember().getName())
@@ -46,6 +48,24 @@ public class ApplyClubController {
     @GetMapping("/list")
     public ResponseEntity<?> applyClubList() {
         List<ApplyClub> applyClubList = applyClubService.findAll();
-        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, applyClubList));
+        List<ApplyClubResponseDTO> responseDTOS = new ArrayList<>();
+
+        for (ApplyClub applyClub : applyClubList) {
+            ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
+                    .applyClubStatus(applyClub.getApplyClubStatus())
+
+                    .clubType(applyClub.getClubType())
+                    .clubName(applyClub.getClubName())
+                    .name(applyClub.getMember().getName())
+                    .major(applyClub.getMember().getMajor())
+                    .stuNum(applyClub.getMember().getStuNum())
+                    .phoneNum(applyClub.getMember().getPhoneNum())
+                    .pName(applyClub.getProfessor().getName())
+                    .pMajor(applyClub.getProfessor().getMajor())
+                    .pPhoneNum(applyClub.getProfessor().getPhoneNum())
+                    .build();
+            responseDTOS.add(responseDTO);
+        }
+        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTOS));
     }
 }

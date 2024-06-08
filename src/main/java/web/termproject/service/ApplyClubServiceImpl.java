@@ -2,6 +2,7 @@ package web.termproject.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
 import web.termproject.domain.entity.ApplyClub;
 import web.termproject.domain.entity.Member;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ApplyClubServiceImpl implements ApplyClubService {
 
     private final MemberRepository memberRepository;
@@ -34,8 +36,14 @@ public class ApplyClubServiceImpl implements ApplyClubService {
         return applyClubRepository.save(saveApplyClub);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<ApplyClub> findAll() {
         return applyClubRepository.findAll();
+    }
+
+    @Override
+    public ApplyClub findById(Long id) {
+        return applyClubRepository.findById(id).orElseThrow(() -> new CustomIllegalArgumentException(ErrorCode.APPLY_CLUB_NOT_FOUND, "동아리 신청내역이 존재하지 않습니다."));
     }
 }

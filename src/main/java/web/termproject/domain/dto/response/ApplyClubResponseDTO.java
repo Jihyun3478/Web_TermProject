@@ -2,11 +2,14 @@ package web.termproject.domain.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
+import web.termproject.domain.status.ApplyClubStatus;
 import web.termproject.domain.status.ClubType;
 
 @Getter
 @Builder
 public class ApplyClubResponseDTO {
+    private String refuseReason;
+    private ApplyClubStatus applyClubStatus;
     private ClubType clubType;
     private String clubName;
     private String name;
