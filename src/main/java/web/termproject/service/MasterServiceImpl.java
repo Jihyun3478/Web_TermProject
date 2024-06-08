@@ -43,14 +43,6 @@ public class MasterServiceImpl implements MasterService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public ClubResponseDTO findMasterClubInfo(Long clubId, Long memberId) {
-        Optional<Club> optionalClub = masterRepository.findClubByClubIdAndMemberId(clubId, memberId);
-        if(optionalClub.isPresent())
-            return getClubResponseDTO(optionalClub.get());
-        else throw new ResponseStatusException(HttpStatus.NOT_FOUND, ErrorCode.NOT_FOUND_ENTITY.getMessage());
-    }
-
     private ClubResponseDTO getClubResponseDTO(Club club) {
         ClubResponseDTO clubResponseDTO = modelMapper.map(club, ClubResponseDTO.class);
         List<ApplyMemberReponseDTO> applyMemberReponseDTOList = masterRepository.findApplyMemberByClubId(club.getId()).stream()
@@ -78,16 +70,6 @@ public class MasterServiceImpl implements MasterService {
             return getClubResponseDTO(club);
         }
         else throw new ResponseStatusException(HttpStatus.NOT_FOUND, ErrorCode.NOT_FOUND_ENTITY.getMessage());
-    }
-
-    @Override
-    public List<ApplyMemberReponseDTO> getApplyMemberList(Long clubId) {
-        if(!masterRepository.existsById(clubId)) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return masterRepository.findApplyMemberByClubId(clubId).stream().map(applyMember -> {
-            ApplyMemberReponseDTO applyMemberReponseDTO = modelMapper.map(applyMember, ApplyMemberReponseDTO.class);
-            applyMemberReponseDTO.setMember(modelMapper.map(applyMember.getMember(), MemberResponseDTO.class));
-            return applyMemberReponseDTO;
-        }).collect(Collectors.toList());
     }
 
     @Override
