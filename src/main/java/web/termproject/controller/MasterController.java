@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import web.termproject.domain.dto.request.ClubRequestDTO;
-import web.termproject.domain.dto.response.ApplyMemberReponseDTO;
 import web.termproject.domain.dto.response.ClubResponseDTO;
 import web.termproject.domain.status.ApplyMemberStatus;
 import web.termproject.security.util.SecurityUtil;
