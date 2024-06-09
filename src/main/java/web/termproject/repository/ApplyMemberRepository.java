@@ -27,7 +27,8 @@ public interface ApplyMemberRepository extends JpaRepository<ApplyMember, Long> 
             "    FROM ApplyMember am\n" +
             "    WHERE am.club = c\n" +
             "    AND am.applyMemberStatus = 1\n" +
-            ")")
+            ")" +
+            "AND ac.applyClubStatus = 0")
     List<Club> findClubByNotMemberClubId(@Param("memberId") Long memberId);
 
     @Query("SELECT CASE WHEN COUNT(am) > 0 THEN TRUE ELSE FALSE END FROM ApplyMember am WHERE am.member.id = :memberId AND am.club.id = :clubId")

@@ -125,15 +125,15 @@ public class ApplyMemberServiceImpl implements ApplyMemberService {
     }
 
     @Override
-    public List<ClubResponseDTO> getClubList(String loginId) throws BadRequestException {
+    public List<ClubResponseDTO> getNotApplyMemberClubList(String loginId) throws BadRequestException {
         Member findMember = memberService.findByLoginId(loginId);
 
         return applyMemberRepository.findClubByNotMemberClubId(findMember.getId()).stream()
-                .map(this::apply)
+                .map(this::NotApplyMemberClubListMerge)
                 .toList();
     }
 
-    private ClubResponseDTO apply(Club club) {
+    private ClubResponseDTO NotApplyMemberClubListMerge(Club club) {
         ClubResponseDTO clubResponseDTO = modelMapper.map(club, ClubResponseDTO.class);
         clubResponseDTO.setProfessor(modelMapper.map(club.getApplyClub().getProfessor(), ProfessorResponseDTO.class));
         clubResponseDTO.setMasterMember(modelMapper.map(club.getApplyClub().getMember(), MemberResponseDTO.class));
