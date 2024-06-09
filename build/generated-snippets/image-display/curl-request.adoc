@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/image/display?imagePath=test.jpg' -i -X GET \
+    -H 'Accept: image/jpeg'
+----

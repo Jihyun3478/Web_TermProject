@@ -1,0 +1,21 @@
+[source,json,options="nowrap"]
+----
+{
+  "code" : 200000,
+  "message" : "OK",
+  "data" : [ {
+    "applyClubId" : null,
+    "applyClubStatus" : "WAIT",
+    "clubType" : "중앙동아리",
+    "clubName" : "Coding Club",
+    "name" : "John Doe",
+    "major" : "Computer Science",
+    "stuNum" : "20210001",
+    "phoneNum" : "010-1234-5678",
+    "refuseReason" : null,
+    "pname" : "Prof. Smith",
+    "pmajor" : "Software Engineering",
+    "pphoneNum" : "010-9876-5432"
+  } ]
+}
+----

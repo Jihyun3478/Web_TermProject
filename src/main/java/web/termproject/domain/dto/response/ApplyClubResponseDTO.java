@@ -8,7 +8,7 @@ import web.termproject.domain.status.ClubType;
 @Getter
 @Builder
 public class ApplyClubResponseDTO {
-    private String refuseReason;
+    private Long applyClubId;
     private ApplyClubStatus applyClubStatus;
     private ClubType clubType;
     private String clubName;
@@ -19,4 +19,5 @@ public class ApplyClubResponseDTO {
     private String pName;
     private String pMajor;
     private String pPhoneNum;
+    private String refuseReason;
 }

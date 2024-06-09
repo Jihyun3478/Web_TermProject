@@ -1,0 +1,9 @@
+[source,json,options="nowrap"]
+----
+{
+  "clubType" : "중앙동아리",
+  "clubName" : "동아리1",
+  "loginId" : "test1234",
+  "professorLoginId" : "pTest1234"
+}
+----

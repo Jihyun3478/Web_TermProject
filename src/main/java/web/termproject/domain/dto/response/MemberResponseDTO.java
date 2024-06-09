@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import web.termproject.domain.status.RoleType;
 
 @Builder
 @Getter
@@ -20,4 +21,5 @@ public class MemberResponseDTO {
     private String email;
     private String gender;
     private String birthDate;
+    private RoleType role;
 }

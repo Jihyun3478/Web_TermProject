@@ -15,6 +15,7 @@ import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.ApiResponse;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
+import web.termproject.domain.status.RoleType;
 import web.termproject.exception.ResponseCode;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.MemberService;
@@ -31,9 +32,9 @@ public class MemberController {
     /* 회원가입 */
     @PostMapping("/api/signup")
     public ResponseEntity<ApiResponse> signup(@Valid @RequestBody SignupRequestDTO requestDTO) {
-        memberService.createMember(requestDTO);
+        MemberResponseDTO responseDTO = memberService.createMember(requestDTO);
 
-        return ResponseEntity.ok(ApiResponse.response(ResponseCode.Created, "회원가입 완료", requestDTO));
+        return ResponseEntity.ok(ApiResponse.response(ResponseCode.Created, "회원가입 완료", responseDTO));
     }
 
     @GetMapping("/confirmLoginId/{loginId}")
@@ -70,6 +71,9 @@ public class MemberController {
     public ResponseEntity<MemberResponseDTO> getMemberInfo() {
         String loginId = SecurityUtil.getLoginId();
         Member findMember = memberService.findByLoginId(loginId);
+        if (findMember == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
         MemberResponseDTO memberResponseDTO = MemberResponseDTO.builder()
                 .id(findMember.getId())
                 .loginId(findMember.getLoginId())
@@ -86,6 +90,8 @@ public class MemberController {
         return ResponseEntity.ok(memberResponseDTO);
     }
 
+
+
     @PostConstruct
     public void initData() {
         SignupRequestDTO member1 = SignupRequestDTO.builder()
@@ -94,7 +100,7 @@ public class MemberController {
                 .name("홍길동")
                 .stuNum("2024")
                 .major("컴퓨터소프트웨어공학과")
-                .phoneNum("00000000000")
+                .phoneNum("000-0000-0000")
                 .email("홍길동@kumoh.ac.kr")
                 .gender("남")
                 .birthDate("2000-01-01")
@@ -102,12 +108,27 @@ public class MemberController {
 
         memberService.createMember(member1);
 
+        SignupRequestDTO admin1 = SignupRequestDTO.builder()
+                .loginId("admin1234")
+                .loginPw("admin1234")
+                .name("관리자")
+                .stuNum("1111")
+                .major("컴퓨터소프트웨어공학과")
+                .phoneNum("111-1111-1111")
+                .email("admin@kumoh.ac.kr")
+                .gender("남")
+                .birthDate("2000-01-01")
+                .role(RoleType.ADMIN)
+                .build();
+
+        memberService.createMember(admin1);
+
         PSignupRequestDTO professor1 = PSignupRequestDTO.builder()
                 .pLoginId("pTest1234")
                 .loginPw("pTest1234")
                 .name("교수님1")
                 .major("컴퓨터소프트웨어공학과")
-                .phoneNum("11111111111")
+                .phoneNum("222-2222-2222")
                 .email("교수님@kumoh.ac.kr")
                 .build();
 

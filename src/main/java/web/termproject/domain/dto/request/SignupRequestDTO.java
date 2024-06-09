@@ -40,7 +40,7 @@ public class SignupRequestDTO {
     private String email;
     private String gender;
     private String birthDate;
-    private RoleType roleType;
+    private RoleType role;
 
     public Member toEntity() {
         return Member.builder()

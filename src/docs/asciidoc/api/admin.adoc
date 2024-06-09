@@ -1,0 +1,18 @@
+=== 동아리 신청 목록 조회
+
+include::{snippets}/apply-club-list/http-request.adoc[]
+include::{snippets}/apply-club-list/http-response.adoc[]
+include::{snippets}/apply-club-list/response-fields.adoc[]
+
+=== 동아리 신청 승인
+
+// include::{snippets}/accept-club/http-request.adoc[]
+// include::{snippets}/accept-club/http-response.adoc[]
+// include::{snippets}/accept-club/response-fields.adoc[]
+
+=== 동아리 신청 거절
+
+include::{snippets}/refuse-club/http-request.adoc[]
+include::{snippets}/refuse-club/request-fields.adoc[]
+include::{snippets}/refuse-club/http-response.adoc[]
+include::{snippets}/refuse-club/response-fields.adoc[]

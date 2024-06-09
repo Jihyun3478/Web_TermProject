@@ -1,20 +1,17 @@
 package web.termproject.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import web.termproject.domain.dto.request.RefuseApplyClubDTO;
-import web.termproject.domain.dto.response.*;
+import web.termproject.domain.dto.response.ApiResponse;
+import web.termproject.domain.dto.response.ApplyClubResponseDTO;
+import web.termproject.domain.dto.response.ClubResponseDTO;
 import web.termproject.domain.entity.ApplyClub;
-import web.termproject.domain.entity.Club;
-import web.termproject.domain.status.ApplyClubStatus;
-import web.termproject.domain.status.ClubType;
 import web.termproject.exception.ResponseCode;
 import web.termproject.service.ApplyClubService;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,61 +20,39 @@ import java.util.List;
 public class AdminController {
 
     private final ApplyClubService applyClubService;
-    private final ModelMapper modelMapper;
 
+    /**
+     * 동아리 신청 목록 조회
+     */
+    @PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
     @GetMapping("/list")
     public ResponseEntity<?> applyClubList() {
-        List<ApplyClub> applyClubList = applyClubService.findAll();
-        List<ApplyClubResponseDTO> responseDTOS = new ArrayList<>();
-
-        for (ApplyClub applyClub : applyClubList) {
-            ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
-                    .applyClubStatus(applyClub.getApplyClubStatus())
-                    .clubType(applyClub.getClubType())
-                    .clubName(applyClub.getClubName())
-                    .name(applyClub.getMember().getName())
-                    .major(applyClub.getMember().getMajor())
-                    .stuNum(applyClub.getMember().getStuNum())
-                    .phoneNum(applyClub.getMember().getPhoneNum())
-                    .pName(applyClub.getProfessor().getName())
-                    .pMajor(applyClub.getProfessor().getMajor())
-                    .pPhoneNum(applyClub.getProfessor().getPhoneNum())
-                    .build();
-            responseDTOS.add(responseDTO);
-        }
+        List<ApplyClubResponseDTO> responseDTOS = applyClubService.findAll();
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTOS));
     }
 
+    /**
+     * 동아리 신청 승인
+     * @param applyClubId
+     */
+    @PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
     @PostMapping("/accept/{applyClubId}")
     public ResponseEntity<?> acceptClub(@PathVariable("applyClubId") Long applyClubId) {
         ApplyClub applyClub = applyClubService.findById(applyClubId);
-        Club club = applyClubService.createClub(applyClub);
+        ClubResponseDTO responseDTO = applyClubService.createClub(applyClub);
 
-        ClubResponseDTO responseDTO = ClubResponseDTO.builder()
-                .clubType(club.getClubType())
-                .name(club.getName())
-                .build();
-        responseDTO.setProfessor(modelMapper.map(applyClub.getProfessor(), ProfessorResponseDTO.class));
-        responseDTO.setMasterMember(modelMapper.map(applyClub.getMember(), MemberResponseDTO.class));
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTO));
     }
 
+    /**
+     * 동아리 신청 거절
+     * @param applyClubId
+     * @param refuseApplyClubDTO
+     */
+    @PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
     @PostMapping("/refuse/{applyClubId}")
     public ResponseEntity<?> refuseClub(@PathVariable("applyClubId") Long applyClubId, @RequestBody RefuseApplyClubDTO refuseApplyClubDTO) {
-        ApplyClub applyClub = applyClubService.findById(applyClubId);
-        ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
-                .refuseReason(refuseApplyClubDTO.getRefuseReason())
-                .applyClubStatus(ApplyClubStatus.REFUSE)
-                .clubType(applyClub.getClubType())
-                .clubName(applyClub.getClubName())
-                .name(applyClub.getMember().getName())
-                .major(applyClub.getMember().getMajor())
-                .stuNum(applyClub.getMember().getStuNum())
-                .phoneNum(applyClub.getMember().getPhoneNum())
-                .pName(applyClub.getProfessor().getName())
-                .pMajor(applyClub.getProfessor().getMajor())
-                .pPhoneNum(applyClub.getProfessor().getPhoneNum())
-                .build();
+        ApplyClubResponseDTO responseDTO = applyClubService.refuseClub(applyClubId, refuseApplyClubDTO.getRefuseReason());
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTO));
     }
 }

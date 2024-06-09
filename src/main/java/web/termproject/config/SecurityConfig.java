@@ -46,6 +46,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
 //                        .requestMatchers("/", "/signup", "/signin","/api/signup", "/api/signin", "/confirmId", "/confirmNickname").permitAll() // 지정된 URL 은 인증, 인가 없이도 접근 허용
+                        .requestMatchers( "/admin").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .logout((logout) -> logout
                         .logoutSuccessUrl("/")

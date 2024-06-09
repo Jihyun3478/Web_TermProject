@@ -1,0 +1,6 @@
+=== 동아리 등록 신청
+
+include::{snippets}/applyClub-create/http-request.adoc[]
+include::{snippets}/applyClub-create/request-fields.adoc[]
+include::{snippets}/applyClub-create/http-response.adoc[]
+include::{snippets}/applyClub-create/response-fields.adoc[]

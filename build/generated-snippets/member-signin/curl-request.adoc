@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/api/signin' -i -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "loginId" : "test1234",
+  "loginPw" : "test1234"
+}'
+----

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
+import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.RoleType;
 import web.termproject.repository.MemberRepository;
@@ -31,12 +32,23 @@ public class MemberServiceImpl implements MemberService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public void createMember(SignupRequestDTO signupRequestDTO) {
+    public MemberResponseDTO createMember(SignupRequestDTO signupRequestDTO) {
         Member member = signupRequestDTO.toEntity();
         member.addUserAuthority();
         member.encodePassword(passwordEncoder);
 
-        memberRepository.save(member);
+        Member savedMember = memberRepository.save(member);
+        return MemberResponseDTO.builder()
+                .loginId(savedMember.getLoginId())
+                .loginPw(savedMember.getLoginPw())
+                .name(savedMember.getName())
+                .stuNum(savedMember.getStuNum())
+                .major(savedMember.getMajor())
+                .phoneNum(savedMember.getPhoneNum())
+                .email(savedMember.getEmail())
+                .gender(savedMember.getGender())
+                .birthDate(savedMember.getBirthDate())
+                .build();
     }
 
     public boolean confirmId(String loginId) {

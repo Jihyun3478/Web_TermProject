@@ -1,0 +1,11 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/applyClub/create' -i -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "clubType" : "중앙동아리",
+  "clubName" : "동아리1",
+  "loginId" : "test1234",
+  "professorLoginId" : "pTest1234"
+}'
+----

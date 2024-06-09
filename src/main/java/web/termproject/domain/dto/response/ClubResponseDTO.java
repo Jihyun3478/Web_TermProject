@@ -18,7 +18,7 @@ public class ClubResponseDTO {
     private String introduce;
     private String history;
     private String imageRoute;
-    private Date meetingTime;
+    private String meetingTime;
     private String president;
     private String vicePresident;
     private String generalAffairs;
