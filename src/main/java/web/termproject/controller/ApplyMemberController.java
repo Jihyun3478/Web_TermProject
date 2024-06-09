@@ -32,8 +32,8 @@ public class ApplyMemberController {
     }
 
     @GetMapping("/clubList")
-    public List<ClubResponseDTO> getClubList() throws BadRequestException {
+    public List<ClubResponseDTO> getNotApplyMemberClubList() throws BadRequestException {
         String loginId = SecurityUtil.getLoginId();
-        return applyMemberService.getClubList(loginId);
+        return applyMemberService.getNotApplyMemberClubList(loginId);
     }
 }

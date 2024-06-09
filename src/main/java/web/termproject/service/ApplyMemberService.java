@@ -16,5 +16,5 @@ public interface ApplyMemberService {
     ResponseEntity<Resource> downloadFile() throws MalformedURLException;
     ResponseEntity<Resource> downloadApplyForm(Long clubId, Long memberId) throws MalformedURLException;
 
-    List<ClubResponseDTO> getClubList(String loginId) throws BadRequestException;
+    List<ClubResponseDTO> getNotApplyMemberClubList(String loginId) throws BadRequestException;
 }
