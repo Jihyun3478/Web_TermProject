@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/master/club/list' \
+    'Authorization:Bearer your_token_here'
+----

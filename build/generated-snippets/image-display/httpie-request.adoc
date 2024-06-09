@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/image/display?imagePath=test.jpg' \
+    'Accept:image/jpeg'
+----

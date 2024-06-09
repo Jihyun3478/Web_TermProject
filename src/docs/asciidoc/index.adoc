@@ -1,100 +1,29 @@
-= API Documentation
+ifndef::snippets[]
+:snippets: build/generated-snippets
+endif::[]
+= 동아리 커뮤니티 REST API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
 :toc: left
 :toclevels: 2
 :sectnums:
+:sectlinks:
 
 == ApplyMemberController
-
-=== Download Image
-
-include::{snippets}/applyMember-download/http-request.adoc[]
-include::{snippets}/applyMember-download/http-response.adoc[]
-include::{snippets}/applyMember-download/curl-request.adoc[]
-include::{snippets}/applyMember-download/httpie-request.adoc[]
-include::{snippets}/applyMember-download/request-body.adoc[]
-include::{snippets}/applyMember-download/response-body.adoc[]
-
-=== Upload Files
-
-include::{snippets}/applyMember-upload/http-request.adoc[]
-include::{snippets}/applyMember-upload/http-response.adoc[]
-include::{snippets}/applyMember-upload/curl-request.adoc[]
-include::{snippets}/applyMember-upload/httpie-request.adoc[]
-include::{snippets}/applyMember-upload/request-body.adoc[]
-include::{snippets}/applyMember-upload/response-body.adoc[]
-
-=== Get Club List
-
-include::{snippets}/applyMember-clubList/http-request.adoc[]
-include::{snippets}/applyMember-clubList/http-response.adoc[]
-include::{snippets}/applyMember-clubList/curl-request.adoc[]
-include::{snippets}/applyMember-clubList/httpie-request.adoc[]
-include::{snippets}/applyMember-clubList/request-body.adoc[]
-include::{snippets}/applyMember-clubList/response-body.adoc[]
+include::api/applyMember.adoc[]
 
 == ImageController
-
-=== Get Image
-
-include::{snippets}/image-display/http-request.adoc[]
-include::{snippets}/image-display/http-response.adoc[]
-include::{snippets}/image-display/curl-request.adoc[]
-include::{snippets}/image-display/httpie-request.adoc[]
-include::{snippets}/image-display/request-body.adoc[]
-include::{snippets}/image-display/response-body.adoc[]
-
-=== Upload Image
-
-include::{snippets}/image-upload/http-request.adoc[]
-include::{snippets}/image-upload/http-response.adoc[]
-include::{snippets}/image-upload/curl-request.adoc[]
-include::{snippets}/image-upload/httpie-request.adoc[]
-include::{snippets}/image-upload/request-body.adoc[]
-include::{snippets}/image-upload/response-body.adoc[]
+include::api/image.adoc[]
 
 == MasterController
+include::api/master.adoc[]
 
-=== Get Clubs
+== MemberController
+include::api/member.adoc[]
 
-include::{snippets}/master-club-list/http-request.adoc[]
-include::{snippets}/master-club-list/http-response.adoc[]
-include::{snippets}/master-club-list/curl-request.adoc[]
-include::{snippets}/master-club-list/httpie-request.adoc[]
-include::{snippets}/master-club-list/request-body.adoc[]
-include::{snippets}/master-club-list/response-body.adoc[]
+== ApplyClubController
+include::api/applyClub.adoc[]
 
-=== Update Master Club Info
-
-include::{snippets}/master-club-update/http-request.adoc[]
-include::{snippets}/master-club-update/http-response.adoc[]
-include::{snippets}/master-club-update/curl-request.adoc[]
-include::{snippets}/master-club-update/httpie-request.adoc[]
-include::{snippets}/master-club-update/request-body.adoc[]
-include::{snippets}/master-club-update/response-body.adoc[]
-
-=== Upload Club Image
-
-include::{snippets}/master-club-uploadImage/http-request.adoc[]
-include::{snippets}/master-club-uploadImage/http-response.adoc[]
-include::{snippets}/master-club-uploadImage/curl-request.adoc[]
-include::{snippets}/master-club-uploadImage/httpie-request.adoc[]
-include::{snippets}/master-club-uploadImage/request-body.adoc[]
-include::{snippets}/master-club-uploadImage/response-body.adoc[]
-
-=== Update Apply Member Status
-
-include::{snippets}/master-applyMember-updateStatus/http-request.adoc[]
-include::{snippets}/master-applyMember-updateStatus/http-response.adoc[]
-include::{snippets}/master-applyMember-updateStatus/curl-request.adoc[]
-include::{snippets}/master-applyMember-updateStatus/httpie-request.adoc[]
-include::{snippets}/master-applyMember-updateStatus/request-body.adoc[]
-include::{snippets}/master-applyMember-updateStatus/response-body.adoc[]
-
-=== Download Apply Form
-
-include::{snippets}/master-applyMember-downloadForm/http-request.adoc[]
-include::{snippets}/master-applyMember-downloadForm/http-response.adoc[]
-include::{snippets}/master-applyMember-downloadForm/curl-request.adoc[]
-include::{snippets}/master-applyMember-downloadForm/httpie-request.adoc[]
-include::{snippets}/master-applyMember-downloadForm/request-body.adoc[]
-include::{snippets}/master-applyMember-downloadForm/response-body.adoc[]
+== AdminController
+include::api/admin.adoc[]

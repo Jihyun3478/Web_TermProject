@@ -1,16 +1,18 @@
 package web.termproject.service;
 
+import org.modelmapper.ModelMapper;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
-import web.termproject.domain.dto.request.ClubRequestDTO;
+import web.termproject.domain.dto.response.ApplyClubResponseDTO;
+import web.termproject.domain.dto.response.ClubResponseDTO;
 import web.termproject.domain.entity.ApplyClub;
-import web.termproject.domain.entity.Club;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ApplyClubService {
-    ApplyClub createApplyClub(ApplyClubRequestDTO requestDTO);
-    Club createClub(ApplyClub applyClub);
-    List<ApplyClub> findAll();
+    ApplyClubResponseDTO createApplyClub(ApplyClubRequestDTO requestDTO);
+    ClubResponseDTO createClub(ApplyClub applyClub);
+    ApplyClubResponseDTO refuseClub(Long applyClubId, String refuseReason);
+    List<ApplyClubResponseDTO> findAll();
     ApplyClub findById(Long id);
+    ModelMapper getModelMapper();
 }

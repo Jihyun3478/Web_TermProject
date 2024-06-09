@@ -1,0 +1,15 @@
+[source,json,options="nowrap"]
+----
+{
+  "loginId" : "test1234",
+  "loginPw" : "test1234",
+  "name" : "홍길동",
+  "stuNum" : "20240001",
+  "major" : "컴퓨터소프트웨어공학과",
+  "phoneNum" : "000-0000-0000",
+  "email" : "test@kumoh.ac.kr",
+  "gender" : "남",
+  "birthDate" : "2000-01-01",
+  "role" : "MEMBER"
+}
+----

@@ -7,16 +7,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import web.termproject.domain.status.RoleType;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static jakarta.persistence.EnumType.STRING;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Member {
 
     @Id
@@ -50,6 +50,8 @@ public class Member {
     @Enumerated(STRING)
     @Column(nullable = false)
     private RoleType role;
+
+    private String grantType;
 
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
     private Board board;

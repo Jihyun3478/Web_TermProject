@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ http --multipart POST 'http://localhost:8080/applyMember/upload/1' \
+    'Authorization:Bearer your_token_here' \
+    'files'='test content'
+----
