@@ -88,8 +88,8 @@ public class MemberServiceImpl implements MemberService {
                     .loginId(email)
                     .loginPw(passwordEncoder.encode(email))
                     .role(RoleType.MEMBER)
-                    .major("미정")
-                    .phoneNum("미정")
+                    .major("컴퓨터소프트웨어공학과")
+                    .phoneNum("00000000000")
                     .build();
             memberRepository.save(member);
             return member;
