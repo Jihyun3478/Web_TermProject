@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
+import web.termproject.domain.dto.request.ClubRequestDTO;
 import web.termproject.domain.entity.ApplyClub;
+import web.termproject.domain.entity.Club;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.entity.Professor;
 import web.termproject.exception.CustomIllegalArgumentException;
 import web.termproject.exception.ErrorCode;
 import web.termproject.repository.ApplyClubRepository;
+import web.termproject.repository.ClubRepository;
 import web.termproject.repository.MemberRepository;
 import web.termproject.repository.ProfessorRepository;
 
@@ -23,6 +26,7 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     private final MemberRepository memberRepository;
     private final ProfessorRepository professorRepository;
     private final ApplyClubRepository applyClubRepository;
+    private final ClubRepository clubRepository;
 
     @Override
     public ApplyClub createApplyClub(ApplyClubRequestDTO requestDTO) {
@@ -34,6 +38,14 @@ public class ApplyClubServiceImpl implements ApplyClubService {
         ApplyClub saveApplyClub = ApplyClub.createApplyClub(requestDTO.getClubType(), requestDTO.getClubName(), member, professor);
 
         return applyClubRepository.save(saveApplyClub);
+    }
+
+    @Override
+    public Club createClub(ApplyClub applyClub) {
+        Club club = new Club();
+        Club savedClub = club.createClub(applyClub);
+
+        return clubRepository.save(savedClub);
     }
 
     @Transactional(readOnly = true)
