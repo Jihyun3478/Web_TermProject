@@ -41,31 +41,4 @@ public class ApplyClubController {
                 .build();
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTO));
     }
-
-    /**
-     * 동아리 신청 목록
-     */
-    @GetMapping("/list")
-    public ResponseEntity<?> applyClubList() {
-        List<ApplyClub> applyClubList = applyClubService.findAll();
-        List<ApplyClubResponseDTO> responseDTOS = new ArrayList<>();
-
-        for (ApplyClub applyClub : applyClubList) {
-            ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
-                    .applyClubStatus(applyClub.getApplyClubStatus())
-
-                    .clubType(applyClub.getClubType())
-                    .clubName(applyClub.getClubName())
-                    .name(applyClub.getMember().getName())
-                    .major(applyClub.getMember().getMajor())
-                    .stuNum(applyClub.getMember().getStuNum())
-                    .phoneNum(applyClub.getMember().getPhoneNum())
-                    .pName(applyClub.getProfessor().getName())
-                    .pMajor(applyClub.getProfessor().getMajor())
-                    .pPhoneNum(applyClub.getProfessor().getPhoneNum())
-                    .build();
-            responseDTOS.add(responseDTO);
-        }
-        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTOS));
-    }
 }
