@@ -46,11 +46,4 @@ public class BoardController {
     public BoardResponseDTO getBoard(@PathVariable("boardId") Long boardId){
         return boardService.getBoard(boardId);
     }
-
-    //동아리 공지 게시글 조회 -> 동아리 회원만
-    @GetMapping("/findAllAnnouncement/")
-    public List<BoardResponseDTO> findAllMemberRecruit(){
-
-        return boardService.findAllMemberRecruit();
-    }
 }
