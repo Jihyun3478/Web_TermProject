@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import web.termproject.domain.dto.request.RefuseApplyClubDTO;
-import web.termproject.domain.dto.response.ApiResponse;
+import web.termproject.exception.ApiResponse;
 import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.dto.response.ClubResponseDTO;
 import web.termproject.domain.entity.ApplyClub;
@@ -28,7 +28,7 @@ public class AdminController {
     @GetMapping("/list")
     public ResponseEntity<?> applyClubList() {
         List<ApplyClubResponseDTO> responseDTOS = applyClubService.findAll();
-        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTOS));
+        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, "관리자 동아리 신청 목록 조회", responseDTOS));
     }
 
     /**
@@ -41,7 +41,7 @@ public class AdminController {
         ApplyClub applyClub = applyClubService.findById(applyClubId);
         ClubResponseDTO responseDTO = applyClubService.createClub(applyClub);
 
-        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTO));
+        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, "관리자 동아리 신청 승인", responseDTO));
     }
 
     /**
@@ -53,6 +53,6 @@ public class AdminController {
     @PostMapping("/refuse/{applyClubId}")
     public ResponseEntity<?> refuseClub(@PathVariable("applyClubId") Long applyClubId, @RequestBody RefuseApplyClubDTO refuseApplyClubDTO) {
         ApplyClubResponseDTO responseDTO = applyClubService.refuseClub(applyClubId, refuseApplyClubDTO.getRefuseReason());
-        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, responseDTO));
+        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, "관리자 동아리 신청 거절", responseDTO));
     }
 }

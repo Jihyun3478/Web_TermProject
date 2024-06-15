@@ -7,15 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.LoginRequestDTO;
 import web.termproject.domain.dto.request.PSignupRequestDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
-import web.termproject.domain.dto.response.ApiResponse;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.RoleType;
+import web.termproject.exception.ApiResponse;
+import web.termproject.exception.ErrorCode;
 import web.termproject.exception.ResponseCode;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.MemberService;
@@ -31,28 +31,10 @@ public class MemberController {
 
     /* 회원가입 */
     @PostMapping("/api/signup")
-    public ResponseEntity<ApiResponse> signup(@Valid @RequestBody SignupRequestDTO requestDTO) {
+    public ResponseEntity<?> signup(@Valid @RequestBody SignupRequestDTO requestDTO) {
         MemberResponseDTO responseDTO = memberService.createMember(requestDTO);
 
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.Created, "회원가입 완료", responseDTO));
-    }
-
-    @GetMapping("/confirmLoginId/{loginId}")
-    public ResponseEntity<String> confirmId(@PathVariable("loginId") String loginId) {
-        if(memberService.confirmId(loginId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok("사용 가능한 아이디 입니다.");
-        }
-    }
-
-    @GetMapping("/confirmNickname/{nickname}")
-    public ResponseEntity<String> confirmNickname(@PathVariable("nickname") String nickname) {
-        if(memberService.confirmNickname(nickname)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok("사용 가능한 닉네임 입니다.");
-        }
     }
 
     @PostMapping("/api/signin")
