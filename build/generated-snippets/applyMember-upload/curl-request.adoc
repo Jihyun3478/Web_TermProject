@@ -1,7 +1,0 @@
-[source,bash]
-----
-$ curl 'http://localhost:8080/applyMember/upload/1' -i -X POST \
-    -H 'Content-Type: multipart/form-data' \
-    -H 'Authorization: Bearer your_token_here' \
-    -F 'files=test content'
-----

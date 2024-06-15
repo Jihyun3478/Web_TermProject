@@ -1,4 +1,4 @@
-package web.termproject.controller;
+package web.termproject.docs;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,6 +7,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.test.context.support.WithMockUser;
+import web.termproject.controller.MemberController;
 import web.termproject.docs.RestDocsSupport;
 import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.LoginRequestDTO;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MemberController.class)
-class MemberControllerTest extends RestDocsSupport {
+class MemberControllerDocsTest extends RestDocsSupport {
 
     @MockBean
     private MemberService memberService;

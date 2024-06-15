@@ -1,4 +1,4 @@
-package web.termproject.controller;
+package web.termproject.docs;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,11 +15,11 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import web.termproject.controller.ApplyMemberController;
 import web.termproject.domain.dto.response.ApplyMemberReponseDTO;
 import web.termproject.domain.dto.response.ClubResponseDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.dto.response.ProfessorResponseDTO;
-import web.termproject.domain.status.ApplyMemberStatus;
 import web.termproject.domain.status.ClubType;
 import web.termproject.domain.status.RoleType;
 import web.termproject.service.ApplyMemberService;
@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(RestDocumentationExtension.class)
 @WebMvcTest(ApplyMemberController.class)
-class ApplyMemberControllerTest {
+class ApplyMemberControllerDocsTest {
     @Autowired
     private MockMvc mockMvc;
 

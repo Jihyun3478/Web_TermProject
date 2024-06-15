@@ -128,8 +128,4 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     public ApplyClub findById(Long id) {
         return applyClubRepository.findById(id).orElseThrow(() -> new CustomIllegalArgumentException(ErrorCode.APPLY_CLUB_NOT_FOUND, "동아리 신청내역이 존재하지 않습니다."));
     }
-
-    public ModelMapper getModelMapper() {
-        return modelMapper;
-    }
 }

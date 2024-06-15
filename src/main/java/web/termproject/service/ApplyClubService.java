@@ -14,5 +14,4 @@ public interface ApplyClubService {
     ApplyClubResponseDTO refuseClub(Long applyClubId, String refuseReason);
     List<ApplyClubResponseDTO> findAll();
     ApplyClub findById(Long id);
-    ModelMapper getModelMapper();
 }
