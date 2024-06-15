@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="web.termproject.docs.ImageControllerDocsTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-06-15T15:02:49" hostname="MacBook-Pro.local" time="0.019">
+  <properties/>
+  <testcase name="testGetImage()" classname="web.termproject.docs.ImageControllerDocsTest" time="0.01"/>
+  <testcase name="testUploadImage()" classname="web.termproject.docs.ImageControllerDocsTest" time="0.009"/>
+  <system-out><![CDATA[2024-06-16T00:02:48.938+09:00  INFO 51025 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [web.termproject.docs.ImageControllerDocsTest]: ImageControllerDocsTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-06-16T00:02:48.945+09:00  INFO 51025 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration web.termproject.TermProjectApplication for test class web.termproject.docs.ImageControllerDocsTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2024-06-16T00:02:48.960+09:00  INFO 51025 --- [    Test worker] w.t.docs.ImageControllerDocsTest         : Starting ImageControllerDocsTest using Java 21.0.2 with PID 51025 (started by jihyun in /Users/jihyun/Desktop/IdeaProjects/Web_TermProject)
+2024-06-16T00:02:48.960+09:00  INFO 51025 --- [    Test worker] w.t.docs.ImageControllerDocsTest         : The following 1 profile is active: "jwt"
+2024-06-16T00:02:49.091+09:00 DEBUG 51025 --- [    Test worker] swordEncoderAuthenticationManagerBuilder : No authenticationProviders and no parentAuthenticationManager defined. Returning null.
+2024-06-16T00:02:49.096+09:00  INFO 51025 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@8cd2bb5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a3611b1, org.springframework.security.web.context.SecurityContextHolderFilter@2bf2523f, org.springframework.security.web.header.HeaderWriterFilter@b0e6d4e, org.springframework.web.filter.CorsFilter@419ece7a, org.springframework.security.web.csrf.CsrfFilter@5b5d6f9c, org.springframework.security.web.authentication.logout.LogoutFilter@4d73d3d1, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@3c39c739, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@2e8eafb2, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@4b3b2a4f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7004cd44, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@427c2c96, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1be3e952, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@818a514, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@238d27ef, org.springframework.security.oauth2.client.web.OAuth2AuthorizationCodeGrantFilter@7a3f3bc4, org.springframework.security.web.access.ExceptionTranslationFilter@3514df8d, org.springframework.security.web.access.intercept.AuthorizationFilter@6f076c53]
+2024-06-16T00:02:49.102+09:00  INFO 51025 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-06-16T00:02:49.102+09:00  INFO 51025 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-16T00:02:49.102+09:00  INFO 51025 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-06-16T00:02:49.110+09:00  INFO 51025 --- [    Test worker] w.t.docs.ImageControllerDocsTest         : Started ImageControllerDocsTest in 0.164 seconds (process running for 2.577)
+2024-06-16T00:02:49.115+09:00  INFO 51025 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-06-16T00:02:49.115+09:00  INFO 51025 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-16T00:02:49.115+09:00  INFO 51025 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-06-16T00:02:49.125+09:00  INFO 51025 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-06-16T00:02:49.125+09:00  INFO 51025 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-16T00:02:49.125+09:00  INFO 51025 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

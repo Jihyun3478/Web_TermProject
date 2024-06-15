@@ -5,7 +5,9 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 18
+Content-Length: 24
 
-{"url":"test.jpg"}
+{
+  "url" : "test.jpg"
+}
 ----

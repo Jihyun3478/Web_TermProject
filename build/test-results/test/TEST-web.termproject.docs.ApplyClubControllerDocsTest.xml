@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="web.termproject.docs.ApplyClubControllerDocsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-15T15:02:48" hostname="MacBook-Pro.local" time="0.031">
+  <properties/>
+  <testcase name="동아리 등록 신청" classname="web.termproject.docs.ApplyClubControllerDocsTest" time="0.031"/>
+  <system-out><![CDATA[00:02:48.055 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+00:02:48.055 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+00:02:48.055 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /applyClub/create
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Content-Length:"106"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.ApplyClubController
+           Method = web.termproject.controller.ApplyClubController#createApplyClub(ApplyClubRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"code":201000,"message":"동아리 등록 신청 완료","data":{"applyClubId":2,"applyClubStatus":"WAIT","clubType":"중앙동아리","clubName":"동아리1","name":"이지현","major":"컴퓨터소프트웨어공학과","stuNum":"홍길동","phoneNum":"000-0000-0000","refuseReason":null,"pname":"교수님1","pmajor":"컴퓨터소프트웨어공학과","pphoneNum":"222-2222-2222"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

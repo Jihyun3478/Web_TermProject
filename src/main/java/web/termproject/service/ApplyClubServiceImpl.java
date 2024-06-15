@@ -2,6 +2,7 @@ package web.termproject.service;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
@@ -14,8 +15,6 @@ import web.termproject.domain.entity.Club;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.entity.Professor;
 import web.termproject.domain.status.ApplyClubStatus;
-import web.termproject.exception.CustomIllegalArgumentException;
-import web.termproject.exception.ErrorCode;
 import web.termproject.repository.ApplyClubRepository;
 import web.termproject.repository.ClubRepository;
 import web.termproject.repository.MemberRepository;
@@ -40,7 +39,7 @@ public class ApplyClubServiceImpl implements ApplyClubService {
         Member member = memberRepository.findByLoginId(requestDTO.getLoginId());
         Professor professor = professorRepository.findByLoginId(requestDTO.getProfessorLoginId());
         if(member == null || professor == null) {
-            throw new CustomIllegalArgumentException(ErrorCode.MEMBER_NOT_FOUND, "존재하지 않는 사용자입니다.");
+            throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
         }
         ApplyClub applyClub = ApplyClub.createApplyClub(requestDTO.getClubType(), requestDTO.getClubName(), member, professor);
 
@@ -80,7 +79,7 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     @Override
     public ApplyClubResponseDTO refuseClub(Long applyClubId, String refuseReason) {
         ApplyClub applyClub = applyClubRepository.findById(applyClubId)
-                .orElseThrow(() -> new CustomIllegalArgumentException(ErrorCode.APPLY_CLUB_NOT_FOUND, "동아리 신청내역이 존재하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("동아리 신청내역이 존재하지 않습니다."));
         applyClub.setApplyClubStatus(ApplyClubStatus.REFUSE);
         applyClub.setRefuseReason(refuseReason);
         ApplyClub savedApplyClub = applyClubRepository.save(applyClub);
@@ -126,6 +125,6 @@ public class ApplyClubServiceImpl implements ApplyClubService {
 
     @Override
     public ApplyClub findById(Long id) {
-        return applyClubRepository.findById(id).orElseThrow(() -> new CustomIllegalArgumentException(ErrorCode.APPLY_CLUB_NOT_FOUND, "동아리 신청내역이 존재하지 않습니다."));
+        return applyClubRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("동아리 신청내역이 존재하지 않습니다."));
     }
 }
