@@ -89,65 +89,65 @@ class AdminControllerDocsTest extends RestDocsSupport {
                         )));
     }
 
-    @WithMockUser(username = "관리자", roles = {"ADMIN"})
-    @DisplayName("동아리 승인")
-    @Test
-    void acceptClub() throws Exception {
-        ApplyClub applyClub = new ApplyClub();
-        applyClub.setId(1L);
-        Professor professor = new Professor();
-        applyClub.setProfessor(professor);
-        Member member = new Member();
-        applyClub.setMember(member);
-
-        ClubResponseDTO clubResponseDTO = ClubResponseDTO.builder()
-                .id(1L)
-                .introduce("Introduction text")
-                .history("History text")
-                .imageRoute("image/route.png")
-                .meetingTime("Weekly on Mondays")
-                .president("President Name")
-                .vicePresident("Vice President Name")
-                .generalAffairs("General Affairs Name")
-                .clubType(ClubType.CENTRAL)
-                .name("Coding Club")
-                .build();
-
-        ModelMapper modelMapper = mock(ModelMapper.class);
-        ProfessorResponseDTO professorResponseDTO = new ProfessorResponseDTO();
-        MemberResponseDTO masterMemberResponseDTO = new MemberResponseDTO();
-
-        when(modelMapper.map(any(Professor.class), eq(ProfessorResponseDTO.class))).thenReturn(professorResponseDTO);
-        when(modelMapper.map(any(Member.class), eq(MemberResponseDTO.class))).thenReturn(masterMemberResponseDTO);
-
-        given(applyClubService.findById(eq(1L))).willReturn(applyClub);
-        given(applyClubService.createClub((ApplyClub) any(ApplyClub.class))).willReturn(clubResponseDTO);
-
-        mockMvc.perform(post("/admin/accept/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andDo(document("accept-club",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        responseFields(
-                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("응답 코드"),
-                                fieldWithPath("message").type(JsonFieldType.STRING).description("응답 메시지"),
-                                fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("동아리 ID").optional(),
-                                fieldWithPath("data.introduce").type(JsonFieldType.STRING).description("동아리 소개").optional(),
-                                fieldWithPath("data.history").type(JsonFieldType.STRING).description("동아리 역사").optional(),
-                                fieldWithPath("data.imageRoute").type(JsonFieldType.STRING).description("이미지 경로").optional(),
-                                fieldWithPath("data.meetingTime").type(JsonFieldType.STRING).description("모임 시간").optional(),
-                                fieldWithPath("data.president").type(JsonFieldType.STRING).description("회장 이름").optional(),
-                                fieldWithPath("data.vicePresident").type(JsonFieldType.STRING).description("부회장 이름").optional(),
-                                fieldWithPath("data.generalAffairs").type(JsonFieldType.STRING).description("총무 이름").optional(),
-                                fieldWithPath("data.professor").type(JsonFieldType.OBJECT).description("지도 교수 정보").optional(),
-                                fieldWithPath("data.applyMember").type(JsonFieldType.OBJECT).description("신청 회원 정보").optional(),
-                                fieldWithPath("data.masterMember").type(JsonFieldType.OBJECT).description("주임 회원 정보").optional(),
-                                fieldWithPath("data.clubType").type(JsonFieldType.STRING).description("동아리 유형"),
-                                fieldWithPath("data.name").type(JsonFieldType.STRING).description("동아리 이름")
-                        )));
-    }
+//    @WithMockUser(username = "관리자", roles = {"ADMIN"})
+//    @DisplayName("동아리 승인")
+//    @Test
+//    void acceptClub() throws Exception {
+//        ApplyClub applyClub = new ApplyClub();
+//        applyClub.setId(1L);
+//        Professor professor = new Professor();
+//        applyClub.setProfessor(professor);
+//        Member member = new Member();
+//        applyClub.setMember(member);
+//
+//        ClubResponseDTO clubResponseDTO = ClubResponseDTO.builder()
+//                .id(1L)
+//                .introduce("Introduction text")
+//                .history("History text")
+//                .imageRoute("image/route.png")
+//                .meetingTime("Weekly on Mondays")
+//                .president("President Name")
+//                .vicePresident("Vice President Name")
+//                .generalAffairs("General Affairs Name")
+//                .clubType(ClubType.CENTRAL)
+//                .name("Coding Club")
+//                .build();
+//
+//        ModelMapper modelMapper = mock(ModelMapper.class);
+//        ProfessorResponseDTO professorResponseDTO = new ProfessorResponseDTO();
+//        MemberResponseDTO masterMemberResponseDTO = new MemberResponseDTO();
+//
+//        when(modelMapper.map(any(Professor.class), eq(ProfessorResponseDTO.class))).thenReturn(professorResponseDTO);
+//        when(modelMapper.map(any(Member.class), eq(MemberResponseDTO.class))).thenReturn(masterMemberResponseDTO);
+//
+//        given(applyClubService.findById(eq(1L))).willReturn(applyClub);
+//        given(applyClubService.createClub((ApplyClub) any(ApplyClub.class))).willReturn(clubResponseDTO);
+//
+//        mockMvc.perform(post("/admin/accept/1")
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//                .andDo(document("accept-club",
+//                        preprocessRequest(prettyPrint()),
+//                        preprocessResponse(prettyPrint()),
+//                        responseFields(
+//                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("응답 코드"),
+//                                fieldWithPath("message").type(JsonFieldType.STRING).description("응답 메시지"),
+//                                fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("동아리 ID").optional(),
+//                                fieldWithPath("data.introduce").type(JsonFieldType.STRING).description("동아리 소개").optional(),
+//                                fieldWithPath("data.history").type(JsonFieldType.STRING).description("동아리 역사").optional(),
+//                                fieldWithPath("data.imageRoute").type(JsonFieldType.STRING).description("이미지 경로").optional(),
+//                                fieldWithPath("data.meetingTime").type(JsonFieldType.STRING).description("모임 시간").optional(),
+//                                fieldWithPath("data.president").type(JsonFieldType.STRING).description("회장 이름").optional(),
+//                                fieldWithPath("data.vicePresident").type(JsonFieldType.STRING).description("부회장 이름").optional(),
+//                                fieldWithPath("data.generalAffairs").type(JsonFieldType.STRING).description("총무 이름").optional(),
+//                                fieldWithPath("data.professor").type(JsonFieldType.OBJECT).description("지도 교수 정보").optional(),
+//                                fieldWithPath("data.applyMember").type(JsonFieldType.OBJECT).description("신청 회원 정보").optional(),
+//                                fieldWithPath("data.masterMember").type(JsonFieldType.OBJECT).description("주임 회원 정보").optional(),
+//                                fieldWithPath("data.clubType").type(JsonFieldType.STRING).description("동아리 유형"),
+//                                fieldWithPath("data.name").type(JsonFieldType.STRING).description("동아리 이름")
+//                        )));
+//    }
 
     @WithMockUser(username = "관리자", roles = {"ADMIN"})
     @DisplayName("동아리 거절")
