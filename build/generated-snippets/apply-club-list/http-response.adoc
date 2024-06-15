@@ -2,11 +2,11 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 438
+Content-Length: 476
 
 {
   "code" : 200000,
-  "message" : "OK",
+  "message" : "관리자 동아리 신청 목록 조회",
   "data" : [ {
     "applyClubId" : null,
     "applyClubStatus" : "WAIT",

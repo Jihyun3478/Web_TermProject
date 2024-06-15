@@ -5,7 +5,55 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 2
+Content-Length: 1437
 
-[]
+[ {
+  "id" : 1,
+  "clubType" : "중앙동아리",
+  "name" : "테스트 클럽 이름",
+  "introduce" : null,
+  "history" : "테스트 클럽 역사",
+  "imageRoute" : "테스트 클럽 이미지 경로",
+  "meetingTime" : "정기회의 시간",
+  "president" : "회장 명",
+  "vicePresident" : "부회장 명",
+  "generalAffairs" : "회계사 명",
+  "professor" : {
+    "id" : 1,
+    "major" : "컴퓨터소프트웨어공학과",
+    "phoneNum" : "1231234123",
+    "email" : "345@345.com",
+    "name" : "테스트 교수님"
+  },
+  "applyMember" : [ {
+    "id" : 1,
+    "applyMemberStatus" : "CLUB_MEMBER",
+    "member" : {
+      "id" : 1,
+      "loginId" : "마스터멤버 id",
+      "loginPw" : "마스터멤버 비밀번호",
+      "name" : "마스터 멤버 이름",
+      "stuNum" : "12341234",
+      "major" : "컴퓨터소프트웨어공학과",
+      "phoneNum" : "0000000000",
+      "email" : "123@123.com",
+      "gender" : "남",
+      "birthDate" : "마스터멤버 생일",
+      "role" : "MASTER_MEMBER"
+    }
+  } ],
+  "masterMember" : {
+    "id" : 1,
+    "loginId" : "마스터멤버 id",
+    "loginPw" : "마스터멤버 비밀번호",
+    "name" : "마스터 멤버 이름",
+    "stuNum" : "12341234",
+    "major" : "컴퓨터소프트웨어공학과",
+    "phoneNum" : "0000000000",
+    "email" : "123@123.com",
+    "gender" : "남",
+    "birthDate" : "마스터멤버 생일",
+    "role" : "MASTER_MEMBER"
+  }
+} ]
 ----
