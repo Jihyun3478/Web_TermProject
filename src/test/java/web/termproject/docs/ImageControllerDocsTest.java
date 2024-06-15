@@ -1,4 +1,4 @@
-package web.termproject.controller;
+package web.termproject.docs;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
+import web.termproject.controller.ImageController;
 import web.termproject.service.ImageService;
 
 import java.util.HashMap;
@@ -31,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(RestDocumentationExtension.class)
 @WebMvcTest(ImageController.class)
-class ImageControllerTest {
+class ImageControllerDocsTest {
 
     @Autowired
     private MockMvc mockMvc;

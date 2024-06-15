@@ -1,16 +1,16 @@
-package web.termproject.controller;
+package web.termproject.docs;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
+import web.termproject.controller.ApplyClubController;
 import web.termproject.docs.RestDocsSupport;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
 import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.status.ApplyClubStatus;
 import web.termproject.domain.status.ClubType;
 import web.termproject.service.ApplyClubService;
-import web.termproject.service.MemberService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -22,7 +22,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class ApplyClubControllerTest extends RestDocsSupport {
+class ApplyClubControllerDocsTest extends RestDocsSupport {
 
     private final ApplyClubService applyClubService = mock(ApplyClubService.class);
 
