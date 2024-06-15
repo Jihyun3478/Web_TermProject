@@ -19,4 +19,6 @@ public interface BoardService {
 
     //나머지 특정 게시글 조회
     BoardResponseDTO getBoard(Long boardId);
+
+    List<BoardResponseDTO> findAllMemberRecruit();
 }
