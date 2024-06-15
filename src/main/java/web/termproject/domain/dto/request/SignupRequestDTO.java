@@ -56,4 +56,19 @@ public class SignupRequestDTO {
                 .role(RoleType.MEMBER)
                 .build();
     }
+
+    public static SignupRequestDTO of(Member member) {
+        return SignupRequestDTO.builder()
+                .loginId(member.getLoginId())
+                .loginPw(member.getLoginPw())
+                .name(member.getName())
+                .stuNum(member.getStuNum())
+                .major(member.getStuNum())
+                .phoneNum(member.getPhoneNum())
+                .email(member.getEmail())
+                .gender(member.getGender())
+                .birthDate(member.getBirthDate())
+                .role(RoleType.MEMBER)
+                .build();
+    }
 }
