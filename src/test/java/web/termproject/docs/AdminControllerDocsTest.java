@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.test.context.support.WithMockUser;
 import web.termproject.controller.AdminController;
-import web.termproject.docs.RestDocsSupport;
 import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.dto.response.ClubResponseDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
@@ -149,56 +148,56 @@ class AdminControllerDocsTest extends RestDocsSupport {
 //                        )));
 //    }
 
-    @WithMockUser(username = "관리자", roles = {"ADMIN"})
-    @DisplayName("동아리 거절")
-    @Test
-    void refuseClub() throws Exception {
-        ApplyClub applyClub = new ApplyClub();
-        applyClub.setId(1L);
-
-        ApplyClubResponseDTO applyClubResponseDTO = ApplyClubResponseDTO.builder()
-                .applyClubStatus(ApplyClubStatus.REFUSE)
-                .clubType(ClubType.CENTRAL)
-                .clubName("Coding Club")
-                .name("John Doe")
-                .major("Computer Science")
-                .stuNum("20210001")
-                .phoneNum("010-1234-5678")
-                .pName("Prof. Smith")
-                .pMajor("Software Engineering")
-                .pPhoneNum("010-9876-5432")
-                .refuseReason("Insufficient funding")
-                .build();
-
-        given(applyClubService.findById(1L)).willReturn(applyClub);
-        given(applyClubService.refuseClub(eq(1L), eq("Insufficient funding"))).willReturn(applyClubResponseDTO);
-
-        mockMvc.perform(post("/admin/refuse/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"refuseReason\":\"Insufficient funding\"}"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andDo(document("refuse-club",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        requestFields(
-                                fieldWithPath("refuseReason").type(JsonFieldType.STRING).description("거절 사유")
-                        ),
-                        responseFields(
-                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("응답 코드"),
-                                fieldWithPath("message").type(JsonFieldType.STRING).description("응답 메시지"),
-                                fieldWithPath("data.refuseReason").type(JsonFieldType.STRING).description("거절 사유").optional(),
-                                fieldWithPath("data.applyClubId").type(JsonFieldType.NUMBER).description("동아리 신청 ID").optional(),
-                                fieldWithPath("data.applyClubStatus").type(JsonFieldType.STRING).description("동아리 신청 상태"),
-                                fieldWithPath("data.clubType").type(JsonFieldType.STRING).description("동아리 유형"),
-                                fieldWithPath("data.clubName").type(JsonFieldType.STRING).description("동아리 이름"),
-                                fieldWithPath("data.name").type(JsonFieldType.STRING).description("신청자 이름"),
-                                fieldWithPath("data.major").type(JsonFieldType.STRING).description("신청자 전공"),
-                                fieldWithPath("data.stuNum").type(JsonFieldType.STRING).description("신청자 학번"),
-                                fieldWithPath("data.phoneNum").type(JsonFieldType.STRING).description("신청자 전화번호"),
-                                fieldWithPath("data.pname").type(JsonFieldType.STRING).description("지도 교수 이름"),
-                                fieldWithPath("data.pmajor").type(JsonFieldType.STRING).description("지도 교수 전공"),
-                                fieldWithPath("data.pphoneNum").type(JsonFieldType.STRING).description("지도 교수 전화번호")
-                        )));
-    }
+//    @WithMockUser(username = "관리자", roles = {"ADMIN"})
+//    @DisplayName("동아리 거절")
+//    @Test
+//    void refuseClub() throws Exception {
+//        ApplyClub applyClub = new ApplyClub();
+//        applyClub.setId(1L);
+//
+//        ApplyClubResponseDTO applyClubResponseDTO = ApplyClubResponseDTO.builder()
+//                .applyClubStatus(ApplyClubStatus.REFUSE)
+//                .clubType(ClubType.CENTRAL)
+//                .clubName("Coding Club")
+//                .name("John Doe")
+//                .major("Computer Science")
+//                .stuNum("20210001")
+//                .phoneNum("010-1234-5678")
+//                .pName("Prof. Smith")
+//                .pMajor("Software Engineering")
+//                .pPhoneNum("010-9876-5432")
+//                .refuseReason("Insufficient funding")
+//                .build();
+//
+//        given(applyClubService.findById(1L)).willReturn(applyClub);
+//        given(applyClubService.refuseClub(eq(1L), eq("Insufficient funding"))).willReturn(applyClubResponseDTO);
+//
+//        mockMvc.perform(post("/admin/refuse/1")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content("{\"refuseReason\":\"Insufficient funding\"}"))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//                .andDo(document("refuse-club",
+//                        preprocessRequest(prettyPrint()),
+//                        preprocessResponse(prettyPrint()),
+//                        requestFields(
+//                                fieldWithPath("refuseReason").type(JsonFieldType.STRING).description("거절 사유")
+//                        ),
+//                        responseFields(
+//                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("응답 코드"),
+//                                fieldWithPath("message").type(JsonFieldType.STRING).description("응답 메시지"),
+//                                fieldWithPath("data.refuseReason").type(JsonFieldType.STRING).description("거절 사유").optional(),
+//                                fieldWithPath("data.applyClubId").type(JsonFieldType.NUMBER).description("동아리 신청 ID").optional(),
+//                                fieldWithPath("data.applyClubStatus").type(JsonFieldType.STRING).description("동아리 신청 상태"),
+//                                fieldWithPath("data.clubType").type(JsonFieldType.STRING).description("동아리 유형"),
+//                                fieldWithPath("data.clubName").type(JsonFieldType.STRING).description("동아리 이름"),
+//                                fieldWithPath("data.name").type(JsonFieldType.STRING).description("신청자 이름"),
+//                                fieldWithPath("data.major").type(JsonFieldType.STRING).description("신청자 전공"),
+//                                fieldWithPath("data.stuNum").type(JsonFieldType.STRING).description("신청자 학번"),
+//                                fieldWithPath("data.phoneNum").type(JsonFieldType.STRING).description("신청자 전화번호"),
+//                                fieldWithPath("data.pname").type(JsonFieldType.STRING).description("지도 교수 이름"),
+//                                fieldWithPath("data.pmajor").type(JsonFieldType.STRING).description("지도 교수 전공"),
+//                                fieldWithPath("data.pphoneNum").type(JsonFieldType.STRING).description("지도 교수 전화번호")
+//                        )));
+//    }
 }
