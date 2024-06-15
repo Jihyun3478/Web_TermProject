@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="web.termproject.controller.AdminControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-06-09T13:34:41" hostname="MacBook-Pro.local" time="0.195">
+  <properties/>
+  <testcase name="동아리 거절" classname="web.termproject.controller.AdminControllerTest" time="0.17"/>
+  <testcase name="동아리 신청목록 조회" classname="web.termproject.controller.AdminControllerTest" time="0.024"/>
+  <system-out><![CDATA[2024-06-09T22:34:41.177+09:00  INFO 73199 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-09T22:34:41.178+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-09T22:34:41.178+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /admin/refuse/1
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Content-Length:"39"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.AdminController
+           Method = web.termproject.controller.AdminController#refuseClub(Long, RefuseApplyClubDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"code":200000,"message":"OK","data":{"applyClubId":null,"applyClubStatus":"REFUSE","clubType":"중앙동아리","clubName":"Coding Club","name":"John Doe","major":"Computer Science","stuNum":"20210001","phoneNum":"010-1234-5678","refuseReason":"Insufficient funding","pname":"Prof. Smith","pmajor":"Software Engineering","pphoneNum":"010-9876-5432"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2024-06-09T22:34:41.312+09:00  INFO 73199 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-09T22:34:41.312+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-09T22:34:41.312+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /admin/list
+       Parameters = {}
+          Headers = [Content-Type:"application/json"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.AdminController
+           Method = web.termproject.controller.AdminController#applyClubList()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"code":200000,"message":"OK","data":[{"applyClubId":null,"applyClubStatus":"WAIT","clubType":"중앙동아리","clubName":"Coding Club","name":"John Doe","major":"Computer Science","stuNum":"20210001","phoneNum":"010-1234-5678","refuseReason":null,"pname":"Prof. Smith","pmajor":"Software Engineering","pphoneNum":"010-9876-5432"}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

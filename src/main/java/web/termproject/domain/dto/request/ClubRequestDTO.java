@@ -16,4 +16,5 @@ public class ClubRequestDTO {
     private String president;
     private String vicePresident;
     private String generalAffairs;
+    private String history;
 }

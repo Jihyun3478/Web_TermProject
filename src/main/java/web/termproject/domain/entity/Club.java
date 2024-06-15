@@ -2,9 +2,7 @@ package web.termproject.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import web.termproject.domain.status.ClubType;
 
 import java.util.ArrayList;
@@ -13,7 +11,9 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Club {
 
     @Id
@@ -42,4 +42,15 @@ public class Club {
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<ApplyMember> applyMemberList = new ArrayList<>();
+
+    public Club createClub(ApplyClub applyClub) {
+        return Club.builder()
+                .clubType(applyClub.getClubType())
+                .name(applyClub.getClubName())
+                .build();
+    }
+
+    public void updateImageRouteInfo(String imageRoute) {
+        this.imageRoute = imageRoute;
+    }
 }

@@ -1,0 +1,4 @@
+[source,x-www-form-urlencoded,options="nowrap"]
+----
+ApplyMemberStatus=CLUB_MEMBER
+----

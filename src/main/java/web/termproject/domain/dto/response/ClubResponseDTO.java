@@ -1,14 +1,8 @@
 package web.termproject.domain.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 import lombok.*;
-import web.termproject.domain.entity.ApplyClub;
-import web.termproject.domain.entity.ApplyMember;
-import web.termproject.domain.status.ApplyClubStatus;
 import web.termproject.domain.status.ClubType;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +18,7 @@ public class ClubResponseDTO {
     private String introduce;
     private String history;
     private String imageRoute;
-    private Date meetingTime;
+    private String meetingTime;
     private String president;
     private String vicePresident;
     private String generalAffairs;

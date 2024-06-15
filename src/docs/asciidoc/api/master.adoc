@@ -1,0 +1,38 @@
+=== Get Clubs
+
+include::{snippets}/master-club-list/http-request.adoc[]
+include::{snippets}/master-club-list/http-response.adoc[]
+include::{snippets}/master-club-list/curl-request.adoc[]
+include::{snippets}/master-club-list/httpie-request.adoc[]
+include::{snippets}/master-club-list/response-body.adoc[]
+
+=== Update Master Club Info
+
+include::{snippets}/master-club-update/http-request.adoc[]
+include::{snippets}/master-club-update/http-response.adoc[]
+include::{snippets}/master-club-update/curl-request.adoc[]
+include::{snippets}/master-club-update/httpie-request.adoc[]
+include::{snippets}/master-club-update/request-body.adoc[]
+
+=== Upload Club Image
+
+include::{snippets}/master-club-uploadImage/http-request.adoc[]
+include::{snippets}/master-club-uploadImage/http-response.adoc[]
+include::{snippets}/master-club-uploadImage/curl-request.adoc[]
+include::{snippets}/master-club-uploadImage/httpie-request.adoc[]
+
+=== Update Apply Member Status
+
+include::{snippets}/master-applyMember-updateStatus/http-request.adoc[]
+include::{snippets}/master-applyMember-updateStatus/http-response.adoc[]
+include::{snippets}/master-applyMember-updateStatus/curl-request.adoc[]
+include::{snippets}/master-applyMember-updateStatus/httpie-request.adoc[]
+include::{snippets}/master-applyMember-updateStatus/request-body.adoc[]
+include::{snippets}/master-applyMember-updateStatus/response-body.adoc[]
+
+=== Download Apply Form
+
+include::{snippets}/master-applyMember-downloadForm/http-request.adoc[]
+include::{snippets}/master-applyMember-downloadForm/http-response.adoc[]
+include::{snippets}/master-applyMember-downloadForm/curl-request.adoc[]
+include::{snippets}/master-applyMember-downloadForm/httpie-request.adoc[]

@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+clubType+`
+|`+String+`
+|동아리 종류
+
+|`+clubName+`
+|`+String+`
+|동아리 이름
+
+|`+loginId+`
+|`+String+`
+|member ID
+
+|`+professorLoginId+`
+|`+String+`
+|professor ID
+
+|===

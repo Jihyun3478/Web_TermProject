@@ -1,0 +1,15 @@
+=== Get Image
+
+include::{snippets}/image-display/http-request.adoc[]
+include::{snippets}/image-display/http-response.adoc[]
+include::{snippets}/image-display/curl-request.adoc[]
+include::{snippets}/image-display/httpie-request.adoc[]
+
+
+=== Upload Image
+
+include::{snippets}/image-upload/http-request.adoc[]
+include::{snippets}/image-upload/http-response.adoc[]
+include::{snippets}/image-upload/curl-request.adoc[]
+include::{snippets}/image-upload/httpie-request.adoc[]
+include::{snippets}/image-upload/response-body.adoc[]

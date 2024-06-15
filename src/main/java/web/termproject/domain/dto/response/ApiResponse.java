@@ -2,6 +2,7 @@ package web.termproject.domain.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
+import web.termproject.exception.ResponseCode;
 
 @Data
 @Builder

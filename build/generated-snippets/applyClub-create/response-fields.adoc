@@ -1,0 +1,64 @@
+|===
+|Path|Type|Description
+
+|`+code+`
+|`+Number+`
+|코드
+
+|`+message+`
+|`+String+`
+|메시지
+
+|`+data+`
+|`+Object+`
+|응답데이터
+
+|`+data.applyClubId+`
+|`+Number+`
+|동아리 신청 식별자
+
+|`+data.applyClubStatus+`
+|`+String+`
+|동아리 신청 현황
+
+|`+data.clubType+`
+|`+String+`
+|동아리 종류
+
+|`+data.clubName+`
+|`+String+`
+|동아리 이름
+
+|`+data.name+`
+|`+String+`
+|신청자 이름
+
+|`+data.major+`
+|`+String+`
+|신청자 소속
+
+|`+data.stuNum+`
+|`+String+`
+|신청자 학번
+
+|`+data.phoneNum+`
+|`+String+`
+|신청자 전화번호
+
+|`+data.pname+`
+|`+String+`
+|교수님 성함
+
+|`+data.pmajor+`
+|`+String+`
+|교수님 소속
+
+|`+data.pphoneNum+`
+|`+String+`
+|교수님 전화번호
+
+|`+data.refuseReason+`
+|`+String+`
+|거절 사유
+
+|===

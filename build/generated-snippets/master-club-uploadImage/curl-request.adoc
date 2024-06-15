@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/master/club/uploadImage/1' -i -X POST \
+    -H 'Content-Type: multipart/form-data' \
+    -F 'image=test content'
+----

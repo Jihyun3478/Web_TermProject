@@ -1,0 +1,21 @@
+=== Download Image
+
+include::{snippets}/applyMember-download/http-request.adoc[]
+include::{snippets}/applyMember-download/http-response.adoc[]
+include::{snippets}/applyMember-download/curl-request.adoc[]
+include::{snippets}/applyMember-download/httpie-request.adoc[]
+
+=== Upload Files
+
+include::{snippets}/applyMember-upload/http-request.adoc[]
+include::{snippets}/applyMember-upload/http-response.adoc[]
+include::{snippets}/applyMember-upload/curl-request.adoc[]
+include::{snippets}/applyMember-upload/httpie-request.adoc[]
+
+=== Get Club List
+
+include::{snippets}/applyMember-clubList/http-request.adoc[]
+include::{snippets}/applyMember-clubList/http-response.adoc[]
+include::{snippets}/applyMember-clubList/curl-request.adoc[]
+include::{snippets}/applyMember-clubList/httpie-request.adoc[]
+include::{snippets}/applyMember-clubList/response-body.adoc[]

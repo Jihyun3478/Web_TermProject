@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="web.termproject.controller.ApplyClubControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-09T13:34:41" hostname="MacBook-Pro.local" time="0.031">
+  <properties/>
+  <testcase name="동아리 등록 신청" classname="web.termproject.controller.ApplyClubControllerTest" time="0.031"/>
+  <system-out><![CDATA[2024-06-09T22:34:41.336+09:00  INFO 73199 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-09T22:34:41.336+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-09T22:34:41.337+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /applyClub/create
+       Parameters = {}
+          Headers = [Content-Type:"application/json", Content-Length:"106"]
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.ApplyClubController
+           Method = web.termproject.controller.ApplyClubController#createApplyClub(ApplyClubRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:"application/json"]
+     Content type = application/json
+             Body = {"code":200000,"message":"OK","data":{"applyClubId":2,"applyClubStatus":"WAIT","clubType":"중앙동아리","clubName":"동아리1","name":"이지현","major":"컴퓨터소프트웨어공학과","stuNum":"홍길동","phoneNum":"000-0000-0000","refuseReason":null,"pname":"교수님1","pmajor":"컴퓨터소프트웨어공학과","pphoneNum":"222-2222-2222"}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

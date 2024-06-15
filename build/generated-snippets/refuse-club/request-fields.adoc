@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+refuseReason+`
+|`+String+`
+|거절 사유
+
+|===

@@ -1,0 +1,29 @@
+ifndef::snippets[]
+:snippets: build/generated-snippets
+endif::[]
+= 동아리 커뮤니티 REST API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectnums:
+:sectlinks:
+
+== ApplyMemberController
+include::api/applyMember.adoc[]
+
+== ImageController
+include::api/image.adoc[]
+
+== MasterController
+include::api/master.adoc[]
+
+== MemberController
+include::api/member.adoc[]
+
+== ApplyClubController
+include::api/applyClub.adoc[]
+
+== AdminController
+include::api/admin.adoc[]

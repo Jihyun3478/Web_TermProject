@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - MemberControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>MemberControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/web.termproject.controller.html">web.termproject.controller</a> &gt; MemberControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.075s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">회원_전체_정보_조회</td>
+<td class="success">memberDetailInfo()</td>
+<td class="success">0.018s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">로그인</td>
+<td class="success">signIn()</td>
+<td class="success">0.017s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">회원가입</td>
+<td class="success">signUp()</td>
+<td class="success">0.040s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2024-06-09T22:34:42.101+09:00  INFO 73199 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [web.termproject.controller.MemberControllerTest]: MemberControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-06-09T22:34:42.104+09:00  INFO 73199 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration web.termproject.TermProjectApplication for test class web.termproject.controller.MemberControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2024-06-09T22:34:42.117+09:00  INFO 73199 --- [    Test worker] w.t.controller.MemberControllerTest      : Starting MemberControllerTest using Java 21.0.2 with PID 73199 (started by jihyun in /Users/jihyun/Desktop/IdeaProjects/Web_TermProject)
+2024-06-09T22:34:42.117+09:00  INFO 73199 --- [    Test worker] w.t.controller.MemberControllerTest      : The following 1 profile is active: &quot;jwt&quot;
+2024-06-09T22:34:42.263+09:00 DEBUG 73199 --- [    Test worker] swordEncoderAuthenticationManagerBuilder : No authenticationProviders and no parentAuthenticationManager defined. Returning null.
+2024-06-09T22:34:42.268+09:00  INFO 73199 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@14c77f6d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@150ae70c, org.springframework.security.web.context.SecurityContextHolderFilter@7b330cbd, org.springframework.security.web.header.HeaderWriterFilter@590603cf, org.springframework.web.filter.CorsFilter@47d98145, org.springframework.security.web.csrf.CsrfFilter@7d365620, org.springframework.security.web.authentication.logout.LogoutFilter@2e47326b, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@ab8b7f, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@1ee98d0d, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@68bd3e3f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@27f64853, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@508edcd7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@347bc2ad, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e872237, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7f1dfdbc, org.springframework.security.oauth2.client.web.OAuth2AuthorizationCodeGrantFilter@48ebf57c, org.springframework.security.web.access.ExceptionTranslationFilter@54c5c875, org.springframework.security.web.access.intercept.AuthorizationFilter@17e83783]
+2024-06-09T22:34:42.273+09:00  INFO 73199 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-06-09T22:34:42.274+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-09T22:34:42.274+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-06-09T22:34:42.277+09:00  INFO 73199 --- [    Test worker] w.t.controller.MemberControllerTest      : Started MemberControllerTest in 0.172 seconds (process running for 5.0)
+2024-06-09T22:34:42.284+09:00  INFO 73199 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-09T22:34:42.284+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-09T22:34:42.284+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/memberInfo
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json&quot;]
+             Body = &lt;no character encoding set&gt;
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.MemberController
+           Method = web.termproject.controller.MemberController#getMemberInfo()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = null
+          Headers = []
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/memberInfo
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json&quot;]
+             Body = &lt;no character encoding set&gt;
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.MemberController
+           Method = web.termproject.controller.MemberController#getMemberInfo()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json&quot;]
+     Content type = application/json
+             Body = {&quot;id&quot;:1,&quot;loginId&quot;:&quot;test1234&quot;,&quot;loginPw&quot;:&quot;test1234&quot;,&quot;name&quot;:&quot;홍길동&quot;,&quot;stuNum&quot;:&quot;2024&quot;,&quot;major&quot;:&quot;컴퓨터소프트웨어공학과&quot;,&quot;phoneNum&quot;:&quot;000-0000-0000&quot;,&quot;email&quot;:&quot;홍길동@kumoh.ac.kr&quot;,&quot;gender&quot;:&quot;남&quot;,&quot;birthDate&quot;:&quot;2000-01-01&quot;,&quot;role&quot;:null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2024-06-09T22:34:42.301+09:00  INFO 73199 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-09T22:34:42.301+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-09T22:34:42.301+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-06-09T22:34:42.305+09:00  INFO 73199 --- [    Test worker] w.t.controller.MemberController          : request username = test1234, password = test1234
+2024-06-09T22:34:42.306+09:00  INFO 73199 --- [    Test worker] w.t.controller.MemberController          : jwtToken accessToken = access-token, refreshToken = refresh-token
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/signin
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json&quot;, Content-Length:&quot;43&quot;]
+             Body = &lt;no character encoding set&gt;
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.MemberController
+           Method = web.termproject.controller.MemberController#signIn(LoginRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json&quot;]
+     Content type = application/json
+             Body = {&quot;grantType&quot;:null,&quot;accessToken&quot;:&quot;access-token&quot;,&quot;refreshToken&quot;:&quot;refresh-token&quot;}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2024-06-09T22:34:42.318+09:00  INFO 73199 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-09T22:34:42.318+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-09T22:34:42.318+09:00  INFO 73199 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/signup
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json&quot;, Content-Length:&quot;236&quot;]
+             Body = &lt;no character encoding set&gt;
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.MemberController
+           Method = web.termproject.controller.MemberController#signup(SignupRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json&quot;]
+     Content type = application/json
+             Body = {&quot;code&quot;:201000,&quot;message&quot;:&quot;회원가입 완료&quot;,&quot;data&quot;:{&quot;id&quot;:1,&quot;loginId&quot;:&quot;test1234&quot;,&quot;loginPw&quot;:&quot;test1234&quot;,&quot;name&quot;:&quot;홍길동&quot;,&quot;stuNum&quot;:&quot;20240001&quot;,&quot;major&quot;:&quot;컴퓨터소프트웨어공학과&quot;,&quot;phoneNum&quot;:&quot;000-0000-0000&quot;,&quot;email&quot;:&quot;test@kumoh.ac.kr&quot;,&quot;gender&quot;:&quot;남&quot;,&quot;birthDate&quot;:&quot;2000-01-01&quot;,&quot;role&quot;:&quot;MEMBER&quot;}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.7</a> at 2024. 6. 9. 오후 10:34:42</p>
+</div>
+</div>
+</body>
+</html>

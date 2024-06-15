@@ -1,10 +1,15 @@
 package web.termproject.domain.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import web.termproject.domain.status.RoleType;
 
 @Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberResponseDTO {
     private Long id;
     private String loginId;
@@ -16,4 +21,5 @@ public class MemberResponseDTO {
     private String email;
     private String gender;
     private String birthDate;
+    private RoleType role;
 }
