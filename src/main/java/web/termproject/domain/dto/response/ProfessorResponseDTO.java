@@ -1,9 +1,6 @@
 package web.termproject.domain.dto.response;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
 import lombok.*;
-import web.termproject.domain.entity.ApplyClub;
 
 @Getter
 @Setter
