@@ -7,7 +7,7 @@ import web.termproject.domain.dto.response.BoardResponseDTO;
 import java.util.List;
 
 public interface BoardService {
-    void save(BoardRequestDTO boardRequestDTO, MultipartFile image);
+    Boolean save(BoardRequestDTO boardRequestDTO, MultipartFile image);
 
     List<BoardResponseDTO> findAllAnnouncement();
 

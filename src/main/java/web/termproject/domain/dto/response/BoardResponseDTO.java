@@ -15,6 +15,7 @@ public class BoardResponseDTO {
     private Long id;
     private String title;
     private String content;
+    private String writer;
     private Member member;
     private BoardType boardType;
     private String imageRoute;
