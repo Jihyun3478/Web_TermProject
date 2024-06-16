@@ -6,9 +6,9 @@ include::{snippets}/apply-club-list/response-fields.adoc[]
 
 === 동아리 신청 승인
 
-// include::{snippets}/accept-club/http-request.adoc[]
-// include::{snippets}/accept-club/http-response.adoc[]
-// include::{snippets}/accept-club/response-fields.adoc[]
+include::{snippets}/accept-club/http-request.adoc[]
+include::{snippets}/accept-club/http-response.adoc[]
+include::{snippets}/accept-club/response-fields.adoc[]
 
 === 동아리 신청 거절
 

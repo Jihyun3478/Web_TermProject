@@ -8,13 +8,13 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.test.context.support.WithMockUser;
 import web.termproject.controller.MemberController;
-import web.termproject.docs.RestDocsSupport;
 import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.LoginRequestDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.RoleType;
+import web.termproject.service.ApplyClubService;
 import web.termproject.service.MemberService;
 import web.termproject.service.ProfessorService;
 
@@ -37,9 +37,12 @@ class MemberControllerDocsTest extends RestDocsSupport {
     @MockBean
     private ProfessorService professorService;
 
+    @MockBean
+    private ApplyClubService applyClubService;
+
     @Override
     protected Object initController() {
-        return new MemberController(memberService, professorService);
+        return new MemberController(memberService, professorService, applyClubService);
     }
 
     @DisplayName("회원가입")
@@ -121,12 +124,13 @@ class MemberControllerDocsTest extends RestDocsSupport {
                 .loginPw("test1234")
                 .build();
 
-        JwtTokenDTO jwtToken = JwtTokenDTO.builder()
+        JwtTokenDTO jwtTokenDTO = JwtTokenDTO.builder()
                 .accessToken("access-token")
                 .refreshToken("refresh-token")
+                .grantType("Bearer")
                 .build();
 
-        given(memberService.signIn(any(String.class), any(String.class))).willReturn(jwtToken);
+        given(memberService.signIn(any(String.class), any(String.class))).willReturn(jwtTokenDTO);
 
         mockMvc.perform(post("/api/signin")
                         .contentType(MediaType.APPLICATION_JSON)

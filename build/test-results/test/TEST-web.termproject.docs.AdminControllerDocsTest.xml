@@ -1,248 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="web.termproject.docs.AdminControllerDocsTest" tests="3" skipped="0" failures="2" errors="0" timestamp="2024-06-15T15:02:47" hostname="MacBook-Pro.local" time="0.58">
+<testsuite name="web.termproject.docs.AdminControllerDocsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-16T09:49:11" hostname="MacBook-Pro.local" time="0.431">
   <properties/>
-  <testcase name="동아리 거절" classname="web.termproject.docs.AdminControllerDocsTest" time="0.433">
-    <failure message="java.lang.AssertionError: Status expected:&lt;200&gt; but was:&lt;400&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Status expected:&lt;200&gt; but was:&lt;400&gt;
-	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
-	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
-	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
-	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
-	at web.termproject.docs.AdminControllerDocsTest.refuseClub(AdminControllerDocsTest.java:179)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
-	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
-	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
-	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:119)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:94)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:89)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:62)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
-	at jdk.proxy1/jdk.proxy1.$Proxy2.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-</failure>
-  </testcase>
-  <testcase name="동아리 승인" classname="web.termproject.docs.AdminControllerDocsTest" time="0.077">
-    <failure message="org.mockito.exceptions.misusing.InvalidUseOfMatchersException: &#10;Invalid use of argument matchers!&#10;2 matchers expected, 1 recorded:&#10;-&gt; at web.termproject.docs.AdminControllerDocsTest.acceptClub(AdminControllerDocsTest.java:119)&#10;&#10;This exception may occur if matchers are combined with raw values:&#10;    //incorrect:&#10;    someMethod(any(), &quot;raw String&quot;);&#10;When using matchers, all arguments have to be provided by matchers.&#10;For example:&#10;    //correct:&#10;    someMethod(any(), eq(&quot;String by matcher&quot;));&#10;&#10;For more info see javadoc for Matchers class.&#10;" type="org.mockito.exceptions.misusing.InvalidUseOfMatchersException">org.mockito.exceptions.misusing.InvalidUseOfMatchersException: 
-Invalid use of argument matchers!
-2 matchers expected, 1 recorded:
--&gt; at web.termproject.docs.AdminControllerDocsTest.acceptClub(AdminControllerDocsTest.java:119)
-
-This exception may occur if matchers are combined with raw values:
-    //incorrect:
-    someMethod(any(), &quot;raw String&quot;);
-When using matchers, all arguments have to be provided by matchers.
-For example:
-    //correct:
-    someMethod(any(), eq(&quot;String by matcher&quot;));
-
-For more info see javadoc for Matchers class.
-
-	at app//org.modelmapper.ModelMapper.map(ModelMapper.java:420)
-	at app//web.termproject.docs.AdminControllerDocsTest.acceptClub(AdminControllerDocsTest.java:119)
-	at java.base@21.0.2/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.2/java.lang.reflect.Method.invoke(Method.java:580)
-	at app//org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
-	at app//org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
-	at app//org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
-	at app//org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at app//org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
-	at app//org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base@21.0.2/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base@21.0.2/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
-	at app//org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:119)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:94)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:89)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:62)
-	at java.base@21.0.2/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.2/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
-	at jdk.proxy1/jdk.proxy1.$Proxy2.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-</failure>
-  </testcase>
-  <testcase name="동아리 신청목록 조회" classname="web.termproject.docs.AdminControllerDocsTest" time="0.067"/>
-  <system-out><![CDATA[00:02:47.613 [Test worker] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
-00:02:47.816 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-00:02:47.816 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-00:02:47.818 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
-00:02:47.889 [Test worker] WARN org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver -- Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot construct instance of `web.termproject.domain.dto.request.RefuseApplyClubDTO` (although at least one Creator exists): cannot deserialize from Object value (no delegate- or property-based Creator)]
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /admin/refuse/1
-       Parameters = {}
-          Headers = [Content-Type:"application/json", Content-Length:"39"]
-             Body = <no character encoding set>
-    Session Attrs = {}
-
-Handler:
-             Type = web.termproject.controller.AdminController
-           Method = web.termproject.controller.AdminController#refuseClub(Long, RefuseApplyClubDTO)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = org.springframework.http.converter.HttpMessageNotReadableException
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 400
-    Error message = null
-          Headers = []
-     Content type = null
-             Body = 
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-00:02:47.908 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-00:02:47.908 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-00:02:47.908 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
-00:02:47.987 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-00:02:47.987 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-00:02:47.987 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+  <testcase name="동아리 신청 상세 조회" classname="web.termproject.docs.AdminControllerDocsTest" time="0.431"/>
+  <system-out><![CDATA[18:49:12.070 [Test worker] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+18:49:12.244 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+18:49:12.245 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+18:49:12.246 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
 
 MockHttpServletRequest:
       HTTP Method = GET
-      Request URI = /admin/list
+      Request URI = /admin/list/1
        Parameters = {}
           Headers = [Content-Type:"application/json"]
              Body = <no character encoding set>
@@ -250,7 +17,7 @@ MockHttpServletRequest:
 
 Handler:
              Type = web.termproject.controller.AdminController
-           Method = web.termproject.controller.AdminController#applyClubList()
+           Method = web.termproject.controller.AdminController#applyClubDetail(Long)
 
 Async:
     Async started = false
@@ -272,7 +39,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Content-Type:"application/json"]
      Content type = application/json
-             Body = {"code":200000,"message":"관리자 동아리 신청 목록 조회","data":[{"applyClubId":null,"applyClubStatus":"WAIT","clubType":"중앙동아리","clubName":"Coding Club","name":"John Doe","major":"Computer Science","stuNum":"20210001","phoneNum":"010-1234-5678","refuseReason":null,"pname":"Prof. Smith","pmajor":"Software Engineering","pphoneNum":"010-9876-5432"}]}
+             Body = {"code":200000,"message":"관리자 동아리 신청 상세 조회","data":{"applyClubId":1,"applyClubStatus":"WAIT","clubType":"중앙동아리","clubName":"Coding Club","name":"홍길동","major":"컴퓨터소프트웨어공학과","stuNum":"2024","phoneNum":"000-0000-0000","refuseReason":null,"pname":"교수님1","pmajor":"컴퓨터소프트웨어공학과","pphoneNum":"222-2222-2222"}}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []

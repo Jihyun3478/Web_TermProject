@@ -20,7 +20,10 @@ public class ApplyClub extends BaseTimeEntity {
 
     private ClubType clubType;
     private String clubName;
+
+    @Enumerated(EnumType.STRING)
     private ApplyClubStatus applyClubStatus;
+
     private String refuseReason;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)

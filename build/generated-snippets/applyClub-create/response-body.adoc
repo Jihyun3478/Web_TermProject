@@ -7,7 +7,7 @@
     "applyClubId" : 2,
     "applyClubStatus" : "WAIT",
     "clubType" : "중앙동아리",
-    "clubName" : "동아리1",
+    "clubName" : "Basketball Club",
     "name" : "이지현",
     "major" : "컴퓨터소프트웨어공학과",
     "stuNum" : "홍길동",

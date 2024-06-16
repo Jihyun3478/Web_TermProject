@@ -1,0 +1,44 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 950
+
+{
+  "code" : 200000,
+  "message" : "관리자 동아리 신청 승인",
+  "data" : {
+    "id" : 1,
+    "clubType" : "중앙동아리",
+    "name" : "Coding Club",
+    "introduce" : null,
+    "history" : null,
+    "imageRoute" : null,
+    "meetingTime" : null,
+    "president" : null,
+    "vicePresident" : null,
+    "generalAffairs" : null,
+    "professor" : {
+      "id" : 1,
+      "major" : "컴퓨터소프트웨어공학과",
+      "phoneNum" : "222-2222-2222",
+      "email" : "교수님@kumoh.ac.kr",
+      "name" : "교수님1"
+    },
+    "applyMember" : null,
+    "masterMember" : {
+      "id" : 1,
+      "loginId" : "test1234",
+      "loginPw" : "test1234",
+      "name" : "홍길동",
+      "stuNum" : "2024",
+      "major" : "컴퓨터소프트웨어공학과",
+      "phoneNum" : "000-0000-0000",
+      "email" : "홍길동@kumoh.ac.kr",
+      "gender" : "남",
+      "birthDate" : "2000-01-01",
+      "role" : "MASTER_MEMBER"
+    }
+  }
+}
+----

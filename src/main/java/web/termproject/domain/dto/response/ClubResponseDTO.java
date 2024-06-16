@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClubResponseDTO {
     private Long id;
+    private Long applyClubId;
     private ClubType clubType;
     private String name;
     private String introduce;
