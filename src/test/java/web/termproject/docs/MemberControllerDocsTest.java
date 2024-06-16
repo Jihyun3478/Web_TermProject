@@ -14,6 +14,7 @@ import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.RoleType;
+import web.termproject.service.AdminService;
 import web.termproject.service.ApplyClubService;
 import web.termproject.service.MemberService;
 import web.termproject.service.ProfessorService;
@@ -35,6 +36,9 @@ class MemberControllerDocsTest extends RestDocsSupport {
     private MemberService memberService;
 
     @MockBean
+    private AdminService adminService;
+
+    @MockBean
     private ProfessorService professorService;
 
     @MockBean
@@ -42,7 +46,7 @@ class MemberControllerDocsTest extends RestDocsSupport {
 
     @Override
     protected Object initController() {
-        return new MemberController(memberService, professorService, applyClubService);
+        return new MemberController(memberService, adminService, professorService, applyClubService);
     }
 
     @DisplayName("회원가입")
