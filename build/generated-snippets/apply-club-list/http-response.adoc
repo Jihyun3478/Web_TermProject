@@ -2,24 +2,24 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 438
+Content-Length: 502
 
 {
   "code" : 200000,
-  "message" : "OK",
+  "message" : "관리자 동아리 신청 목록 조회",
   "data" : [ {
     "applyClubId" : null,
     "applyClubStatus" : "WAIT",
     "clubType" : "중앙동아리",
     "clubName" : "Coding Club",
-    "name" : "John Doe",
-    "major" : "Computer Science",
-    "stuNum" : "20210001",
-    "phoneNum" : "010-1234-5678",
+    "name" : "홍길동",
+    "major" : "컴퓨터소프트웨어공학과",
+    "stuNum" : "2024",
+    "phoneNum" : "000-0000-0000",
     "refuseReason" : null,
-    "pname" : "Prof. Smith",
-    "pmajor" : "Software Engineering",
-    "pphoneNum" : "010-9876-5432"
+    "pname" : "교수님1",
+    "pmajor" : "컴퓨터소프트웨어공학과",
+    "pphoneNum" : "222-2222-2222"
   } ]
 }
 ----

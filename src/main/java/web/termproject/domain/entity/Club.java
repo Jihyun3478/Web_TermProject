@@ -35,13 +35,17 @@ public class Club {
     private String vicePresident;
     private String generalAffairs;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "apply_club_id")
     private ApplyClub applyClub;
 
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<ApplyMember> applyMemberList = new ArrayList<>();
+
+    public void setApplyClub(ApplyClub applyClub) {
+        this.applyClub = applyClub;
+    }
 
     public Club createClub(ApplyClub applyClub) {
         return Club.builder()

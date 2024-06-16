@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - AdminControllerDocsTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>AdminControllerDocsTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/web.termproject.docs.html">web.termproject.docs</a> &gt; AdminControllerDocsTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.438s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">동아리 승인</td>
+<td class="success">acceptClub()</td>
+<td class="success">0.438s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>18:59:11.194 [Test worker] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+18:59:11.369 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+18:59:11.369 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+18:59:11.371 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /admin/accept/1
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json&quot;]
+             Body = &lt;no character encoding set&gt;
+    Session Attrs = {}
+
+Handler:
+             Type = web.termproject.controller.AdminController
+           Method = web.termproject.controller.AdminController#acceptClub(Long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Content-Type:&quot;application/json&quot;]
+     Content type = application/json
+             Body = {&quot;code&quot;:200000,&quot;message&quot;:&quot;관리자 동아리 신청 승인&quot;,&quot;data&quot;:{&quot;id&quot;:1,&quot;applyClubId&quot;:1,&quot;clubType&quot;:&quot;중앙동아리&quot;,&quot;name&quot;:&quot;Coding Club&quot;,&quot;introduce&quot;:null,&quot;history&quot;:null,&quot;imageRoute&quot;:null,&quot;meetingTime&quot;:null,&quot;president&quot;:null,&quot;vicePresident&quot;:null,&quot;generalAffairs&quot;:null,&quot;professor&quot;:{&quot;id&quot;:1,&quot;major&quot;:&quot;컴퓨터소프트웨어공학과&quot;,&quot;phoneNum&quot;:&quot;222-2222-2222&quot;,&quot;email&quot;:&quot;교수님@kumoh.ac.kr&quot;,&quot;name&quot;:&quot;교수님1&quot;},&quot;applyMember&quot;:null,&quot;masterMember&quot;:{&quot;id&quot;:1,&quot;loginId&quot;:&quot;test1234&quot;,&quot;loginPw&quot;:&quot;test1234&quot;,&quot;name&quot;:&quot;홍길동&quot;,&quot;stuNum&quot;:&quot;2024&quot;,&quot;major&quot;:&quot;컴퓨터소프트웨어공학과&quot;,&quot;phoneNum&quot;:&quot;000-0000-0000&quot;,&quot;email&quot;:&quot;홍길동@kumoh.ac.kr&quot;,&quot;gender&quot;:&quot;남&quot;,&quot;birthDate&quot;:&quot;2000-01-01&quot;,&quot;role&quot;:&quot;MASTER_MEMBER&quot;}}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>WARNING: A Java agent has been loaded dynamically (/Users/jihyun/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.13/979ce25f7d3096a2e82214ba7dc972a05ce7a171/byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.7</a> at Jun 16, 2024, 6:59:11 PM</p>
+</div>
+</div>
+</body>
+</html>

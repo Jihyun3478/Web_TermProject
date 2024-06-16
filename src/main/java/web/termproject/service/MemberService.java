@@ -8,8 +8,6 @@ import web.termproject.domain.entity.Member;
 
 public interface MemberService {
     MemberResponseDTO createMember(SignupRequestDTO signupRequestDTO);
-    boolean confirmId(String loginId);
-    boolean confirmNickname(String nickname);
     JwtTokenDTO signIn(String username, String password);
     Member findByLoginId(String loginId);
     Member processOAuthPostLogin(Authentication authentication);

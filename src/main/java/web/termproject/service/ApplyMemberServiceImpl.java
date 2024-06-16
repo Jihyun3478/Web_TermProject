@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import web.termproject.domain.dto.response.ClubResponseDTO;
-import web.termproject.domain.dto.response.ErrorCode;
+import web.termproject.exception.ErrorCode;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.dto.response.ProfessorResponseDTO;
 import web.termproject.domain.entity.ApplyMember;

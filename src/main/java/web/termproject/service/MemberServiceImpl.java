@@ -51,14 +51,6 @@ public class MemberServiceImpl implements MemberService {
                 .build();
     }
 
-    public boolean confirmId(String loginId) {
-        return memberRepository.existsByLoginId(loginId);
-    }
-
-    public boolean confirmNickname(String nickname) {
-        return memberRepository.existsByName(nickname);
-    }
-
     public JwtTokenDTO signIn(String username, String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
 

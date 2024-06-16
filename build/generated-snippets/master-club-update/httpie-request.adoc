@@ -1,6 +1,14 @@
 [source,bash]
 ----
-$ echo '{"name":"update_name", "introduce":"update_introduce", "imageRoute": "update_imageRoute", "meetingtime": "update_meetingTime", "president": "update_president", "vicePresident": "update_vicePresident", "generalAffairs": "update_generalAffairs"}' | http PUT 'http://localhost:8080/master/club/1' \
+$ echo '{
+  "name" : "update_name",
+  "introduce" : "update_introduce",
+  "imageRoute" : "update_imageRoute",
+  "meetingtime" : "update_meetingTime",
+  "president" : "update_president",
+  "vicePresident" : "update_vicePresident",
+  "generalAffairs" : "update_generalAffairs"
+}' | http PUT 'http://localhost:8080/master/club/1' \
     'Content-Type:application/json' \
     'Authorization:Bearer your_token_here'
 ----

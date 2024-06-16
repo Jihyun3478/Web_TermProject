@@ -1,0 +1,60 @@
+|===
+|Path|Type|Description
+
+|`+code+`
+|`+Number+`
+|응답 코드
+
+|`+message+`
+|`+String+`
+|응답 메시지
+
+|`+data.applyClubId+`
+|`+Number+`
+|동아리 신청 ID
+
+|`+data.applyClubStatus+`
+|`+String+`
+|동아리 신청 상태
+
+|`+data.clubType+`
+|`+String+`
+|동아리 유형
+
+|`+data.clubName+`
+|`+String+`
+|동아리 이름
+
+|`+data.name+`
+|`+String+`
+|신청자 이름
+
+|`+data.major+`
+|`+String+`
+|신청자 전공
+
+|`+data.stuNum+`
+|`+String+`
+|신청자 학번
+
+|`+data.phoneNum+`
+|`+String+`
+|신청자 전화번호
+
+|`+data.pname+`
+|`+String+`
+|지도 교수 이름
+
+|`+data.pmajor+`
+|`+String+`
+|지도 교수 전공
+
+|`+data.pphoneNum+`
+|`+String+`
+|지도 교수 전화번호
+
+|`+data.refuseReason+`
+|`+String+`
+|거절 사유
+
+|===

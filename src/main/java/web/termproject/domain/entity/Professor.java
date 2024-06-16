@@ -35,4 +35,12 @@ public class Professor {
 
     @OneToOne(mappedBy = "professor")
     private ApplyClub applyClub;
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

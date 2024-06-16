@@ -17,6 +17,8 @@ public class ApplyMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "APPLY_MEMBER_ID")
     private Long id;
+
+    @Enumerated(EnumType.STRING)
     private ApplyMemberStatus applyMemberStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,6 +1,5 @@
 package web.termproject.service;
 
-import org.modelmapper.ModelMapper;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
 import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.dto.response.ClubResponseDTO;
@@ -14,4 +13,5 @@ public interface ApplyClubService {
     ApplyClubResponseDTO refuseClub(Long applyClubId, String refuseReason);
     List<ApplyClubResponseDTO> findAll();
     ApplyClub findById(Long id);
+    void save(ApplyClub applyClub);
 }

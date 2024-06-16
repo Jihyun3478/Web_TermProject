@@ -2,6 +2,7 @@ package web.termproject.service;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.termproject.domain.dto.request.ApplyClubRequestDTO;
@@ -14,8 +15,6 @@ import web.termproject.domain.entity.Club;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.entity.Professor;
 import web.termproject.domain.status.ApplyClubStatus;
-import web.termproject.exception.CustomIllegalArgumentException;
-import web.termproject.exception.ErrorCode;
 import web.termproject.repository.ApplyClubRepository;
 import web.termproject.repository.ClubRepository;
 import web.termproject.repository.MemberRepository;
@@ -37,10 +36,13 @@ public class ApplyClubServiceImpl implements ApplyClubService {
 
     @Override
     public ApplyClubResponseDTO createApplyClub(ApplyClubRequestDTO requestDTO) {
-        Member member = memberRepository.findByLoginId(requestDTO.getLoginId());
-        Professor professor = professorRepository.findByLoginId(requestDTO.getProfessorLoginId());
-        if(member == null || professor == null) {
-            throw new CustomIllegalArgumentException(ErrorCode.MEMBER_NOT_FOUND, "존재하지 않는 사용자입니다.");
+        Member member = memberRepository.findByName(requestDTO.getName());
+        Professor professor = professorRepository.findByName(requestDTO.getPName());
+        if(member == null) {
+            throw new UsernameNotFoundException("존재하지 않는 학생입니다.");
+        }
+        if(professor == null) {
+            throw new UsernameNotFoundException("존재하지 않는 교수입니다.");
         }
         ApplyClub applyClub = ApplyClub.createApplyClub(requestDTO.getClubType(), requestDTO.getClubName(), member, professor);
 
@@ -65,9 +67,12 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     public ClubResponseDTO createClub(ApplyClub applyClub) {
         Club club = new Club();
         Club savedClub = club.createClub(applyClub);
+        savedClub.setApplyClub(applyClub);
         clubRepository.save(savedClub);
 
         ClubResponseDTO responseDTO = ClubResponseDTO.builder()
+                .id(savedClub.getId())
+                .applyClubId(savedClub.getApplyClub().getId())
                 .clubType(savedClub.getClubType())
                 .name(savedClub.getName())
                 .build();
@@ -80,7 +85,7 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     @Override
     public ApplyClubResponseDTO refuseClub(Long applyClubId, String refuseReason) {
         ApplyClub applyClub = applyClubRepository.findById(applyClubId)
-                .orElseThrow(() -> new CustomIllegalArgumentException(ErrorCode.APPLY_CLUB_NOT_FOUND, "동아리 신청내역이 존재하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("동아리 신청내역이 존재하지 않습니다."));
         applyClub.setApplyClubStatus(ApplyClubStatus.REFUSE);
         applyClub.setRefuseReason(refuseReason);
         ApplyClub savedApplyClub = applyClubRepository.save(applyClub);
@@ -108,6 +113,7 @@ public class ApplyClubServiceImpl implements ApplyClubService {
 
         for (ApplyClub applyClub : applyClubList) {
             ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
+                    .applyClubId(applyClub.getId())
                     .applyClubStatus(applyClub.getApplyClubStatus())
                     .clubType(applyClub.getClubType())
                     .clubName(applyClub.getClubName())
@@ -126,6 +132,11 @@ public class ApplyClubServiceImpl implements ApplyClubService {
 
     @Override
     public ApplyClub findById(Long id) {
-        return applyClubRepository.findById(id).orElseThrow(() -> new CustomIllegalArgumentException(ErrorCode.APPLY_CLUB_NOT_FOUND, "동아리 신청내역이 존재하지 않습니다."));
+        return applyClubRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("동아리 신청내역이 존재하지 않습니다."));
+    }
+
+    @Override
+    public void save(ApplyClub applyClub) {
+        applyClubRepository.save(applyClub);
     }
 }

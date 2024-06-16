@@ -2,16 +2,16 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 461
+Content-Length: 494
 
 {
-  "code" : 200000,
-  "message" : "OK",
+  "code" : 201000,
+  "message" : "동아리 등록 신청 완료",
   "data" : {
     "applyClubId" : 2,
     "applyClubStatus" : "WAIT",
     "clubType" : "중앙동아리",
-    "clubName" : "동아리1",
+    "clubName" : "Basketball Club",
     "name" : "이지현",
     "major" : "컴퓨터소프트웨어공학과",
     "stuNum" : "홍길동",

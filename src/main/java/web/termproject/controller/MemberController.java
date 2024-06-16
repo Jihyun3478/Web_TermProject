@@ -6,18 +6,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import web.termproject.domain.dto.request.JwtTokenDTO;
-import web.termproject.domain.dto.request.LoginRequestDTO;
-import web.termproject.domain.dto.request.PSignupRequestDTO;
-import web.termproject.domain.dto.request.SignupRequestDTO;
-import web.termproject.domain.dto.response.ApiResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import web.termproject.domain.dto.request.*;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
+import web.termproject.domain.status.ClubType;
 import web.termproject.domain.status.RoleType;
+import web.termproject.exception.ApiResponse;
 import web.termproject.exception.ResponseCode;
 import web.termproject.security.util.SecurityUtil;
+import web.termproject.service.ApplyClubService;
 import web.termproject.service.MemberService;
 import web.termproject.service.ProfessorService;
 
@@ -28,31 +29,14 @@ public class MemberController {
 
     private final MemberService memberService;
     private final ProfessorService professorService;
+    private final ApplyClubService applyClubService;
 
     /* 회원가입 */
     @PostMapping("/api/signup")
-    public ResponseEntity<ApiResponse> signup(@Valid @RequestBody SignupRequestDTO requestDTO) {
+    public ResponseEntity<?> signup(@Valid @RequestBody SignupRequestDTO requestDTO) {
         MemberResponseDTO responseDTO = memberService.createMember(requestDTO);
 
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.Created, "회원가입 완료", responseDTO));
-    }
-
-    @GetMapping("/confirmLoginId/{loginId}")
-    public ResponseEntity<String> confirmId(@PathVariable("loginId") String loginId) {
-        if(memberService.confirmId(loginId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok("사용 가능한 아이디 입니다.");
-        }
-    }
-
-    @GetMapping("/confirmNickname/{nickname}")
-    public ResponseEntity<String> confirmNickname(@PathVariable("nickname") String nickname) {
-        if(memberService.confirmNickname(nickname)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok("사용 가능한 닉네임 입니다.");
-        }
     }
 
     @PostMapping("/api/signin")
@@ -67,7 +51,7 @@ public class MemberController {
         return jwtToken;
     }
 
-    /*@GetMapping("/api/memberInfo")
+    @GetMapping("/api/memberInfo")
     public ResponseEntity<MemberResponseDTO> getMemberInfo() {
         String loginId = SecurityUtil.getLoginId();
         Member findMember = memberService.findByLoginId(loginId);
@@ -133,5 +117,18 @@ public class MemberController {
                 .build();
 
         professorService.createProfessor(professor1);
-    }*/
+
+//        ApplyClubRequestDTO applyClub = ApplyClubRequestDTO.builder()
+//                .clubType(ClubType.CENTRAL)
+//                .clubName("동아리 신청 테스트")
+//                .name("홍길동")
+//                .major("컴퓨터소프트웨어공학과")
+//                .stuNum("2024")
+//                .phoneNum("000-0000-0000")
+//                .pName("교수님1")
+//                .pMajor("컴퓨터소프트웨어공학과")
+//                .pPhoneNum("222-2222-2222")
+//                .build();
+//        applyClubService.createApplyClub(applyClub);
+    }
 }
