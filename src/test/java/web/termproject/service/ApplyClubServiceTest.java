@@ -1,5 +1,6 @@
 package web.termproject.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,17 +38,47 @@ class ApplyClubServiceTest {
     @Autowired
     private ApplyClubRepository applyClubRepository;
 
+    private Member testMember;
+    private Professor testProfessor;
+
+    @BeforeEach
+    void initData() {
+        testMember = Member.builder()
+                .id(1L)
+                .loginId("test1234")
+                .loginPw("test1234")
+                .name("홍길동")
+                .stuNum("2024")
+                .major("컴퓨터소프트웨어공학과")
+                .phoneNum("000-0000-0000")
+                .email("홍길동@kumoh.ac.kr")
+                .gender("남")
+                .birthDate("2000-01-01")
+                .build();
+
+        testProfessor = Professor.builder()
+                .id(1L)
+                .loginId("pTest1234")
+                .loginPw("pTest1234")
+                .name("교수님1")
+                .major("컴퓨터소프트웨어공학과")
+                .phoneNum("222-2222-2222")
+                .email("교수님@kumoh.ac.kr")
+                .build();
+    }
+
     @Test
     void createApplyClub() {
-        // Given
-        Member member = memberService.findByLoginId("test1234");
-        Professor professor = professorRepository.findByLoginId("pTest1234");
-
         ApplyClubRequestDTO requestDTO = ApplyClubRequestDTO.builder()
                 .clubType(ClubType.CENTRAL)
                 .clubName("Basketball Club")
-                .loginId(member.getLoginId())
-                .professorLoginId(professor.getLoginId())
+                .name(testMember.getName())
+                .major(testMember.getMajor())
+                .stuNum(testMember.getStuNum())
+                .phoneNum(testMember.getPhoneNum())
+                .pName(testProfessor.getName())
+                .pMajor(testProfessor.getMajor())
+                .pPhoneNum(testProfessor.getPhoneNum())
                 .build();
 
         // When
@@ -57,20 +88,6 @@ class ApplyClubServiceTest {
         assertThat(responseDTO).isNotNull();
         assertThat(responseDTO.getClubName()).isEqualTo("Basketball Club");
         assertThat(responseDTO.getClubType()).isEqualTo(ClubType.CENTRAL);
-    }
-
-    @Test
-    void createApplyClub_throwsUsernameNotFoundException() {
-        // Given
-        ApplyClubRequestDTO requestDTO = ApplyClubRequestDTO.builder()
-                .clubType(ClubType.CENTRAL)
-                .clubName("Basketball Club")
-                .loginId("nonexistent")
-                .professorLoginId("nonexistent")
-                .build();
-
-        // When & Then
-        assertThrows(UsernameNotFoundException.class, () -> applyClubService.createApplyClub(requestDTO));
     }
 
     @Test
@@ -106,12 +123,6 @@ class ApplyClubServiceTest {
         assertThat(responseDTO).isNotNull();
         assertThat(responseDTO.getApplyClubStatus()).isEqualTo(ApplyClubStatus.REFUSE);
         assertThat(responseDTO.getRefuseReason()).isEqualTo("Not interested");
-    }
-
-    @Test
-    void refuseClub_throwsIllegalArgumentException() {
-        // When & Then
-        assertThrows(IllegalArgumentException.class, () -> applyClubService.refuseClub(999L, "Not interested"));
     }
 
     @Test

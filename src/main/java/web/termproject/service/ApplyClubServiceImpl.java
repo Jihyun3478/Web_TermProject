@@ -36,10 +36,13 @@ public class ApplyClubServiceImpl implements ApplyClubService {
 
     @Override
     public ApplyClubResponseDTO createApplyClub(ApplyClubRequestDTO requestDTO) {
-        Member member = memberRepository.findByLoginId(requestDTO.getLoginId());
-        Professor professor = professorRepository.findByLoginId(requestDTO.getProfessorLoginId());
-        if(member == null || professor == null) {
-            throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
+        Member member = memberRepository.findByName(requestDTO.getName());
+        Professor professor = professorRepository.findByName(requestDTO.getPName());
+        if(member == null) {
+            throw new UsernameNotFoundException("존재하지 않는 학생입니다.");
+        }
+        if(professor == null) {
+            throw new UsernameNotFoundException("존재하지 않는 교수입니다.");
         }
         ApplyClub applyClub = ApplyClub.createApplyClub(requestDTO.getClubType(), requestDTO.getClubName(), member, professor);
 
@@ -64,9 +67,12 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     public ClubResponseDTO createClub(ApplyClub applyClub) {
         Club club = new Club();
         Club savedClub = club.createClub(applyClub);
+        savedClub.setApplyClub(applyClub);
         clubRepository.save(savedClub);
 
         ClubResponseDTO responseDTO = ClubResponseDTO.builder()
+                .id(savedClub.getId())
+                .applyClubId(savedClub.getApplyClub().getId())
                 .clubType(savedClub.getClubType())
                 .name(savedClub.getName())
                 .build();
@@ -107,6 +113,7 @@ public class ApplyClubServiceImpl implements ApplyClubService {
 
         for (ApplyClub applyClub : applyClubList) {
             ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
+                    .applyClubId(applyClub.getId())
                     .applyClubStatus(applyClub.getApplyClubStatus())
                     .clubType(applyClub.getClubType())
                     .clubName(applyClub.getClubName())
@@ -126,5 +133,10 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     @Override
     public ApplyClub findById(Long id) {
         return applyClubRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("동아리 신청내역이 존재하지 않습니다."));
+    }
+
+    @Override
+    public void save(ApplyClub applyClub) {
+        applyClubRepository.save(applyClub);
     }
 }
