@@ -130,6 +130,35 @@ public class ApplyClubServiceImpl implements ApplyClubService {
         return responseDTOS;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<ApplyClubResponseDTO> findApplyClubByMember(String loginId) {
+        List<ApplyClub> applyClubList = applyClubRepository.findAll();
+        List<ApplyClubResponseDTO> responseDTOS = new ArrayList<>();
+
+        Member member = memberRepository.findByLoginId(loginId);
+
+        for (ApplyClub applyClub : applyClubList) {
+            if(applyClub.getMember() == member) {
+                ApplyClubResponseDTO responseDTO = ApplyClubResponseDTO.builder()
+                        .applyClubId(applyClub.getId())
+                        .applyClubStatus(applyClub.getApplyClubStatus())
+                        .clubType(applyClub.getClubType())
+                        .clubName(applyClub.getClubName())
+                        .name(applyClub.getMember().getName())
+                        .major(applyClub.getMember().getMajor())
+                        .stuNum(applyClub.getMember().getStuNum())
+                        .phoneNum(applyClub.getMember().getPhoneNum())
+                        .pName(applyClub.getProfessor().getName())
+                        .pMajor(applyClub.getProfessor().getMajor())
+                        .pPhoneNum(applyClub.getProfessor().getPhoneNum())
+                        .build();
+                responseDTOS.add(responseDTO);
+            }
+        }
+        return responseDTOS;
+    }
+
     @Override
     public ApplyClub findById(Long id) {
         return applyClubRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("동아리 신청내역이 존재하지 않습니다."));
