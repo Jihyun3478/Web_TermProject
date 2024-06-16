@@ -1,4 +1,4 @@
-package web.termproject.domain.dto.response;
+package web.termproject.domain.dto.response.board;
 
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +11,7 @@ import web.termproject.domain.status.BoardType;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardResponseDTO {
+public class ActivityPhotoResponseDTO {
     private Long id;
     private String title;
     private String content;
@@ -19,6 +19,5 @@ public class BoardResponseDTO {
     private Member member;
     private BoardType boardType;
     private String imageRoute;
-    private String videoRoute;
     private MultipartFile image;
 }

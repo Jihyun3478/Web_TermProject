@@ -1,0 +1,6 @@
+=== 동아리 공지 등록
+
+==== 요청
+include::{snippets}/club-notice-save/http-request.adoc[]
+==== 응답
+include::{snippets}/club-notice-save/http-response.adoc[]
