@@ -2,7 +2,6 @@ package web.termproject.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import web.termproject.domain.dto.request.BoardRequestDTO;
 import web.termproject.domain.status.BoardType;
 
 @Entity
