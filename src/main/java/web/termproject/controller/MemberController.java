@@ -10,17 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import web.termproject.domain.dto.request.*;
+import web.termproject.domain.dto.request.JwtTokenDTO;
+import web.termproject.domain.dto.request.LoginRequestDTO;
+import web.termproject.domain.dto.request.PSignupRequestDTO;
+import web.termproject.domain.dto.request.SignupRequestDTO;
+import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
-import web.termproject.domain.status.ClubType;
 import web.termproject.domain.status.RoleType;
 import web.termproject.exception.ApiResponse;
 import web.termproject.exception.ResponseCode;
 import web.termproject.security.util.SecurityUtil;
+import web.termproject.service.AdminService;
 import web.termproject.service.ApplyClubService;
 import web.termproject.service.MemberService;
 import web.termproject.service.ProfessorService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +34,7 @@ import web.termproject.service.ProfessorService;
 public class MemberController {
 
     private final MemberService memberService;
+    private final AdminService adminService;
     private final ProfessorService professorService;
     private final ApplyClubService applyClubService;
 
@@ -74,7 +81,11 @@ public class MemberController {
         return ResponseEntity.ok(memberResponseDTO);
     }
 
-
+    @GetMapping("/member/applyClub/list")
+    public ResponseEntity<?> applyClubList() {
+        List<ApplyClubResponseDTO> responseDTOS = applyClubService.findApplyClubByMember(SecurityUtil.getLoginId());
+        return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, "동아리 신청 목록 조회", responseDTOS));
+    }
 
     @PostConstruct
     public void initData() {
@@ -105,7 +116,7 @@ public class MemberController {
                 .role(RoleType.ADMIN)
                 .build();
 
-        memberService.createMember(admin1);
+        adminService.createAdmin(admin1);
 
         PSignupRequestDTO professor1 = PSignupRequestDTO.builder()
                 .pLoginId("pTest1234")
