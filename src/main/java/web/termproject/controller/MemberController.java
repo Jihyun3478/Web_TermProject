@@ -67,7 +67,7 @@ public class MemberController {
         return jwtToken;
     }
 
-    @GetMapping("/api/memberInfo")
+    /*@GetMapping("/api/memberInfo")
     public ResponseEntity<MemberResponseDTO> getMemberInfo() {
         String loginId = SecurityUtil.getLoginId();
         Member findMember = memberService.findByLoginId(loginId);
@@ -133,5 +133,5 @@ public class MemberController {
                 .build();
 
         professorService.createProfessor(professor1);
-    }
+    }*/
 }
