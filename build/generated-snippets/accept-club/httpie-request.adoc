@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http POST 'http://localhost:8080/admin/accept/1' \
+    'Content-Type:application/json'
+----

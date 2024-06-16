@@ -9,12 +9,32 @@
 |`+String+`
 |동아리 이름
 
-|`+loginId+`
+|`+name+`
 |`+String+`
-|member ID
+|신청자 이름
 
-|`+professorLoginId+`
+|`+.major+`
 |`+String+`
-|professor ID
+|신청자 전공
+
+|`+stuNum+`
+|`+String+`
+|신청자 학번
+
+|`+phoneNum+`
+|`+String+`
+|신청자 전화번호
+
+|`+pname+`
+|`+String+`
+|지도 교수 이름
+
+|`+pmajor+`
+|`+String+`
+|지도 교수 전공
+
+|`+pphoneNum+`
+|`+String+`
+|지도 교수 전화번호
 
 |===

@@ -9,13 +9,13 @@
 |`+String+`
 |응답 메시지
 
-|`+data.refuseReason+`
-|`+String+`
-|거절 사유
-
 |`+data.applyClubId+`
 |`+Number+`
 |동아리 신청 ID
+
+|`+data.refuseReason+`
+|`+String+`
+|거절 사유
 
 |`+data.applyClubStatus+`
 |`+String+`
@@ -31,30 +31,30 @@
 
 |`+data.name+`
 |`+String+`
-|신청자 이름
+|이름
 
 |`+data.major+`
 |`+String+`
-|신청자 전공
+|전공
 
 |`+data.stuNum+`
 |`+String+`
-|신청자 학번
+|학번
 
 |`+data.phoneNum+`
 |`+String+`
-|신청자 전화번호
+|전화번호
 
 |`+data.pname+`
 |`+String+`
-|지도 교수 이름
+|교수 이름
 
 |`+data.pmajor+`
 |`+String+`
-|지도 교수 전공
+|교수 전공
 
 |`+data.pphoneNum+`
 |`+String+`
-|지도 교수 전화번호
+|교수 전화번호
 
 |===

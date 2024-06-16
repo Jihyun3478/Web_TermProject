@@ -1,7 +1,7 @@
 [source,json,options="nowrap"]
 ----
 {
-  "grantType" : null,
+  "grantType" : "Bearer",
   "accessToken" : "access-token",
   "refreshToken" : "refresh-token"
 }
