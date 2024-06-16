@@ -13,6 +13,10 @@
 |`+Number+`
 |동아리 ID
 
+|`+data.applyClubId+`
+|`+Number+`
+|동아리 신청 ID
+
 |`+data.clubType+`
 |`+String+`
 |동아리 유형

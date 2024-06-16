@@ -2,13 +2,14 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 950
+Content-Length: 973
 
 {
   "code" : 200000,
   "message" : "관리자 동아리 신청 승인",
   "data" : {
     "id" : 1,
+    "applyClubId" : 1,
     "clubType" : "중앙동아리",
     "name" : "Coding Club",
     "introduce" : null,

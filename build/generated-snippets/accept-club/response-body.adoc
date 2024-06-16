@@ -5,6 +5,7 @@
   "message" : "관리자 동아리 신청 승인",
   "data" : {
     "id" : 1,
+    "applyClubId" : 1,
     "clubType" : "중앙동아리",
     "name" : "Coding Club",
     "introduce" : null,

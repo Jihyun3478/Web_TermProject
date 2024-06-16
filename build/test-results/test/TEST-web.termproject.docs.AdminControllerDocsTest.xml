@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="web.termproject.docs.AdminControllerDocsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-16T09:49:11" hostname="MacBook-Pro.local" time="0.431">
+<testsuite name="web.termproject.docs.AdminControllerDocsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-16T09:59:11" hostname="MacBook-Pro.local" time="0.438">
   <properties/>
-  <testcase name="동아리 신청 상세 조회" classname="web.termproject.docs.AdminControllerDocsTest" time="0.431"/>
-  <system-out><![CDATA[18:49:12.070 [Test worker] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
-18:49:12.244 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
-18:49:12.245 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
-18:49:12.246 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+  <testcase name="동아리 승인" classname="web.termproject.docs.AdminControllerDocsTest" time="0.438"/>
+  <system-out><![CDATA[18:59:11.194 [Test worker] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+18:59:11.369 [Test worker] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+18:59:11.369 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+18:59:11.371 [Test worker] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
 
 MockHttpServletRequest:
-      HTTP Method = GET
-      Request URI = /admin/list/1
+      HTTP Method = POST
+      Request URI = /admin/accept/1
        Parameters = {}
           Headers = [Content-Type:"application/json"]
              Body = <no character encoding set>
@@ -17,7 +17,7 @@ MockHttpServletRequest:
 
 Handler:
              Type = web.termproject.controller.AdminController
-           Method = web.termproject.controller.AdminController#applyClubDetail(Long)
+           Method = web.termproject.controller.AdminController#acceptClub(Long)
 
 Async:
     Async started = false
@@ -39,7 +39,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Content-Type:"application/json"]
      Content type = application/json
-             Body = {"code":200000,"message":"관리자 동아리 신청 상세 조회","data":{"applyClubId":1,"applyClubStatus":"WAIT","clubType":"중앙동아리","clubName":"Coding Club","name":"홍길동","major":"컴퓨터소프트웨어공학과","stuNum":"2024","phoneNum":"000-0000-0000","refuseReason":null,"pname":"교수님1","pmajor":"컴퓨터소프트웨어공학과","pphoneNum":"222-2222-2222"}}
+             Body = {"code":200000,"message":"관리자 동아리 신청 승인","data":{"id":1,"applyClubId":1,"clubType":"중앙동아리","name":"Coding Club","introduce":null,"history":null,"imageRoute":null,"meetingTime":null,"president":null,"vicePresident":null,"generalAffairs":null,"professor":{"id":1,"major":"컴퓨터소프트웨어공학과","phoneNum":"222-2222-2222","email":"교수님@kumoh.ac.kr","name":"교수님1"},"applyMember":null,"masterMember":{"id":1,"loginId":"test1234","loginPw":"test1234","name":"홍길동","stuNum":"2024","major":"컴퓨터소프트웨어공학과","phoneNum":"000-0000-0000","email":"홍길동@kumoh.ac.kr","gender":"남","birthDate":"2000-01-01","role":"MASTER_MEMBER"}}}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
