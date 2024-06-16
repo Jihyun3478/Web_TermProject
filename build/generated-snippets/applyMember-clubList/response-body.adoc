@@ -2,6 +2,7 @@
 ----
 [ {
   "id" : 1,
+  "applyClubId" : null,
   "clubType" : "중앙동아리",
   "name" : "테스트 클럽 이름",
   "introduce" : null,

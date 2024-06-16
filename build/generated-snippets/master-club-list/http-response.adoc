@@ -5,10 +5,11 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 1437
+Content-Length: 1461
 
 [ {
   "id" : 1,
+  "applyClubId" : null,
   "clubType" : "중앙동아리",
   "name" : "테스트 클럽 이름",
   "introduce" : null,

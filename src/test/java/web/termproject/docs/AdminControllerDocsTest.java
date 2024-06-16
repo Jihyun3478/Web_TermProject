@@ -166,6 +166,7 @@ class AdminControllerDocsTest extends RestDocsSupport {
     void acceptClub() throws Exception {
         ClubResponseDTO responseDTO = ClubResponseDTO.builder()
                 .id(1L)
+                .applyClubId(1L)
                 .clubType(testApplyClub.getClubType())
                 .name(testApplyClub.getClubName())
                 .professor(ProfessorResponseDTO.builder()
@@ -204,6 +205,7 @@ class AdminControllerDocsTest extends RestDocsSupport {
                                 fieldWithPath("code").type(JsonFieldType.NUMBER).description("응답 코드"),
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("응답 메시지"),
                                 fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("동아리 ID"),
+                                fieldWithPath("data.applyClubId").type(JsonFieldType.NUMBER).description("동아리 신청 ID"),
                                 fieldWithPath("data.clubType").type(JsonFieldType.STRING).description("동아리 유형").optional(),
                                 fieldWithPath("data.name").type(JsonFieldType.STRING).description("동아리 이름"),
                                 fieldWithPath("data.professor.id").type(JsonFieldType.NUMBER).description("지도 교수 ID"),
