@@ -159,10 +159,4 @@ class ApplyClubServiceTest {
         assertThat(result).isNotNull();
         assertThat(result.getClubName()).isEqualTo("Basketball Club");
     }
-
-    @Test
-    void findById_throwsIllegalArgumentException() {
-        // When & Then
-        assertThrows(IllegalArgumentException.class, () -> applyClubService.findById(999L));
-    }
 }

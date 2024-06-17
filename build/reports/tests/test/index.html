@@ -20,13 +20,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">37</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">1</div>
 <p>failures</p>
 </div>
 </td>
@@ -38,7 +38,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.438s</div>
+<div class="counter">1.463s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">97%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,13 +58,25 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Packages</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Classes</a>
+<a href="#tab1">Packages</a>
+</li>
+<li>
+<a href="#tab2">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/web.termproject.docs.BoardControllerDocsTest.html">BoardControllerDocsTest</a>.
+<a href="classes/web.termproject.docs.BoardControllerDocsTest.html#동아리공지_등록_테스트()">동아리공지_등록_테스트()</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
 <h2>Packages</h2>
 <table>
 <thead>
@@ -80,18 +92,48 @@
 <tbody>
 <tr>
 <td class="success">
-<a href="packages/web.termproject.docs.html">web.termproject.docs</a>
+<a href="packages/web.termproject.html">web.termproject</a>
 </td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0.438s</td>
+<td>0.002s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/web.termproject.controller.html">web.termproject.controller</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.049s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/web.termproject.docs.html">web.termproject.docs</a>
+</td>
+<td>22</td>
+<td>1</td>
+<td>0</td>
+<td>0.775s</td>
+<td class="failures">95%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/web.termproject.service.html">web.termproject.service</a>
+</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0.637s</td>
 <td class="success">100%</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Classes</h2>
 <table>
 <thead>
@@ -107,12 +149,122 @@
 <tbody>
 <tr>
 <td class="success">
-<a href="classes/web.termproject.docs.AdminControllerDocsTest.html">web.termproject.docs.AdminControllerDocsTest</a>
+<a href="classes/web.termproject.TermProjectApplicationTests.html">web.termproject.TermProjectApplicationTests</a>
 </td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0.438s</td>
+<td>0.002s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.controller.BoardControllerTest.html">web.termproject.controller.BoardControllerTest</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.049s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.docs.AdminControllerDocsTest.html">web.termproject.docs.AdminControllerDocsTest</a>
+</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0.071s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.docs.ApplyClubControllerDocsTest.html">web.termproject.docs.ApplyClubControllerDocsTest</a>
+</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.490s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.docs.ApplyMemberControllerDocsTest.html">web.termproject.docs.ApplyMemberControllerDocsTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.025s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/web.termproject.docs.BoardControllerDocsTest.html">web.termproject.docs.BoardControllerDocsTest</a>
+</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>0.044s</td>
+<td class="failures">75%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.docs.ImageControllerDocsTest.html">web.termproject.docs.ImageControllerDocsTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.015s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.docs.MasterControllerDocsTest.html">web.termproject.docs.MasterControllerDocsTest</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.072s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.docs.MemberControllerDocsTest.html">web.termproject.docs.MemberControllerDocsTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.058s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.service.ApplyClubServiceTest.html">web.termproject.service.ApplyClubServiceTest</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.207s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.service.MemberServiceTest.html">web.termproject.service.MemberServiceTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.424s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/web.termproject.service.ProfessorServiceTest.html">web.termproject.service.ProfessorServiceTest</a>
+</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.006s</td>
 <td class="success">100%</td>
 </tr>
 </tbody>
@@ -126,7 +278,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.7</a> at Jun 16, 2024, 6:59:11 PM</p>
+<a href="http://www.gradle.org">Gradle 8.7</a> at Jun 16, 2024, 8:20:32 PM</p>
 </div>
 </div>
 </body>

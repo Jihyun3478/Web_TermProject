@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
     public MemberResponseDTO createMember(SignupRequestDTO signupRequestDTO) {
         Member member = signupRequestDTO.toEntity();
-        member.addUserAuthority();
+        member.addMemberAuthority();
         member.encodePassword(passwordEncoder);
 
         Member savedMember = memberRepository.save(member);

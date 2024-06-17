@@ -65,8 +65,12 @@ public class Member {
     public void encodePassword(PasswordEncoder passwordEncoder){
         this.loginPw = passwordEncoder.encode(loginPw);
     }
-
-    public void addUserAuthority() {
+  
+    public void addMemberAuthority() {
         this.role = RoleType.MEMBER;
+    }
+
+    public void addAdminAuthority() {
+        this.role = RoleType.ADMIN;
     }
 }

@@ -12,6 +12,7 @@ public interface ApplyClubService {
     ClubResponseDTO createClub(ApplyClub applyClub);
     ApplyClubResponseDTO refuseClub(Long applyClubId, String refuseReason);
     List<ApplyClubResponseDTO> findAll();
+    List<ApplyClubResponseDTO> findApplyClubByMember(String loginId);
     ApplyClub findById(Long id);
     void save(ApplyClub applyClub);
 }
