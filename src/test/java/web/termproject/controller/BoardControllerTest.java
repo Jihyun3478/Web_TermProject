@@ -33,7 +33,7 @@ public class BoardControllerTest {
                 .writer("글쓴이데스")
                 .build();
 
-        assertThat(true).isEqualTo(boardService.saveNoticeClub(requestDTO,null));
+        assertThat(true).isEqualTo(boardService.saveNoticeClub(requestDTO,null,null));
 
     }
 
@@ -46,7 +46,7 @@ public class BoardControllerTest {
                 .writer("이소림")
                 .build();
 
-        assertThat(true).isEqualTo(boardService.saveRecruitMember(requestDTO,null));
+        assertThat(true).isEqualTo(boardService.saveRecruitMember(requestDTO,null,null));
 
     }
 
@@ -59,7 +59,7 @@ public class BoardControllerTest {
                 .writer("이소림")
                 .build();
 
-        assertThat(true).isEqualTo(boardService.saveActivityPhoto(requestDTO,null));
+        assertThat(true).isEqualTo(boardService.saveActivityPhoto(requestDTO,null,null));
 
     }
 
@@ -72,7 +72,7 @@ public class BoardControllerTest {
                 .writer("이소림")
                 .build();
 
-        assertThat(true).isEqualTo(boardService.saveActivityVideo(requestDTO));
+        assertThat(true).isEqualTo(boardService.saveActivityVideo(requestDTO,null));
     }
     @Test
     void 활동영상_조회() {
