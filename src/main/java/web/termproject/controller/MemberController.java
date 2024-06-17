@@ -76,7 +76,7 @@ public class MemberController {
 
 
 
-    @PostConstruct
+   /* @PostConstruct
     public void initData() {
         SignupRequestDTO member1 = SignupRequestDTO.builder()
                 .loginId("test1234")
@@ -117,7 +117,7 @@ public class MemberController {
                 .build();
 
         professorService.createProfessor(professor1);
-
+*/
 //        ApplyClubRequestDTO applyClub = ApplyClubRequestDTO.builder()
 //                .clubType(ClubType.CENTRAL)
 //                .clubName("동아리 신청 테스트")
@@ -130,5 +130,5 @@ public class MemberController {
 //                .pPhoneNum("222-2222-2222")
 //                .build();
 //        applyClubService.createApplyClub(applyClub);
-    }
+    //}
 }

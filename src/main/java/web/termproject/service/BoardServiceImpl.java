@@ -2,6 +2,8 @@ package web.termproject.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,14 +16,20 @@ import web.termproject.domain.dto.response.board.ActivityVideoResponseDTO;
 import web.termproject.domain.dto.response.board.NoticeClubResponseDTO;
 import web.termproject.domain.dto.response.board.RecruitMemberResponseDTO;
 import web.termproject.domain.entity.Board;
+import web.termproject.domain.entity.Club;
+import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.BoardType;
 import web.termproject.repository.BoardRepository;
+import web.termproject.repository.MemberRepository;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +37,16 @@ import java.util.stream.Collectors;
 @Transactional
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
+    private final MemberService memberService;
+    private final MemberRepository memberRepository;
     private static String uploadDirectory = System.getProperty("user.home") + "/Desktop/uploads";
 
 
     //동아리 공지 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
     @Override
-    public Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image) {
+    public Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
         Board board = boardRequestDTO.toEntity();
+        Member member = memberService.findByLoginId(loginId);
 
         // 이미지 파일 처리
         if (image != null && !image.isEmpty()) {
@@ -48,18 +59,22 @@ public class BoardServiceImpl implements BoardService {
                 throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
             }
         }
+
+        board.setMember(member);
+        board.setWriter(member.getName());
+        board.setBoardType(BoardType.NOTICE_CLUB);
+
+        System.out.println("Board Type: " + board.getBoardType()); // 디버그용 로그 추가
 
         boardRepository.save(board);
 
-        // 저장된 게시글의 ID가 null이 아닌지 확인하여 Boolean 값 반환
         return board.getId() != null;
     }
-
     //부원 모집 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
     @Override
-    public Boolean saveRecruitMember(RecruitMemberRequestDTO boardRequestDTO, MultipartFile image) {
+    public Boolean saveRecruitMember(RecruitMemberRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
         Board board = boardRequestDTO.toEntity();
-
+        Member member = memberService.findByLoginId(loginId);
         // 이미지 파일 처리
         if (image != null && !image.isEmpty()) {
             try {
@@ -71,7 +86,8 @@ public class BoardServiceImpl implements BoardService {
                 throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
             }
         }
-
+        board.setWriter(member.getName());
+        board.setBoardType(BoardType.RECRUIT_MEMBER);
         boardRepository.save(board);
         // 저장된 게시글의 ID가 null이 아닌지 확인하여 Boolean 값 반환
         return board.getId() != null;
@@ -79,9 +95,9 @@ public class BoardServiceImpl implements BoardService {
 
     //활동 사진 등록
     @Override
-    public Boolean saveActivityPhoto(ActivityPhotoRequestDTO boardRequestDTO, MultipartFile image) {
+    public Boolean saveActivityPhoto(ActivityPhotoRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
         Board board = boardRequestDTO.toEntity();
-
+        Member member = memberService.findByLoginId(loginId);
         // 이미지 파일 처리
         if (image != null && !image.isEmpty()) {
             try {
@@ -93,7 +109,8 @@ public class BoardServiceImpl implements BoardService {
                 throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
             }
         }
-
+        board.setWriter(member.getName());
+        board.setBoardType(BoardType.ACTIVITY_PHOTO);
         boardRepository.save(board);
         // 저장된 게시글의 ID가 null이 아닌지 확인하여 Boolean 값 반환
         return board.getId() != null;
@@ -101,15 +118,20 @@ public class BoardServiceImpl implements BoardService {
 
     //활동 영상 등록
     @Override
-    public Boolean saveActivityVideo(ActivityVideoRequestDTO boardRequestDTO) {
+    public Boolean saveActivityVideo(ActivityVideoRequestDTO boardRequestDTO, String loginId) {
+        Member member = memberService.findByLoginId(loginId);
         Board board = boardRequestDTO.toEntity();
+        board.setMember(member); // 작성자 ID를 사용하도록 변경
+        board.setWriter(member.getName());
+        board.setBoardType(BoardType.ACTIVITY_VIDEO);
         boardRepository.save(board);
-        // 저장된 게시글의 ID가 null이 아닌지 확인하여 Boolean 값 반환
         return board.getId() != null;
     }
 
 
+
     // 동아리 공지 게시글 전체 조회
+    @Override
     public List<NoticeClubResponseDTO> findAllAnnouncement() {
         List<Board> boards = boardRepository.findByBoardType(BoardType.NOTICE_CLUB);
         return boards.stream()
@@ -181,17 +203,17 @@ public class BoardServiceImpl implements BoardService {
     }
 
     //동아리 공지
-    private NoticeClubResponseDTO getNoticeClubResponseDTO(Board board) {
+    @Transactional
+    public NoticeClubResponseDTO getNoticeClubResponseDTO(Board board) {
         NoticeClubResponseDTO dto = new NoticeClubResponseDTO();
         dto.setId(board.getId());
         dto.setTitle(board.getTitle());
         dto.setContent(board.getContent());
-        dto.setMember(board.getMember());
+        dto.setMemberId(board.getMember().getId()); // Member의 id만 설정
         dto.setBoardType(board.getBoardType());
         dto.setImageRoute(board.getImageRoute());
         return dto;
     }
-
     //부원 모집
     private RecruitMemberResponseDTO getRecruitMemberResponseDTO(Board board) {
         RecruitMemberResponseDTO dto = new RecruitMemberResponseDTO();
@@ -222,8 +244,34 @@ public class BoardServiceImpl implements BoardService {
         dto.setId(board.getId());
         dto.setTitle(board.getTitle());
         dto.setVideoUrl(board.getContent());
-        dto.setMember(board.getMember());
         dto.setBoardType(board.getBoardType());
         return dto;
+    }
+
+    @Override
+    public Resource getImage(String imagePath) throws MalformedURLException {
+        Path filePath = Paths.get(uploadDirectory).resolve(imagePath).normalize();
+        Resource resource = new UrlResource(filePath.toUri());
+        if (resource.exists()) {
+            return resource;
+        } else {
+            throw new RuntimeException("File not found " + imagePath);
+        }
+    }
+    @Override
+    public Resource loadAsResource(String filename) {
+        try {
+            Path file = Paths.get(uploadDirectory, filename);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new FileNotFoundException("Could not read file: " + filename);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

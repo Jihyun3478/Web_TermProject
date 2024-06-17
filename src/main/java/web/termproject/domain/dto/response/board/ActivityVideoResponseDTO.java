@@ -13,8 +13,7 @@ import web.termproject.domain.status.BoardType;
 public class ActivityVideoResponseDTO {
     private Long id;
     private String title;
-    private Member member;
+    private String writer; // Member 엔티티 대신 String writer로 대체
     private String videoUrl;
     private BoardType boardType;
-    private String writer;
 }

@@ -21,7 +21,7 @@ public class RecruitMemberRequestDTO {
                 .title(title)
                 .writer(writer)
                 .content(content)
-                .boardType(boardType)
+                .boardType(BoardType.RECRUIT_MEMBER)
                 .imageRoute(imageRoute)
                 .build();
     }

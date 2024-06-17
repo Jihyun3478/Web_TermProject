@@ -21,7 +21,7 @@ public class ActivityPhotoRequestDTO {
                 .title(title)
                 .writer(writer)
                 .content(content)
-                .boardType(boardType)
+                .boardType(BoardType.ACTIVITY_PHOTO)
                 .imageRoute(imageRoute)
                 .build();
     }

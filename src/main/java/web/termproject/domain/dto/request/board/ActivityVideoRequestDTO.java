@@ -20,7 +20,7 @@ public class ActivityVideoRequestDTO {
                 .title(title)
                 .writer(writer)
                 .content(videoUrl)
-                .boardType(boardType)
+                .boardType(BoardType.ACTIVITY_VIDEO)
                 .build();
     }
 }

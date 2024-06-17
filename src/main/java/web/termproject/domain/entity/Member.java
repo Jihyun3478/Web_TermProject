@@ -27,10 +27,9 @@ public class Member {
     @Column(nullable = false, unique = true)
     private String loginId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String loginPw;
 
-    @Column(unique = true)
     private String name;
 
     @Column(unique = true)
@@ -53,8 +52,8 @@ public class Member {
 
     private String grantType;
 
-    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
-    private Board board;
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Board> boards = new ArrayList<>();
 
     @OneToOne(mappedBy = "member")
     private ApplyClub applyClub;
@@ -66,6 +65,7 @@ public class Member {
     public void encodePassword(PasswordEncoder passwordEncoder){
         this.loginPw = passwordEncoder.encode(loginPw);
     }
+
     public void addUserAuthority() {
         this.role = RoleType.MEMBER;
     }
