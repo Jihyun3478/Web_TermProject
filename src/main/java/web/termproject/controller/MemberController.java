@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import web.termproject.domain.dto.request.JwtTokenDTO;
-import web.termproject.domain.dto.request.LoginRequestDTO;
-import web.termproject.domain.dto.request.PSignupRequestDTO;
-import web.termproject.domain.dto.request.SignupRequestDTO;
+import web.termproject.domain.dto.request.*;
 import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
+import web.termproject.domain.status.ClubType;
 import web.termproject.domain.status.RoleType;
 import web.termproject.exception.ApiResponse;
 import web.termproject.exception.ResponseCode;
@@ -128,18 +126,19 @@ public class MemberController {
                 .build();
 
         professorService.createProfessor(professor1);
+
+        ApplyClubRequestDTO applyClub = ApplyClubRequestDTO.builder()
+                .clubType(ClubType.CENTRAL)
+                .clubName("동아리 신청 테스트")
+                .name("홍길동")
+                .major("컴퓨터소프트웨어공학과")
+                .stuNum("2024")
+                .phoneNum("000-0000-0000")
+                .pName("교수님1")
+                .pMajor("컴퓨터소프트웨어공학과")
+                .pPhoneNum("222-2222-2222")
+                .build();
+        applyClubService.createApplyClub(applyClub);
+    }
 */
-//        ApplyClubRequestDTO applyClub = ApplyClubRequestDTO.builder()
-//                .clubType(ClubType.CENTRAL)
-//                .clubName("동아리 신청 테스트")
-//                .name("홍길동")
-//                .major("컴퓨터소프트웨어공학과")
-//                .stuNum("2024")
-//                .phoneNum("000-0000-0000")
-//                .pName("교수님1")
-//                .pMajor("컴퓨터소프트웨어공학과")
-//                .pPhoneNum("222-2222-2222")
-//                .build();
-//        applyClubService.createApplyClub(applyClub);
-    //}
 }
