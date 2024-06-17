@@ -20,4 +20,5 @@ public class NoticeClubResponseDTO {
     private BoardType boardType;
     private String imageRoute;
     private MultipartFile image;
+    private String imageData;
 }

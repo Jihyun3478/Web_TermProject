@@ -17,6 +17,7 @@ public class ActivityPhotoResponseDTO {
     private String content;
     private String writer;
     private Member member;
+    private Long memberId;
     private BoardType boardType;
     private String imageRoute;
     private MultipartFile image;
