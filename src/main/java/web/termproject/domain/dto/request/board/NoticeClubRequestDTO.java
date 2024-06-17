@@ -21,8 +21,7 @@ public class NoticeClubRequestDTO {
                 .title(title)
                 .writer(writer)
                 .content(content)
-                .boardType(boardType)
-              // .member(member)
+                .boardType(BoardType.NOTICE_CLUB)
                 .imageRoute(imageRoute)
                 .build();
     }

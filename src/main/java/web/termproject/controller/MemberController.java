@@ -85,7 +85,7 @@ public class MemberController {
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, "동아리 신청 목록 조회", responseDTOS));
     }
 
-    @PostConstruct
+   /* @PostConstruct
     public void initData() {
         SignupRequestDTO member1 = SignupRequestDTO.builder()
                 .loginId("test1234")
@@ -140,4 +140,5 @@ public class MemberController {
                 .build();
         applyClubService.createApplyClub(applyClub);
     }
+*/
 }
