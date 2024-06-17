@@ -152,6 +152,7 @@ public class ApplyClubServiceImpl implements ApplyClubService {
                         .pName(applyClub.getProfessor().getName())
                         .pMajor(applyClub.getProfessor().getMajor())
                         .pPhoneNum(applyClub.getProfessor().getPhoneNum())
+                        .refuseReason(applyClub.getRefuseReason())
                         .build();
                 responseDTOS.add(responseDTO);
             }
