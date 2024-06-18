@@ -46,7 +46,7 @@ public class BoardController {
     }
 
     //부원 모집 게시글 등록
-    @PostMapping(value="/api/saveRecruitMember",consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value="/api/saveRecruitMember",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> saveRecruitMember(
             @RequestPart("recruitMemberRequestDTO") @Valid RecruitMemberRequestDTO boardRequestDTO,
             @RequestPart(value = "image", required = false) MultipartFile image) {
@@ -61,7 +61,7 @@ public class BoardController {
     }
 
     //활동 사진 게시글 등록
-    @PostMapping(value="/api/saveActivityPhoto",consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value="/api/saveActivityPhoto",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> saveActivityPhoto(
             @RequestPart("activityPhotoRequestDTO") @Valid ActivityPhotoRequestDTO boardRequestDTO,
             @RequestPart(value = "image", required = false) MultipartFile image) {

@@ -6,6 +6,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 import web.termproject.domain.dto.request.board.ActivityPhotoRequestDTO;
 import web.termproject.domain.dto.request.board.ActivityVideoRequestDTO;
@@ -28,6 +29,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,7 +41,8 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final MemberService memberService;
     private final MemberRepository memberRepository;
-    private static String uploadDirectory = System.getProperty("user.home") + "/Desktop/uploads";
+    private static final String FILE_SEPARATOR = System.getProperty("file.separator");
+    private static String uploadDirectory = System.getProperty("user.home") + FILE_SEPARATOR + "Desktop" + FILE_SEPARATOR + "uploads";
 
 
     //동아리 공지 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
@@ -86,6 +89,7 @@ public class BoardServiceImpl implements BoardService {
                 throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
             }
         }
+        board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.RECRUIT_MEMBER);
         boardRepository.save(board);
@@ -109,6 +113,7 @@ public class BoardServiceImpl implements BoardService {
                 throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
             }
         }
+        board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.ACTIVITY_PHOTO);
         boardRepository.save(board);
@@ -119,8 +124,8 @@ public class BoardServiceImpl implements BoardService {
     //활동 영상 등록
     @Override
     public Boolean saveActivityVideo(ActivityVideoRequestDTO boardRequestDTO, String loginId) {
-        Member member = memberService.findByLoginId(loginId);
         Board board = boardRequestDTO.toEntity();
+        Member member = memberService.findByLoginId(loginId);
         board.setMember(member); // 작성자 ID를 사용하도록 변경
         board.setWriter(member.getName());
         board.setBoardType(BoardType.ACTIVITY_VIDEO);
@@ -210,8 +215,10 @@ public class BoardServiceImpl implements BoardService {
         dto.setTitle(board.getTitle());
         dto.setContent(board.getContent());
         dto.setMemberId(board.getMember().getId()); // Member의 id만 설정
+        dto.setWriter(board.getMember().getName());
         dto.setBoardType(board.getBoardType());
         dto.setImageRoute(board.getImageRoute());
+
         return dto;
     }
     //부원 모집
@@ -220,8 +227,9 @@ public class BoardServiceImpl implements BoardService {
         dto.setId(board.getId());
         dto.setTitle(board.getTitle());
         dto.setContent(board.getContent());
-        dto.setMember(board.getMember());
+        dto.setMemberId(board.getMember().getId());
         dto.setBoardType(board.getBoardType());
+        dto.setWriter(board.getMember().getName());
         dto.setImageRoute(board.getImageRoute());
         return dto;
     }
@@ -232,8 +240,9 @@ public class BoardServiceImpl implements BoardService {
         dto.setId(board.getId());
         dto.setTitle(board.getTitle());
         dto.setContent(board.getContent());
-        dto.setMember(board.getMember());
         dto.setBoardType(board.getBoardType());
+        dto.setMemberId(board.getMember().getId());
+        dto.setWriter(board.getMember().getName());
         dto.setImageRoute(board.getImageRoute());
         return dto;
     }
@@ -244,6 +253,8 @@ public class BoardServiceImpl implements BoardService {
         dto.setId(board.getId());
         dto.setTitle(board.getTitle());
         dto.setVideoUrl(board.getContent());
+        dto.setMemberId(board.getMember().getId());
+        dto.setWriter(board.getMember().getName());
         dto.setBoardType(board.getBoardType());
         return dto;
     }
@@ -261,8 +272,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Resource loadAsResource(String filename) {
         try {
-            Path file = Paths.get(uploadDirectory, filename);
-            Resource resource = new UrlResource(file.toUri());
+            Path filePath = Paths.get(uploadDirectory, filename).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {

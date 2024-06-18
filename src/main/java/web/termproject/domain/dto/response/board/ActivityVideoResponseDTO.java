@@ -14,6 +14,7 @@ public class ActivityVideoResponseDTO {
     private Long id;
     private String title;
     private String writer; // Member 엔티티 대신 String writer로 대체
+    private Long memberId;
     private String videoUrl;
     private BoardType boardType;
 }

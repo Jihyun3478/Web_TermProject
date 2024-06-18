@@ -17,6 +17,7 @@ public class RecruitMemberResponseDTO {
     private String writer;
     private Member member;
     private BoardType boardType;
+    private Long memberId;
     private String imageRoute;
     private MultipartFile image;
 }
