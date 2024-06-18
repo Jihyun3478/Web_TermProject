@@ -1,5 +1,6 @@
 package web.termproject.service;
 
+import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,6 +23,7 @@ import web.termproject.repository.ProfessorRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +45,11 @@ public class ApplyClubServiceImpl implements ApplyClubService {
         }
         if(professor == null) {
             throw new UsernameNotFoundException("존재하지 않는 교수입니다.");
+        }
+
+        Optional<ApplyClub> existingApplyClub = applyClubRepository.findByClubNameAndMember_StuNum(requestDTO.getClubName(), requestDTO.getStuNum());
+        if (existingApplyClub.isPresent()) {
+            throw new DuplicateRequestException("이미 해당 동아리 신청이 존재합니다.");
         }
         ApplyClub applyClub = ApplyClub.createApplyClub(requestDTO.getClubType(), requestDTO.getClubName(), member, professor);
 
