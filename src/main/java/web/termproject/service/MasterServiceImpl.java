@@ -35,7 +35,7 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public List<ClubResponseDTO> getMasterClubsInfo(String loginId) throws BadRequestException {
         Member findMember = memberService.findByLoginId(loginId);
-        if(!masterRepository.existsById(findMember.getId())) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if(masterRepository.findClubsByMemberId(findMember.getId()).isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return masterRepository.findClubsByMemberId(findMember.getId()).stream()
                 .map(this::getClubResponseDTO)
                 .collect(Collectors.toList());

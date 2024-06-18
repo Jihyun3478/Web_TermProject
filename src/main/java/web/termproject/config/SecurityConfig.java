@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/", "/signup", "/signin","/api/signup", "/api/signin").permitAll()
+                        .requestMatchers("/", "/signup", "/signin","/api/signup", "/api/signin", "/image/**", "/applyMember/**", "/master/club/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers( "/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .logout((logout) -> logout
@@ -58,7 +58,6 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(oAuth2LoginSuccessHandler)
-                        .failureUrl("/loginFailure")
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .accessDeniedHandler(customAccessDeniedHandler)
