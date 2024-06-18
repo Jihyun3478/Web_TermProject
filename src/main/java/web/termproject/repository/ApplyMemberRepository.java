@@ -25,7 +25,7 @@ public interface ApplyMemberRepository extends JpaRepository<ApplyMember, Long> 
             "    SELECT am " +
             "    FROM ApplyMember am " +
             "    WHERE am.club = c " +
-            "    AND am.applyMemberStatus = 'APPROVED'" +
+            "    AND am.applyMemberStatus = 'NOT_CLUB_MEMBER'" +
             ") " +
             "AND ac.applyClubStatus = 'ACCEPT'")
     List<Club> findClubByNotMemberClubId(@Param("memberId") Long memberId);

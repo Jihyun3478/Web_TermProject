@@ -16,9 +16,9 @@ public interface MasterRepository extends JpaRepository<Club, Long> {
             "JOIN m.applyClub ac " +
             "JOIN ac.professor p " +
             "JOIN ac.club c " +
-            "WHERE m.id = :memberId " +
-            "AND ac.applyClubStatus = 'WAIT' " +
-            "AND ac.member.id = :memberId")
+            "WHERE m.id = :memberId AND " +
+            "ac.applyClubStatus = 'ACCEPT' AND " +
+            "ac.member.id = :memberId")
     List<Club> findClubsByMemberId(@Param("memberId") Long memberId);
 
     @Query("SELECT am " +
@@ -34,7 +34,7 @@ public interface MasterRepository extends JpaRepository<Club, Long> {
             "JOIN ac.professor p " +
             "JOIN ac.member m " +
             "WHERE c.id = :clubId " +
-            "AND ac.applyClubStatus = 'WAIT' " +
+            "AND ac.applyClubStatus = 'ACCEPT' " +
             "AND ac.member.id = :memberId")
     Optional<Club> findClubByClubIdAndMemberId(@Param("clubId") Long clubId, @Param("memberId") Long memberId);
 
