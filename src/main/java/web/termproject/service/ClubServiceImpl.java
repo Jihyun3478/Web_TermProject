@@ -36,7 +36,7 @@ public class ClubServiceImpl implements ClubService {
                     .introduce(club.getIntroduce())
                     .history(club.getHistory())
                     .imageRoute(club.getImageRoute())
-                    .meetingTime(club.getMeetingTime().toString())
+                    .meetingTime(String.valueOf(club.getMeetingTime()))
                     .president(club.getPresident())
                     .vicePresident(club.getVicePresident())
                     .generalAffairs(club.getGeneralAffairs())

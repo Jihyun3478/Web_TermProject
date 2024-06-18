@@ -74,6 +74,7 @@ public class MemberController {
                 .email(findMember.getEmail())
                 .gender(findMember.getGender())
                 .birthDate(findMember.getBirthDate())
+                .role(findMember.getRole())
                 .build();
 
         return ResponseEntity.ok(memberResponseDTO);
@@ -85,7 +86,7 @@ public class MemberController {
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, "동아리 신청 목록 조회", responseDTOS));
     }
 
-   /* @PostConstruct
+   @PostConstruct
     public void initData() {
         SignupRequestDTO member1 = SignupRequestDTO.builder()
                 .loginId("test1234")
@@ -127,18 +128,17 @@ public class MemberController {
 
         professorService.createProfessor(professor1);
 
-        ApplyClubRequestDTO applyClub = ApplyClubRequestDTO.builder()
-                .clubType(ClubType.CENTRAL)
-                .clubName("동아리 신청 테스트")
-                .name("홍길동")
-                .major("컴퓨터소프트웨어공학과")
-                .stuNum("2024")
-                .phoneNum("000-0000-0000")
-                .pName("교수님1")
-                .pMajor("컴퓨터소프트웨어공학과")
-                .pPhoneNum("222-2222-2222")
-                .build();
-        applyClubService.createApplyClub(applyClub);
+//        ApplyClubRequestDTO applyClub = ApplyClubRequestDTO.builder()
+//                .clubType(ClubType.CENTRAL)
+//                .clubName("동아리 신청 테스트")
+//                .name("홍길동")
+//                .major("컴퓨터소프트웨어공학과")
+//                .stuNum("2024")
+//                .phoneNum("000-0000-0000")
+//                .pName("교수님1")
+//                .pMajor("컴퓨터소프트웨어공학과")
+//                .pPhoneNum("222-2222-2222")
+//                .build();
+//        applyClubService.createApplyClub(applyClub);
     }
-*/
 }
