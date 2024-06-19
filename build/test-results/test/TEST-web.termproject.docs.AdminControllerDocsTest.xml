@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="web.termproject.docs.AdminControllerDocsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-06-19T15:03:30" hostname="MacBook-Pro.local" time="0.25">
+<testsuite name="web.termproject.docs.AdminControllerDocsTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-06-19T15:07:20" hostname="MacBook-Pro.local" time="0.259">
   <properties/>
-  <testcase name="동아리 신청 상세 조회" classname="web.termproject.docs.AdminControllerDocsTest" time="0.144"/>
-  <testcase name="동아리 거절" classname="web.termproject.docs.AdminControllerDocsTest" time="0.048"/>
-  <testcase name="동아리 승인" classname="web.termproject.docs.AdminControllerDocsTest" time="0.03"/>
-  <testcase name="동아리 신청목록 조회" classname="web.termproject.docs.AdminControllerDocsTest" time="0.023"/>
-  <system-out><![CDATA[2024-06-20T00:03:30.494+09:00  INFO 71207 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
-2024-06-20T00:03:30.495+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-06-20T00:03:30.495+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+  <testcase name="동아리 신청 상세 조회" classname="web.termproject.docs.AdminControllerDocsTest" time="0.158"/>
+  <testcase name="동아리 거절" classname="web.termproject.docs.AdminControllerDocsTest" time="0.043"/>
+  <testcase name="동아리 승인" classname="web.termproject.docs.AdminControllerDocsTest" time="0.033"/>
+  <testcase name="동아리 신청목록 조회" classname="web.termproject.docs.AdminControllerDocsTest" time="0.021"/>
+  <system-out><![CDATA[2024-06-20T00:07:20.613+09:00  INFO 72249 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-20T00:07:20.613+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-20T00:07:20.613+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -45,9 +45,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2024-06-20T00:03:30.615+09:00  INFO 71207 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
-2024-06-20T00:03:30.615+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-06-20T00:03:30.615+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-06-20T00:07:20.735+09:00  INFO 72249 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-20T00:07:20.735+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-20T00:07:20.735+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 
 MockHttpServletRequest:
       HTTP Method = POST
@@ -85,9 +85,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2024-06-20T00:03:30.655+09:00  INFO 71207 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
-2024-06-20T00:03:30.655+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-06-20T00:03:30.655+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-06-20T00:07:20.778+09:00  INFO 72249 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-20T00:07:20.778+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-20T00:07:20.778+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 
 MockHttpServletRequest:
       HTTP Method = POST
@@ -125,9 +125,9 @@ MockHttpServletResponse:
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-2024-06-20T00:03:30.687+09:00  INFO 71207 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
-2024-06-20T00:03:30.687+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-06-20T00:03:30.687+09:00  INFO 71207 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-06-20T00:07:20.812+09:00  INFO 72249 --- [    Test worker] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2024-06-20T00:07:20.812+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-06-20T00:07:20.812+09:00  INFO 72249 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 
 MockHttpServletRequest:
       HTTP Method = GET

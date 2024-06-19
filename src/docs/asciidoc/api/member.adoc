@@ -17,3 +17,6 @@
 // include::{snippets}/member-detail-info/http-request.adoc[]
 // include::{snippets}/member-detail-info/http-response.adoc[]
 // include::{snippets}/member-detail-info/response-fields.adoc[]
+
+// == MemberController
+// include::api/member.adoc[]
