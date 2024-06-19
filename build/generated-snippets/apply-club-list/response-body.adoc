@@ -13,9 +13,9 @@
     "stuNum" : "2024",
     "phoneNum" : "000-0000-0000",
     "refuseReason" : null,
-    "pname" : "교수님1",
     "pmajor" : "컴퓨터소프트웨어공학과",
-    "pphoneNum" : "222-2222-2222"
+    "pphoneNum" : "222-2222-2222",
+    "pname" : "교수님1"
   } ]
 }
 ----
