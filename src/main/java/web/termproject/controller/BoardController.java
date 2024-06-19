@@ -24,9 +24,13 @@ import web.termproject.domain.dto.response.board.ActivityPhotoResponseDTO;
 import web.termproject.domain.dto.response.board.ActivityVideoResponseDTO;
 import web.termproject.domain.dto.response.board.NoticeClubResponseDTO;
 import web.termproject.domain.dto.response.board.RecruitMemberResponseDTO;
+import web.termproject.domain.entity.ApplyMember;
 import web.termproject.domain.entity.Board;
+import web.termproject.domain.entity.Club;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.RoleType;
+import web.termproject.repository.ApplyMemberRepository;
+import web.termproject.repository.MemberRepository;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.BoardService;
 import web.termproject.service.MemberService;
@@ -43,6 +47,8 @@ import java.util.stream.Collectors;
 public class BoardController {
     private final BoardService boardService;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
+    private final ApplyMemberRepository applyMemberRepository;
     private static final String uploadDirectory = "C:\\Users\\82109\\Desktop\\uploads";
 
 
@@ -52,11 +58,11 @@ public class BoardController {
             @RequestPart("noticeClubRequestDTO") @Valid NoticeClubRequestDTO boardRequestDTO,
             @RequestPart(value = "image", required = false) MultipartFile image) {
         String loginId = SecurityUtil.getLoginId();
-   //     Member member = memberService.findByLoginId(loginId);
-/*
+       Member member = memberService.findByLoginId(loginId);
+
         if (member.getRole() != RoleType.MASTER_MEMBER) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to post notices.");
-        }*/
+        }
 
         Boolean isSaved = boardService.saveNoticeClub(boardRequestDTO, image, loginId);
 
@@ -127,20 +133,20 @@ public class BoardController {
     @GetMapping("/noticeClub/findAll")
     public List<NoticeClubResponseDTO> findAllNoticeClub() {
         // 현재 로그인한 사용자 정보 가져오기
-      /*  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String loginId = authentication.getName();
+        String loginId = SecurityUtil.getLoginId();
+        Member member = memberRepository.findByLoginId(loginId);
 
-        // 로그인한 사용자가 속한 동아리의 이름 목록 조회
-        List<String> clubNames = memberService.findClubNamesByLoginId(loginId);
+        // 로그인한 사용자가 속한 applyMemberList 조회
+        List<ApplyMember> applyMembers = applyMemberRepository.findApplyMembersByMemberIdAndStatus(member.getId());
+
+        // applyMemberList에서 동아리 ID 목록 추출
+        List<Long> clubIds = applyMembers.stream()
+                .map(applyMember -> applyMember.getClub().getId())
+                .collect(Collectors.toList());
 
         // 동아리 공지글 조회 시, 해당 사용자가 속한 동아리의 공지글만 필터링하여 조회
-        return boardService.findAllAnnouncement(loginId)
-                .stream()
-                .filter(dto -> clubNames.contains(dto.getClubName()))
-                .collect(Collectors.toList());*/
-        return boardService.findAllAnnouncement();
+        return boardService.findAllAnnouncement(clubIds);
     }
-
 
     //부원 모집 게시글 전체 조회
     @GetMapping("/recruitMember/findAll")

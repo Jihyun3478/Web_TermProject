@@ -16,10 +16,9 @@ import web.termproject.domain.dto.response.board.ActivityPhotoResponseDTO;
 import web.termproject.domain.dto.response.board.ActivityVideoResponseDTO;
 import web.termproject.domain.dto.response.board.NoticeClubResponseDTO;
 import web.termproject.domain.dto.response.board.RecruitMemberResponseDTO;
-import web.termproject.domain.entity.Board;
-import web.termproject.domain.entity.Club;
-import web.termproject.domain.entity.Member;
+import web.termproject.domain.entity.*;
 import web.termproject.domain.status.BoardType;
+import web.termproject.repository.ApplyClubRepository;
 import web.termproject.repository.BoardRepository;
 import web.termproject.repository.ClubRepository;
 import web.termproject.repository.MemberRepository;
@@ -44,6 +43,7 @@ public class BoardServiceImpl implements BoardService {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final ClubRepository clubRepository;
+    private final ApplyClubRepository applyClubRepository;
     private static String uploadDirectory = "C:\\Users\\82109\\Desktop\\uploads";
 
 
@@ -53,8 +53,13 @@ public class BoardServiceImpl implements BoardService {
     public Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
-      /*  Club club = clubRepository.findById(boardRequestDTO.getClubId())
-                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));*/
+        // 로그인한 사용자가 속한 applyMemberList 조회
+        ApplyClub applyClub = applyClubRepository.findByMemberId(member.getId());
+
+        // applyMemberList에서 동아리 ID 목록 추출
+        Long clubId  = applyClub.getClub().getId();
+        Club club = clubRepository.findById(clubId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));
 
         if (image != null && !image.isEmpty()) {
             try {
@@ -70,6 +75,7 @@ public class BoardServiceImpl implements BoardService {
         board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.NOTICE_CLUB);
+        board.setClub(club);
         board.setPublic(boardRequestDTO.isPublic()); // 공개 여부 설정
 
        // System.out.println("Board Type: " + board.getBoardType()); // 디버그용 로그 추가
@@ -143,21 +149,12 @@ public class BoardServiceImpl implements BoardService {
 
 
     // 동아리 공지 게시글 전체 조회
-    @Override
-    public List<NoticeClubResponseDTO> findAllAnnouncement() {
-        // 사용자가 속한 모든 동아리의 이름 목록을 가져옵니다.
-      //  List<String> clubNames = memberService.findClubNamesByLoginId(loginId);
-
-        // 동아리 이름 목록을 이용하여 해당 동아리의 공지글만 필터링하여 조회합니다.
-        List<Board> boards = boardRepository.findByBoardType(BoardType.NOTICE_CLUB);
-
-        return boards.stream()
-                .map(this::getNoticeClubResponseDTO)
+    public List<NoticeClubResponseDTO> findAllAnnouncement(List<Long> clubIds) {
+        return boardRepository.findByClub_IdIn(clubIds)
+                .stream()
+                .map(this::convertToNoticeClubResponseDTO)
                 .collect(Collectors.toList());
     }
-
-
-
 
     // 동아리 공지 특정 게시글 조회
     @Override
@@ -166,6 +163,24 @@ public class BoardServiceImpl implements BoardService {
                 .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없거나 동아리 공지가 아닙니다."));
 
         return getNoticeClubResponseDTO(board);
+    }
+
+    private NoticeClubResponseDTO convertToNoticeClubResponseDTO(Board board) {
+        if (board == null) {
+            return null; // or handle differently based on your application's logic
+        }
+        NoticeClubResponseDTO dto = new NoticeClubResponseDTO();
+        dto.setId(board.getId());
+        dto.setTitle(board.getTitle());
+        dto.setContent(board.getContent());
+        dto.setWriter(board.getWriter());
+        dto.setMemberId(board.getMember() != null ? board.getMember().getId() : null);
+        dto.setBoardType(board.getBoardType());
+        dto.setImageRoute(board.getImageRoute());
+        dto.setPublic(board.isPublic());
+        dto.setClubId(board.getClub() != null ? board.getClub().getId() : null);
+        dto.setClubName(board.getClub() != null ? board.getClub().getName() : null);
+        return dto;
     }
 
     //부원모집 게시글 전체조회

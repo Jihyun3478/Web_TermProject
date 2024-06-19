@@ -27,4 +27,5 @@ public class NoticeClubResponseDTO {
     private RoleType roleType;
     private boolean isPublic;
     private String clubName;
+    private Long clubId;
 }
