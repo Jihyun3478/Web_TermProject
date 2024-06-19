@@ -31,23 +31,13 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-        configuration.setAllowedMethods(List.of("OPTIONS", "GET", "POST", "PATCH", "DELETE", "PUT"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/", "/signup", "/signin","/api/signup", "/api/signin", "/image/**", "/applyMember/**", "/master/club/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/", "/signup", "/signin","/api/signup", "/api/signin", "/image/**", "/applyMember/**", "/master/club/**", "/swagger-ui/**", "/v3/api-docs/**", "/oauth2/**").permitAll()
                         .requestMatchers( "/admin/**").hasRole("ADMIN")
                         .requestMatchers("/docs/**").permitAll()
                         .anyRequest().authenticated())
