@@ -108,6 +108,7 @@ public class MemberServiceImpl implements MemberService {
         return byEmail.get();
     }
 
+
     @Override
     public List<Long> findClubIdsByLoginId(String loginId) {
         Member member = memberRepository.findByLoginId(loginId);
