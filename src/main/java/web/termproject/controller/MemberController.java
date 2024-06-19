@@ -128,6 +128,7 @@ public class MemberController {
         createMember("test5555", "test5555", "사용자5", "5555", "전자공학부", "555-5555-5555", "사용자5@kumoh.ac.kr", "남", "2001-05-05");
         createMember("test6666", "test6666", "사용자6", "6666", "전자공학부", "666-6666-6666", "사용자6@kumoh.ac.kr", "여", "2001-06-06");
         createMember("test7777", "test7777", "사용자7", "7777", "컴퓨터소프트웨어공학과", "777-7777-7777", "사용자7@kumoh.ac.kr", "여", "2001-07-07");
+        createMemberWithRole("test8888", "test8888", "사용자8", "8888", "컴퓨터소프트웨어공학과", "888-8888-8888", "사용자8@kumoh.ac.kr", "여", "2001-08-08", RoleType.MASTER_MEMBER);
     }
 
     private void createMember(String loginId, String loginPw, String name, String stuNum, String major, String phoneNum, String email, String gender, String birthDate) {
@@ -141,6 +142,22 @@ public class MemberController {
                 .email(email)
                 .gender(gender)
                 .birthDate(birthDate)
+                .build();
+        memberService.createMember(member);
+    }
+
+    private void createMemberWithRole(String loginId, String loginPw, String name, String stuNum, String major, String phoneNum, String email, String gender, String birthDate, RoleType role) {
+        SignupRequestDTO member = SignupRequestDTO.builder()
+                .loginId(loginId)
+                .loginPw(loginPw)
+                .name(name)
+                .stuNum(stuNum)
+                .major(major)
+                .phoneNum(phoneNum)
+                .email(email)
+                .gender(gender)
+                .birthDate(birthDate)
+                .role(role)
                 .build();
         memberService.createMember(member);
     }
