@@ -55,6 +55,25 @@ public class MemberServiceImpl implements MemberService {
                 .build();
     }
 
+    public MemberResponseDTO createMasterMember(SignupRequestDTO signupRequestDTO) {
+        Member member = signupRequestDTO.toEntity();
+        member.addMasterMemberAuthority();
+        member.encodePassword(passwordEncoder);
+
+        Member savedMember = memberRepository.save(member);
+        return MemberResponseDTO.builder()
+                .loginId(savedMember.getLoginId())
+                .loginPw(savedMember.getLoginPw())
+                .name(savedMember.getName())
+                .stuNum(savedMember.getStuNum())
+                .major(savedMember.getMajor())
+                .phoneNum(savedMember.getPhoneNum())
+                .email(savedMember.getEmail())
+                .gender(savedMember.getGender())
+                .birthDate(savedMember.getBirthDate())
+                .build();
+    }
+
     public JwtTokenDTO signIn(String username, String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
 

@@ -30,7 +30,7 @@ include::{snippets}/master-applyMember-updateStatus/httpie-request.adoc[]
 include::{snippets}/master-applyMember-updateStatus/request-body.adoc[]
 include::{snippets}/master-applyMember-updateStatus/response-body.adoc[]
 
-=== 가입신청서 다운로드
+=== 작성한 가입신청서 다운로드
 
 include::{snippets}/master-applyMember-downloadForm/http-request.adoc[]
 include::{snippets}/master-applyMember-downloadForm/http-response.adoc[]
