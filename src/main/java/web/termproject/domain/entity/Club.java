@@ -36,6 +36,9 @@ public class Club {
     private String vicePresident;
     private String generalAffairs;
 
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Board> boards;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "apply_club_id")
     private ApplyClub applyClub;

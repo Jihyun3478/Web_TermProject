@@ -12,8 +12,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> findByBoardType(BoardType boardType);
 
     Optional<Board> findByIdAndBoardType(Long id, BoardType boardType);
-
-
+    //findByClub_IdIn는 club 객체의 id 필드를 대상으로 IN 연산을 수행하는 쿼리를 생성합니다.
+    List<Board> findByClub_IdIn(List<Long> clubIds);
     List<Board> findByBoardTypeAndClubNameIn(BoardType boardType, List<String> clubNames);
 
 
