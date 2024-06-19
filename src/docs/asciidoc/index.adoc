@@ -10,9 +10,6 @@ endif::[]
 :sectnums:
 :sectlinks:
 
-// == MemberController
-// include::api/member.adoc[]
-
 == ApplyClubController
 include::api/applyClub.adoc[]
 
