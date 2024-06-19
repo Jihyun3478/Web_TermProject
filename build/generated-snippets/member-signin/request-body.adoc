@@ -1,7 +1,0 @@
-[source,json,options="nowrap"]
-----
-{
-  "loginId" : "test1234",
-  "loginPw" : "test1234"
-}
-----

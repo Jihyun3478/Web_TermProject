@@ -1,5 +1,0 @@
-[source,bash]
-----
-$ curl 'http://localhost:8080/master/club/list' -i -X GET \
-    -H 'Authorization: Bearer your_token_here'
-----

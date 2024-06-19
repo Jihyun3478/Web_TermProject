@@ -1,7 +1,0 @@
-[source,bash]
-----
-$ echo '{
-  "refuseReason" : "Reason for refusal"
-}' | http POST 'http://localhost:8080/admin/refuse/1' \
-    'Content-Type:application/json'
-----

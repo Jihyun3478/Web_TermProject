@@ -1,7 +1,0 @@
-[source,http,options="nowrap"]
-----
-GET /image/display?imagePath=test.jpg HTTP/1.1
-Accept: image/jpeg
-Host: localhost:8080
-
-----

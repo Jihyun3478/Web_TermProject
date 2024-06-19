@@ -1,5 +1,0 @@
-[source,bash]
-----
-$ http --form POST 'http://localhost:8080/master/club/applyMember/1' \
-    'ApplyMemberStatus=CLUB_MEMBER'
-----

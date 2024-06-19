@@ -1,5 +1,0 @@
-[source,bash]
-----
-$ http GET 'http://localhost:8080/api/memberInfo' \
-    'Content-Type:application/json'
-----

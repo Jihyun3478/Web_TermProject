@@ -1,5 +1,0 @@
-[source,bash]
-----
-$ curl 'http://localhost:8080/admin/accept/1' -i -X POST \
-    -H 'Content-Type: application/json'
-----

@@ -1,7 +1,0 @@
-[source,bash]
-----
-$ curl 'http://localhost:8080/image/upload' -i -X POST \
-    -H 'Content-Type: multipart/form-data' \
-    -H 'Accept: application/json' \
-    -F 'imageFile=@test.jpg;type=image/jpeg'
-----

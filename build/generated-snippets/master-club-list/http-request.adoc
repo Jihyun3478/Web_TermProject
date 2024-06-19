@@ -1,7 +1,0 @@
-[source,http,options="nowrap"]
-----
-GET /master/club/list HTTP/1.1
-Authorization: Bearer your_token_here
-Host: localhost:8080
-
-----

@@ -1,5 +1,7 @@
 src/main/resources/application.yml
 src/main/resources/application-jwt.yml
+.gradle
+build
 img/
 applyMember/request
 /build/classes/java/main/web/termproject/domain/dto/request/board/ActivityPhotoRequestDTO$ActivityPhotoRequestDTOBuilder.class

@@ -1,4 +1,0 @@
-[source,bash]
-----
-$ curl 'http://localhost:8080/master/club/applyMember/1/1' -i -X GET
-----
