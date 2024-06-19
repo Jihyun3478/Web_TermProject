@@ -124,7 +124,7 @@ public class BoardController {
             @RequestBody ActivityVideoRequestDTO boardRequestDTO) {
         String loginId = SecurityUtil.getLoginId();
         Member member = memberService.findByLoginId(loginId);
-        log.info("url : {}",boardRequestDTO.getContent());
+
         if (member.getRole() != RoleType.MASTER_MEMBER) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to post notices.");
         }

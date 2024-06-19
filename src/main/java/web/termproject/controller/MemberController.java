@@ -31,6 +31,7 @@ import web.termproject.repository.ProfessorRepository;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -95,7 +96,7 @@ public class MemberController {
     }
 
     @PostConstruct
-    public void initData() {
+    public void initData() throws IOException {
         initAdmins();
         initMembers();
         initProfessors();
@@ -244,14 +245,14 @@ public class MemberController {
         }
     }
 
-    private void initBoardData() {
+    private void initBoardData() throws IOException {
         initNoticeClubData();
         initRecruitMemberData();
         initActivityPhotoData();
         initActivityVideoData();
     }
 
-    private void initNoticeClubData() {
+    private void initNoticeClubData() throws IOException {
         NoticeClubRequestDTO notice1 = NoticeClubRequestDTO.builder()
                 .title("Notice 1")
                 .writer("test8888")
@@ -275,7 +276,7 @@ public class MemberController {
         boardService.saveNoticeClub(notice2, null, "test8888");
     }
 
-    private void initRecruitMemberData() {
+    private void initRecruitMemberData() throws IOException {
         RecruitMemberRequestDTO recruit1 = RecruitMemberRequestDTO.builder()
                 .title("Recruit 1")
                 .writer("test8888")
@@ -295,7 +296,7 @@ public class MemberController {
         boardService.saveRecruitMember(recruit2, null, "test8888");
     }
 
-    private void initActivityPhotoData() {
+    private void initActivityPhotoData() throws IOException {
         ActivityPhotoRequestDTO photo1 = ActivityPhotoRequestDTO.builder()
                 .title("Activity Photo 1")
                 .writer("test8888")
