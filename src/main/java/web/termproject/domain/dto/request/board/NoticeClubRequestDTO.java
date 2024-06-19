@@ -15,7 +15,7 @@ public class NoticeClubRequestDTO {
     private String content;
     private BoardType boardType;
     private String imageRoute;
-    private boolean isPublic;
+    private Boolean isPublic;
     private Long clubId; // 동아리 ID 추가
 
 
@@ -26,6 +26,7 @@ public class NoticeClubRequestDTO {
                 .content(content)
                 .boardType(BoardType.NOTICE_CLUB)
                 .imageRoute(imageRoute)
+                .isPublic(isPublic)
                 .build();
     }
 }

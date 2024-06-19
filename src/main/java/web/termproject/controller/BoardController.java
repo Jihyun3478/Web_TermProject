@@ -30,6 +30,7 @@ import web.termproject.domain.entity.Club;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.RoleType;
 import web.termproject.repository.ApplyMemberRepository;
+import web.termproject.repository.BoardRepository;
 import web.termproject.repository.MemberRepository;
 import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.BoardService;
@@ -38,7 +39,10 @@ import web.termproject.service.MemberService;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -49,6 +53,7 @@ public class BoardController {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final ApplyMemberRepository applyMemberRepository;
+    private final BoardRepository boardRepository;
     private static final String uploadDirectory = "C:\\Users\\82109\\Desktop\\uploads";
 
 
@@ -79,6 +84,11 @@ public class BoardController {
             @RequestPart("recruitMemberRequestDTO") @Valid RecruitMemberRequestDTO boardRequestDTO,
             @RequestPart(value = "image", required = false) MultipartFile image) {
         String loginId = SecurityUtil.getLoginId();
+        Member member = memberService.findByLoginId(loginId);
+
+        if (member.getRole() != RoleType.MASTER_MEMBER) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to post notices.");
+        }
         Boolean isSaved = boardService.saveRecruitMember(boardRequestDTO, image,loginId);
 
         if (isSaved) {
@@ -94,6 +104,11 @@ public class BoardController {
             @RequestPart("activityPhotoRequestDTO") @Valid ActivityPhotoRequestDTO boardRequestDTO,
             @RequestPart(value = "image", required = false) MultipartFile image) {
         String loginId = SecurityUtil.getLoginId();
+        Member member = memberService.findByLoginId(loginId);
+
+        if (member.getRole() != RoleType.MASTER_MEMBER) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to post notices.");
+        }
         Boolean isSaved = boardService.saveActivityPhoto(boardRequestDTO, image,loginId);
 
         if (isSaved) {
@@ -108,6 +123,11 @@ public class BoardController {
     public ResponseEntity<String> saveActivityVideo(
             @RequestBody ActivityVideoRequestDTO boardRequestDTO) {
         String loginId = SecurityUtil.getLoginId();
+        Member member = memberService.findByLoginId(loginId);
+
+        if (member.getRole() != RoleType.MASTER_MEMBER) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to post notices.");
+        }
         Boolean isSaved = boardService.saveActivityVideo(boardRequestDTO,loginId);
 
         if (isSaved) {
@@ -129,23 +149,29 @@ public class BoardController {
         }
     }
 
-    //동아리 공지 전체 게시글 조회 -> 동아리 회원만
+    //동아리 공지 전체 게시글 조회
     @GetMapping("/noticeClub/findAll")
     public List<NoticeClubResponseDTO> findAllNoticeClub() {
         // 현재 로그인한 사용자 정보 가져오기
         String loginId = SecurityUtil.getLoginId();
         Member member = memberRepository.findByLoginId(loginId);
 
-        // 로그인한 사용자가 속한 applyMemberList 조회
-        List<ApplyMember> applyMembers = applyMemberRepository.findApplyMembersByMemberIdAndStatus(member.getId());
+        // 전체 공지글 조회
+        List<NoticeClubResponseDTO> allAnnouncements = null;
 
-        // applyMemberList에서 동아리 ID 목록 추출
-        List<Long> clubIds = applyMembers.stream()
-                .map(applyMember -> applyMember.getClub().getId())
+        if ("MASTER_MEMBER".equals(member.getRole())) {
+            System.out.println("나 마스터회원");
+            // MASTER_MEMBER인 경우 자신이 작성한 공지글과 전체 공지글 조회
+            allAnnouncements = boardService.findAllAnnouncementForMasterMember(member.getId());
+        } else {
+            // 일반 회원인 경우 자신이 속한 동아리의 공지글과 전체 공지글 조회
+            allAnnouncements = boardService.findClubAnnouncements(member.getId());
+        }
+
+        // 중복 제거 후 반환
+        return allAnnouncements.stream()
+                .distinct()
                 .collect(Collectors.toList());
-
-        // 동아리 공지글 조회 시, 해당 사용자가 속한 동아리의 공지글만 필터링하여 조회
-        return boardService.findAllAnnouncement(clubIds);
     }
 
     //부원 모집 게시글 전체 조회

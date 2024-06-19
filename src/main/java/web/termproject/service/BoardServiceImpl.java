@@ -2,11 +2,11 @@ package web.termproject.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 import web.termproject.domain.dto.request.board.ActivityPhotoRequestDTO;
 import web.termproject.domain.dto.request.board.ActivityVideoRequestDTO;
@@ -18,10 +18,7 @@ import web.termproject.domain.dto.response.board.NoticeClubResponseDTO;
 import web.termproject.domain.dto.response.board.RecruitMemberResponseDTO;
 import web.termproject.domain.entity.*;
 import web.termproject.domain.status.BoardType;
-import web.termproject.repository.ApplyClubRepository;
-import web.termproject.repository.BoardRepository;
-import web.termproject.repository.ClubRepository;
-import web.termproject.repository.MemberRepository;
+import web.termproject.repository.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,11 +26,9 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import web.termproject.domain.status.RoleType;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +39,8 @@ public class BoardServiceImpl implements BoardService {
     private final MemberRepository memberRepository;
     private final ClubRepository clubRepository;
     private final ApplyClubRepository applyClubRepository;
+    private final ApplyMemberRepository applyMemberRepository;
+    private ModelMapper modelMapper;
     private static String uploadDirectory = "C:\\Users\\82109\\Desktop\\uploads";
 
 
@@ -76,7 +73,6 @@ public class BoardServiceImpl implements BoardService {
         board.setWriter(member.getName());
         board.setBoardType(BoardType.NOTICE_CLUB);
         board.setClub(club);
-        board.setPublic(boardRequestDTO.isPublic()); // 공개 여부 설정
 
        // System.out.println("Board Type: " + board.getBoardType()); // 디버그용 로그 추가
 
@@ -146,13 +142,60 @@ public class BoardServiceImpl implements BoardService {
         return board.getId() != null;
     }
 
+//동아리 공지글 전체공개
+public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long> clubIds) {
+    List<NoticeClubResponseDTO> filteredAnnouncements = findAllAnnouncement(clubIds);
 
+    // 전체공개 공지글 추가
+    List<Board> publicAnnouncements = boardRepository.findByIsPublic(true);
+    List<NoticeClubResponseDTO> publicAnnouncementDTOs = publicAnnouncements.stream()
+            .map(board -> {
+                NoticeClubResponseDTO dto = convertToNoticeClubResponseDTO(board);
+                dto.setIsPublic(true); // Set isPublic to true explicitly for public announcements
+                return dto;
+            })
+            .collect(Collectors.toList());
+
+    // 중복 제거 후 반환
+    List<NoticeClubResponseDTO> allAnnouncements = new ArrayList<>(filteredAnnouncements);
+    allAnnouncements.addAll(publicAnnouncementDTOs);
+    return allAnnouncements.stream()
+            .distinct()
+            .collect(Collectors.toList());
+}
 
     // 동아리 공지 게시글 전체 조회
     public List<NoticeClubResponseDTO> findAllAnnouncement(List<Long> clubIds) {
         return boardRepository.findByClub_IdIn(clubIds)
                 .stream()
                 .map(this::convertToNoticeClubResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<NoticeClubResponseDTO> findClubAnnouncements(Long memberId) {
+        // 일반 회원인 경우 자신이 속한 동아리의 공지글과 전체 공지글(isPublic) 조회
+
+        // 해당 회원이 속한 동아리 조회
+        List<ApplyMember> applyMembers = applyMemberRepository.findApplyMembersByMemberIdAndStatus(memberId);
+        List<Long> clubIds = applyMembers.stream()
+                .map(applyMember -> applyMember.getClub().getId())
+                .collect(Collectors.toList());
+
+        // 동아리 공지글 조회
+        List<NoticeClubResponseDTO> clubAnnouncements = findAllAnnouncement(clubIds);
+
+        // 추가적으로 전체 공지글(isPublic) 조회하여 추가
+        List<Board> publicAnnouncements = boardRepository.findByIsPublic(true);
+        List<NoticeClubResponseDTO> publicAnnouncementDTOs = publicAnnouncements.stream()
+                .map(this::convertToNoticeClubResponseDTO)
+                .collect(Collectors.toList());
+
+        // 중복 제거 후 반환
+        List<NoticeClubResponseDTO> allAnnouncements = new ArrayList<>(clubAnnouncements);
+        allAnnouncements.addAll(publicAnnouncementDTOs);
+        return allAnnouncements.stream()
+                .distinct()
                 .collect(Collectors.toList());
     }
 
@@ -164,6 +207,7 @@ public class BoardServiceImpl implements BoardService {
 
         return getNoticeClubResponseDTO(board);
     }
+    // Convert Board entity to NoticeClubResponseDTO
 
     private NoticeClubResponseDTO convertToNoticeClubResponseDTO(Board board) {
         if (board == null) {
@@ -177,12 +221,48 @@ public class BoardServiceImpl implements BoardService {
         dto.setMemberId(board.getMember() != null ? board.getMember().getId() : null);
         dto.setBoardType(board.getBoardType());
         dto.setImageRoute(board.getImageRoute());
-        dto.setPublic(board.isPublic());
+        dto.setIsPublic(board.getIsPublic());
         dto.setClubId(board.getClub() != null ? board.getClub().getId() : null);
         dto.setClubName(board.getClub() != null ? board.getClub().getName() : null);
         return dto;
     }
 
+    //마스터 전용 조회
+    @Override
+    public List<NoticeClubResponseDTO> findAllAnnouncementForMasterMember(Long memberId) {
+        // MASTER_MEMBER인 경우 자신이 작성한 공지글과 전체 공지글 조회
+        List<Board> boards = boardRepository.findByMemberId(memberId);
+        List<NoticeClubResponseDTO> masterMemberAnnouncements = boards.stream()
+                .map(this::convertToNoticeClubResponseDTO)
+                .collect(Collectors.toList());
+        boards.forEach(board -> System.out.println("마스터 소속 공지글 Board ID: " + board.getId() + ", Title: " + board.getTitle()));
+        // 추가적으로 전체 공지글(isPublic) 조회하여 추가
+        List<Board> publicAnnouncements = boardRepository.findByIsPublic(true);
+        List<NoticeClubResponseDTO> publicAnnouncementDTOs = publicAnnouncements.stream()
+                .map(this::convertToNoticeClubResponseDTO)
+                .collect(Collectors.toList());
+
+        // 중복 제거 후 반환
+        List<NoticeClubResponseDTO> allAnnouncements = new ArrayList<>(masterMemberAnnouncements);
+        allAnnouncements.addAll(publicAnnouncementDTOs);
+
+        allAnnouncements.forEach(board -> System.out.println("마스터 전체글 Board ID: " + board.getId() + ", Title: " + board.getTitle()));
+        return allAnnouncements.stream()
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+    /*@Override
+    public List<NoticeClubResponseDTO> findClubAnnouncements(Long memberId) {
+        // 해당 회원이 속한 동아리 공지글 조회
+        List<Board> boards = boardRepository.findByMemberId(memberId);
+
+        return boards.stream()
+                .filter(board -> board.getBoardType() == BoardType.NOTICE_CLUB)
+                .map(this::convertToNoticeClubResponseDTO)
+                .collect(Collectors.toList());
+    }
+*/
     //부원모집 게시글 전체조회
     @Override
     public List<RecruitMemberResponseDTO> findAllRecruitMember() {
@@ -200,7 +280,7 @@ public class BoardServiceImpl implements BoardService {
 
         return getRecruitMemberResponseDTO(board);
     }
-    
+
     //활동 사진 게시글 전체 조회
     @Override
     public List<ActivityPhotoResponseDTO> findAllActivityPhoto() {
@@ -248,6 +328,7 @@ public class BoardServiceImpl implements BoardService {
         dto.setWriter(board.getMember().getName());
         dto.setBoardType(board.getBoardType());
         dto.setImageRoute(board.getImageRoute());
+        dto.setIsPublic(board.getIsPublic());
         dto.setRoleType(board.getMember().getRole());
 /*
         // 동아리 이름 설정

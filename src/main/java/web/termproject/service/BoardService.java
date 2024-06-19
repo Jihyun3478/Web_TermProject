@@ -11,6 +11,7 @@ import web.termproject.domain.dto.response.board.ActivityPhotoResponseDTO;
 import web.termproject.domain.dto.response.board.ActivityVideoResponseDTO;
 import web.termproject.domain.dto.response.board.NoticeClubResponseDTO;
 import web.termproject.domain.dto.response.board.RecruitMemberResponseDTO;
+import web.termproject.domain.entity.Board;
 import web.termproject.domain.entity.Club;
 
 import java.net.MalformedURLException;
@@ -33,6 +34,10 @@ public interface BoardService {
 
     // 동아리 공지 특정 게시글 조회
     NoticeClubResponseDTO getAnnouncement(Long boardId);
+
+    List<NoticeClubResponseDTO> findAllAnnouncementForMasterMember(Long memberId);
+
+    List<NoticeClubResponseDTO> findClubAnnouncements(Long memberId);
 
     //부원 모집 게시글 전체조회
     List<RecruitMemberResponseDTO> findAllRecruitMember();
@@ -58,4 +63,6 @@ public interface BoardService {
     Resource getImage(String imageRoute)throws MalformedURLException;
 
     Resource loadAsResource(String imagePath);
+
+    List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long> clubIds);
 }
