@@ -71,6 +71,26 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     }
 
     @Override
+    public ApplyClub createApplyClubEntity(ApplyClubRequestDTO requestDTO) {
+        Member member = memberRepository.findByName(requestDTO.getName());
+        Professor professor = professorRepository.findByName(requestDTO.getPName());
+        if(member == null) {
+            throw new UsernameNotFoundException("존재하지 않는 학생입니다.");
+        }
+        if(professor == null) {
+            throw new UsernameNotFoundException("존재하지 않는 교수입니다.");
+        }
+
+        Optional<ApplyClub> existingApplyClub = applyClubRepository.findByClubNameAndMember_StuNum(requestDTO.getClubName(), requestDTO.getStuNum());
+        if (existingApplyClub.isPresent()) {
+            throw new DuplicateRequestException("이미 해당 동아리 신청이 존재합니다.");
+        }
+        ApplyClub applyClub = ApplyClub.createApplyClub(requestDTO.getClubType(), requestDTO.getClubName(), member, professor);
+
+        return applyClubRepository.save(applyClub);
+    }
+
+    @Override
     public ClubResponseDTO createClub(ApplyClub applyClub) {
         Club club = new Club();
         Club savedClub = club.createClub(applyClub);
@@ -175,5 +195,10 @@ public class ApplyClubServiceImpl implements ApplyClubService {
     @Override
     public void save(ApplyClub applyClub) {
         applyClubRepository.save(applyClub);
+    }
+
+    @Override
+    public List<ApplyClub> findByApplyClubStatus(ApplyClubStatus applyClubStatus) {
+        return applyClubRepository.findByApplyClubStatus(applyClubStatus);
     }
 }
