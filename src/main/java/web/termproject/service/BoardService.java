@@ -11,6 +11,7 @@ import web.termproject.domain.dto.response.board.ActivityPhotoResponseDTO;
 import web.termproject.domain.dto.response.board.ActivityVideoResponseDTO;
 import web.termproject.domain.dto.response.board.NoticeClubResponseDTO;
 import web.termproject.domain.dto.response.board.RecruitMemberResponseDTO;
+import web.termproject.domain.entity.Club;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -27,7 +28,7 @@ public interface BoardService {
     Boolean saveActivityVideo(ActivityVideoRequestDTO boardRequestDTO, String loginId);
 
     //동아리 공지 게시글 전체 조회
-    List<NoticeClubResponseDTO> findAllAnnouncement();
+    List<NoticeClubResponseDTO> findAllAnnouncement(List<Long> clubIds);
 
 
     // 동아리 공지 특정 게시글 조회

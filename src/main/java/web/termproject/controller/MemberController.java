@@ -98,8 +98,8 @@ public class MemberController {
         initAdmins();
         initMembers();
         initProfessors();
-//        initApplyClubs();
-//        initClubs();
+        //initApplyClubs();
+       // initClubs();
     }
 
     private void initAdmins() {
