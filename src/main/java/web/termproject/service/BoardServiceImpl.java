@@ -2,6 +2,7 @@ package web.termproject.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -27,27 +28,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final MemberService memberService;
-    private final MemberRepository memberRepository;
     private final ClubRepository clubRepository;
     private final ApplyClubRepository applyClubRepository;
     private final ApplyMemberRepository applyMemberRepository;
-    private ModelMapper modelMapper;
-    private static String uploadDirectory = "C:\\Users\\82109\\Desktop\\uploads";
-
+    private static final String UPLOAD_DIRECTORY = "C:\\Users\\82109\\Desktop\\Web_TermProject\\src\\main\\resources\\static\\boardImage\\";
 
 
     //동아리 공지 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
     @Override
-    public Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
+    public Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image, String loginId) throws IOException {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
         // 로그인한 사용자가 속한 applyMemberList 조회
@@ -61,24 +61,15 @@ public class BoardServiceImpl implements BoardService {
 //        Club club = clubRepository.findById(clubId)
 //                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));
 
-        if (image != null && !image.isEmpty()) {
-            try {
-                String imageFileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-                Path imagePath = Paths.get(uploadDirectory, imageFileName);
-                Files.write(imagePath, image.getBytes());
-                board.setImageRoute(String.valueOf(imagePath));  // 이미지 경로 설정
-            } catch (IOException e) {
-                throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
-            }
-        }
-
         board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.NOTICE_CLUB);
         board.setClub(club);
-
-       // System.out.println("Board Type: " + board.getBoardType()); // 디버그용 로그 추가
-
+        if(image != null) {
+            board.setPhoto(image.getBytes());
+        }else {
+            board.setPhoto(null);
+        }
         boardRepository.save(board);
 
         return board.getId() != null;
@@ -87,14 +78,14 @@ public class BoardServiceImpl implements BoardService {
 
     //부원 모집 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
     @Override
-    public Boolean saveRecruitMember(RecruitMemberRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
+    public Boolean saveRecruitMember(RecruitMemberRequestDTO boardRequestDTO, MultipartFile image, String loginId) throws IOException {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
         // 이미지 파일 처리
         if (image != null && !image.isEmpty()) {
             try {
                 String imageFileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-                Path imagePath = Paths.get(uploadDirectory, imageFileName);
+                Path imagePath = Paths.get(UPLOAD_DIRECTORY, imageFileName);
                 Files.write(imagePath, image.getBytes());
                 board.setImageRoute(String.valueOf(imagePath));
             } catch (IOException e) {
@@ -104,6 +95,11 @@ public class BoardServiceImpl implements BoardService {
         board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.RECRUIT_MEMBER);
+        if(image != null) {
+            board.setPhoto(image.getBytes());
+        } else {
+            board.setPhoto(null);
+        }
         boardRepository.save(board);
         // 저장된 게시글의 ID가 null이 아닌지 확인하여 Boolean 값 반환
         return board.getId() != null;
@@ -111,14 +107,14 @@ public class BoardServiceImpl implements BoardService {
 
     //활동 사진 등록
     @Override
-    public Boolean saveActivityPhoto(ActivityPhotoRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
+    public Boolean saveActivityPhoto(ActivityPhotoRequestDTO boardRequestDTO, MultipartFile image, String loginId) throws IOException {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
         // 이미지 파일 처리
         if (image != null && !image.isEmpty()) {
             try {
                 String imageFileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-                Path imagePath = Paths.get(uploadDirectory, imageFileName);
+                Path imagePath = Paths.get(UPLOAD_DIRECTORY, imageFileName);
                 Files.write(imagePath, image.getBytes());
                 board.setImageRoute(String.valueOf(imagePath));
             } catch (IOException e) {
@@ -128,6 +124,11 @@ public class BoardServiceImpl implements BoardService {
         board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.ACTIVITY_PHOTO);
+        if(image != null) {
+            board.setPhoto(image.getBytes());
+        } else {
+            board.setPhoto(null);
+        }
         boardRepository.save(board);
         // 저장된 게시글의 ID가 null이 아닌지 확인하여 Boolean 값 반환
         return board.getId() != null;
@@ -177,30 +178,38 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
 
     @Override
     public List<NoticeClubResponseDTO> findClubAnnouncements(Long memberId) {
-        // 일반 회원인 경우 자신이 속한 동아리의 공지글과 전체 공지글(isPublic) 조회
-
         // 해당 회원이 속한 동아리 조회
         List<ApplyMember> applyMembers = applyMemberRepository.findApplyMembersByMemberIdAndStatus(memberId);
         List<Long> clubIds = applyMembers.stream()
                 .map(applyMember -> applyMember.getClub().getId())
                 .collect(Collectors.toList());
 
-        // 동아리 공지글 조회
-        List<NoticeClubResponseDTO> clubAnnouncements = findAllAnnouncement(clubIds);
+        // 동아리 공지글 조회 (해당 동아리에 속한 공지글만)
+        List<NoticeClubResponseDTO> clubAnnouncements = findAllAnnouncement(clubIds).stream()
+                .filter(noticeClub -> noticeClub.getBoardType() == BoardType.NOTICE_CLUB && clubIds.contains(noticeClub.getClubId()))
+                .collect(Collectors.toList());
 
-        // 추가적으로 전체 공지글(isPublic) 조회하여 추가
-        List<Board> publicAnnouncements = boardRepository.findByIsPublic(true);
-        List<NoticeClubResponseDTO> publicAnnouncementDTOs = publicAnnouncements.stream()
-                .map(this::convertToNoticeClubResponseDTO)
+        // 전체 공개된 공지글 조회
+        List<NoticeClubResponseDTO> publicAnnouncements = findAllPublicAnnouncements().stream()
+                .filter(noticeClub -> noticeClub.getBoardType() == BoardType.NOTICE_CLUB)
                 .collect(Collectors.toList());
 
         // 중복 제거 후 반환
         List<NoticeClubResponseDTO> allAnnouncements = new ArrayList<>(clubAnnouncements);
-        allAnnouncements.addAll(publicAnnouncementDTOs);
+        allAnnouncements.addAll(publicAnnouncements);
         return allAnnouncements.stream()
                 .distinct()
                 .collect(Collectors.toList());
     }
+
+    private List<NoticeClubResponseDTO> findAllPublicAnnouncements() {
+        List<Board> publicAnnouncements = boardRepository.findByIsPublic(true);
+        return publicAnnouncements.stream()
+                .map(this::convertToNoticeClubResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+
 
     // 동아리 공지 특정 게시글 조회
     @Override
@@ -223,7 +232,11 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         dto.setWriter(board.getWriter());
         dto.setMemberId(board.getMember() != null ? board.getMember().getId() : null);
         dto.setBoardType(board.getBoardType());
-        dto.setImageRoute(board.getImageRoute());
+        if(board.getPhoto() != null) {
+            dto.setPhotoBase64(Base64.getEncoder().encodeToString(board.getPhoto()));
+        }else {
+            dto.setPhotoBase64(null);
+        }
         dto.setIsPublic(board.getIsPublic());
         dto.setClubId(board.getClub() != null ? board.getClub().getId() : null);
         dto.setClubName(board.getClub() != null ? board.getClub().getName() : null);
@@ -235,13 +248,18 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
     public List<NoticeClubResponseDTO> findAllAnnouncementForMasterMember(Long memberId) {
         // MASTER_MEMBER인 경우 자신이 작성한 공지글과 전체 공지글 조회
         List<Board> boards = boardRepository.findByMemberId(memberId);
+        for (Board board : boards) {
+            log.info("boards = {}", board.getTitle());
+        }
         List<NoticeClubResponseDTO> masterMemberAnnouncements = boards.stream()
+                .filter(board -> board.getBoardType() == BoardType.NOTICE_CLUB)
                 .map(this::convertToNoticeClubResponseDTO)
                 .collect(Collectors.toList());
-        boards.forEach(board -> System.out.println("마스터 소속 공지글 Board ID: " + board.getId() + ", Title: " + board.getTitle()));
+
         // 추가적으로 전체 공지글(isPublic) 조회하여 추가
         List<Board> publicAnnouncements = boardRepository.findByIsPublic(true);
         List<NoticeClubResponseDTO> publicAnnouncementDTOs = publicAnnouncements.stream()
+                .filter(board -> board.getBoardType() == BoardType.NOTICE_CLUB)
                 .map(this::convertToNoticeClubResponseDTO)
                 .collect(Collectors.toList());
 
@@ -249,23 +267,11 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         List<NoticeClubResponseDTO> allAnnouncements = new ArrayList<>(masterMemberAnnouncements);
         allAnnouncements.addAll(publicAnnouncementDTOs);
 
-        allAnnouncements.forEach(board -> System.out.println("마스터 전체글 Board ID: " + board.getId() + ", Title: " + board.getTitle()));
         return allAnnouncements.stream()
                 .distinct()
                 .collect(Collectors.toList());
     }
 
-    /*@Override
-    public List<NoticeClubResponseDTO> findClubAnnouncements(Long memberId) {
-        // 해당 회원이 속한 동아리 공지글 조회
-        List<Board> boards = boardRepository.findByMemberId(memberId);
-
-        return boards.stream()
-                .filter(board -> board.getBoardType() == BoardType.NOTICE_CLUB)
-                .map(this::convertToNoticeClubResponseDTO)
-                .collect(Collectors.toList());
-    }
-*/
     //부원모집 게시글 전체조회
     @Override
     public List<RecruitMemberResponseDTO> findAllRecruitMember() {
@@ -330,20 +336,13 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         dto.setMemberId(board.getMember().getId()); // Member의 id만 설정
         dto.setWriter(board.getMember().getName());
         dto.setBoardType(board.getBoardType());
-        dto.setImageRoute(board.getImageRoute());
+        if(board.getPhoto() != null) {
+            dto.setPhotoBase64(Base64.getEncoder().encodeToString(board.getPhoto()));
+        }else {
+            dto.setPhotoBase64(null);
+        }
         dto.setIsPublic(board.getIsPublic());
         dto.setRoleType(board.getMember().getRole());
-/*
-        // 동아리 이름 설정
-        String clubName;
-        if (board.getClubName() != null) {
-            clubName = board.getClubName(); // Board 엔티티에 저장된 동아리 이름 사용
-        } else {
-            // 추가적인 로직이 필요하다면 여기에 구현
-            clubName = ""; // 혹은 null 처리
-        }
-        dto.setClubName(clubName);*/
-
         return dto;
     }
     //부원 모집
@@ -355,7 +354,11 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         dto.setMemberId(board.getMember().getId());
         dto.setBoardType(board.getBoardType());
         dto.setWriter(board.getMember().getName());
-        dto.setImageRoute(board.getImageRoute());
+        if(board.getPhoto() != null) {
+            dto.setPhotoBase64(Base64.getEncoder().encodeToString(board.getPhoto()));
+        }else {
+            dto.setPhotoBase64(null);
+        }
         dto.setRoleType(board.getMember().getRole());
         return dto;
     }
@@ -369,7 +372,11 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         dto.setBoardType(board.getBoardType());
         dto.setMemberId(board.getMember().getId());
         dto.setWriter(board.getMember().getName());
-        dto.setImageRoute(board.getImageRoute());
+        if(board.getPhoto() != null) {
+            dto.setPhotoBase64(Base64.getEncoder().encodeToString(board.getPhoto()));
+        }else {
+            dto.setPhotoBase64(null);
+        }
         dto.setRoleType(board.getMember().getRole());
         return dto;
     }
@@ -379,7 +386,7 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         ActivityVideoResponseDTO dto = new ActivityVideoResponseDTO();
         dto.setId(board.getId());
         dto.setTitle(board.getTitle());
-        dto.setVideoUrl(board.getContent());
+        dto.setContent(board.getContent());
         dto.setMemberId(board.getMember().getId());
         dto.setWriter(board.getMember().getName());
         dto.setBoardType(board.getBoardType());
@@ -387,21 +394,24 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         return dto;
     }
 
+    // 이미지 조회
     @Override
     public Resource getImage(String imagePath) throws MalformedURLException {
-        Path filePath = Paths.get(uploadDirectory, imagePath).normalize();
+        log.info("imageReout : {}",imagePath);
+        Path filePath = Paths.get(UPLOAD_DIRECTORY).resolve(imagePath).normalize();
         Resource resource = new UrlResource(filePath.toUri());
-        if (resource.exists() && resource.isReadable()) {
+        if (resource.exists()) {
             return resource;
         } else {
-            throw new RuntimeException("File not found or cannot read file: " + imagePath);
+            throw new RuntimeException("File not found " + imagePath);
         }
     }
+
 
     @Override
     public Resource loadAsResource(String filename) {
         try {
-            Path filePath = Paths.get(uploadDirectory, filename).normalize();
+            Path filePath = Paths.get(UPLOAD_DIRECTORY, filename).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
@@ -413,17 +423,6 @@ public List<NoticeClubResponseDTO> findAllAnnouncementIncludingPublic(List<Long>
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private boolean isClubMember(String loginId, Board board) {
-        // 사용자 ID를 이용하여 회원 정보 조회
-        Member member = memberRepository.findByLoginId(loginId);
-        if (member == null) {
-            return false; // 회원 정보가 없으면 false 반환
-        }
-
-        // Board에 연결된 Member와 조회된 Member가 동일한지 확인
-        return board.getMember().equals(member);
     }
 
 }

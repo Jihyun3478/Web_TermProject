@@ -23,4 +23,5 @@ public class RecruitMemberResponseDTO {
     private String imageRoute;
     private MultipartFile image;
     private RoleType roleType;
+    private String photoBase64;
 }

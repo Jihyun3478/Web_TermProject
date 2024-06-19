@@ -17,6 +17,7 @@ public class NoticeClubRequestDTO {
     private String imageRoute;
     private Boolean isPublic;
     private Long clubId; // 동아리 ID 추가
+    private byte[] photo;
 
 
     public Board toEntity() {

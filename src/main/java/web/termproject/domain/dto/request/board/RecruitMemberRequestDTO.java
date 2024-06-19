@@ -16,6 +16,7 @@ public class RecruitMemberRequestDTO {
     private BoardType boardType;
     private String imageRoute;
 
+
     public Board toEntity() {
         return Board.builder()
                 .title(title)

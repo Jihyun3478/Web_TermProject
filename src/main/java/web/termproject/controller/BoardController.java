@@ -3,6 +3,7 @@ package web.termproject.controller;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -36,15 +37,14 @@ import web.termproject.security.util.SecurityUtil;
 import web.termproject.service.BoardService;
 import web.termproject.service.MemberService;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/master/board")
 @RequiredArgsConstructor
@@ -61,7 +61,7 @@ public class BoardController {
     @PostMapping(value="/api/saveNoticeClub",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> save(
             @RequestPart("noticeClubRequestDTO") @Valid NoticeClubRequestDTO boardRequestDTO,
-            @RequestPart(value = "image", required = false) MultipartFile image) {
+            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
         String loginId = SecurityUtil.getLoginId();
        Member member = memberService.findByLoginId(loginId);
 
@@ -82,7 +82,7 @@ public class BoardController {
     @PostMapping(value="/api/saveRecruitMember",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> saveRecruitMember(
             @RequestPart("recruitMemberRequestDTO") @Valid RecruitMemberRequestDTO boardRequestDTO,
-            @RequestPart(value = "image", required = false) MultipartFile image) {
+            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
         String loginId = SecurityUtil.getLoginId();
         Member member = memberService.findByLoginId(loginId);
 
@@ -102,7 +102,7 @@ public class BoardController {
     @PostMapping(value="/api/saveActivityPhoto",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> saveActivityPhoto(
             @RequestPart("activityPhotoRequestDTO") @Valid ActivityPhotoRequestDTO boardRequestDTO,
-            @RequestPart(value = "image", required = false) MultipartFile image) {
+            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
         String loginId = SecurityUtil.getLoginId();
         Member member = memberService.findByLoginId(loginId);
 
@@ -124,7 +124,7 @@ public class BoardController {
             @RequestBody ActivityVideoRequestDTO boardRequestDTO) {
         String loginId = SecurityUtil.getLoginId();
         Member member = memberService.findByLoginId(loginId);
-
+        log.info("url : {}",boardRequestDTO.getContent());
         if (member.getRole() != RoleType.MASTER_MEMBER) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to post notices.");
         }
@@ -155,12 +155,12 @@ public class BoardController {
         // 현재 로그인한 사용자 정보 가져오기
         String loginId = SecurityUtil.getLoginId();
         Member member = memberRepository.findByLoginId(loginId);
-
+        log.info("getRole1 : {}",member.getRole());
         // 전체 공지글 조회
         List<NoticeClubResponseDTO> allAnnouncements = null;
 
-        if ("MASTER_MEMBER".equals(member.getRole())) {
-            System.out.println("나 마스터회원");
+        if (RoleType.MASTER_MEMBER==member.getRole()) {
+            log.info("getRole2 : {}",member.getRole());
             // MASTER_MEMBER인 경우 자신이 작성한 공지글과 전체 공지글 조회
             allAnnouncements = boardService.findAllAnnouncementForMasterMember(member.getId());
         } else {
@@ -210,15 +210,21 @@ public class BoardController {
         return boardService.getActivityVideo(boardId);
     }
 
-    @GetMapping(
-            value = {"/image/{imageRoute}"},
-            produces = {"image/jpeg"}
-    )
-    public ResponseEntity<Resource> serveFile(@PathVariable String imagePath) {
-        Resource file = boardService.loadAsResource(imagePath);
-        return ResponseEntity.ok().body(file);
-    }
+    @GetMapping(value = "/image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Could not find the board with id: " + id));
 
+        byte[] imageBytes = board.getPhoto();
+
+        if (imageBytes != null && imageBytes.length > 0) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(imageBytes);
+        } else {
+            throw new RuntimeException("Could not find the image for board with id: " + id);
+        }
+    }
     @GetMapping("/checkMasterMember")
     public ResponseEntity<Boolean> checkMasterMember() {
         // 현재 인증된 사용자 정보 가져오기
@@ -245,59 +251,4 @@ public class BoardController {
 
         return ResponseEntity.ok(clubNames);
     }
-
-    @GetMapping(
-            value = {"/display"},
-            produces = {"image/jpeg"}
-    )
-    public Resource getImage(String imagePath) throws MalformedURLException {
-        return this.boardService.getImage(imagePath);
-    }
-
-//    @GetMapping("/recruitMember/findAll")
-//    public List<RecruitMemberResponseDTO> findAllRecruitMember2() {
-//        List<RecruitMemberResponseDTO> recruitMembers = boardService.findAllRecruitMember();
-//
-//        for (RecruitMemberResponseDTO recruitMember : recruitMembers) {
-//            String imagePath = recruitMember.getImageRoute();// 게시글에 포함된 이미지 경로
-//
-//            if (imagePath != null && !imagePath.isEmpty()) {
-//                try {
-//                    Path filePath = Paths.get(uploadDirectory, imagePath).normalize();
-//                    Resource resource = new UrlResource(filePath.toUri());
-//                    if (resource.exists()) {
-//                        String imageUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                                .path("/download/")
-//                                .path(imagePath)
-//                                .toUriString();
-//                        recruitMember.setImageRoute(imageUrl);
-//                    }
-//                } catch (MalformedURLException ex) {
-//                    throw new RuntimeException("Failed to create URL for image: " + imagePath, ex);
-//                }
-//            }
-//        }
-//
-//        return recruitMembers;
-//    }
-
-    @GetMapping("/recruitMember/download/{imageName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String imageName) throws MalformedURLException {
-        try {
-            Path filePath = Paths.get(uploadDirectory, imageName).normalize();
-            Resource resource = new UrlResource(filePath.toUri());
-
-            if (resource.exists() && resource.isReadable()) {
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                        .body(resource);
-            } else {
-                throw new RuntimeException("File not found or cannot read file: " + imageName);
-            }
-        } catch (MalformedURLException ex) {
-            throw new RuntimeException("Failed to create URL for image: " + imageName, ex);
-        }
-    }
-
-
 }
