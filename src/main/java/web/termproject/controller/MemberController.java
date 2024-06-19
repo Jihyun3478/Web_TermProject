@@ -153,6 +153,7 @@ public class MemberController {
         createProfessor("ptest4444", "ptest4444", "교수님4", "기계공학과", "444-4444-4444", "교수님4@kumoh.ac.kr");
         createProfessor("ptest5555", "ptest5555", "교수님5", "전자공학부", "555-5555-5555", "교수님5@kumoh.ac.kr");
         createProfessor("ptest6666", "ptest6666", "교수님6", "전자공학부", "666-6666-6666", "교수님6@kumoh.ac.kr");
+        createProfessor("ptest7777", "ptest7777", "김성렬", "컴퓨터소프트웨어공학과", "000-0000-0000", "교수님7@kumoh.ac.kr");
     }
 
     private void createProfessor(String pLoginId, String loginPw, String name, String major, String phoneNum, String email) {
@@ -180,21 +181,40 @@ public class MemberController {
         Member member = memberRepository.findByName(memberName);
         Professor professor = professorRepository.findByName(professorName);
 
-        ApplyClubRequestDTO applyClubRequestDTO = ApplyClubRequestDTO.builder()
-                .clubType(clubType)
-                .clubName(clubName)
-                .name(member.getName())
-                .major(member.getMajor())
-                .stuNum(member.getStuNum())
-                .phoneNum(member.getPhoneNum())
-                .pName(professor.getName())
-                .pMajor(professor.getMajor())
-                .pPhoneNum(professor.getPhoneNum())
-                .build();
+        if(status == ApplyClubStatus.REFUSE) {
+            ApplyClubRequestDTO applyClubRequestDTO = ApplyClubRequestDTO.builder()
+                    .clubType(clubType)
+                    .clubName(clubName)
+                    .name(member.getName())
+                    .major(member.getMajor())
+                    .stuNum(member.getStuNum())
+                    .phoneNum(member.getPhoneNum())
+                    .pName(professor.getName())
+                    .pMajor(professor.getMajor())
+                    .pPhoneNum(professor.getPhoneNum())
+                    .build();
+            ApplyClub applyClub = applyClubService.createApplyClubEntity(applyClubRequestDTO);
+            applyClub.setApplyClubStatus(status);
+            applyClub.setRefuseReason("동일한 이름의 동아리가 존재합니다.");
+            applyClubService.save(applyClub);
+        }
+        else {
+            ApplyClubRequestDTO applyClubRequestDTO = ApplyClubRequestDTO.builder()
+                    .clubType(clubType)
+                    .clubName(clubName)
+                    .name(member.getName())
+                    .major(member.getMajor())
+                    .stuNum(member.getStuNum())
+                    .phoneNum(member.getPhoneNum())
+                    .pName(professor.getName())
+                    .pMajor(professor.getMajor())
+                    .pPhoneNum(professor.getPhoneNum())
+                    .build();
 
-        ApplyClub applyClub = applyClubService.createApplyClubEntity(applyClubRequestDTO);
-        applyClub.setApplyClubStatus(status);
-        applyClubService.save(applyClub);
+            ApplyClub applyClub = applyClubService.createApplyClubEntity(applyClubRequestDTO);
+            applyClub.setApplyClubStatus(status);
+            applyClubService.save(applyClub);
+        }
     }
 
     private void initClubs() {

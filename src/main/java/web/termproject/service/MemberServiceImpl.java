@@ -91,13 +91,16 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> byEmail = memberRepository.findByEmail(email);
         if (!byEmail.isPresent()) {
             Member member = Member.builder()
-                    .name(nickname)
-                    .email(email)
                     .loginId(email)
                     .loginPw(passwordEncoder.encode(email))
-                    .role(RoleType.MEMBER)
+                    .name(nickname)
+                    .stuNum("20200930")
                     .major("컴퓨터소프트웨어공학과")
-                    .phoneNum("00000000000")
+                    .phoneNum("010-0000-0000")
+                    .email(email)
+                    .gender("여")
+                    .birthDate("2001-08-15")
+                    .role(RoleType.MEMBER)
                     .build();
             memberRepository.save(member);
             return member;
