@@ -3,6 +3,7 @@ package web.termproject.domain.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import web.termproject.domain.status.ApplyMemberStatus;
 import web.termproject.domain.status.ClubType;
 
 import java.util.ArrayList;
@@ -48,10 +49,20 @@ public class Club {
     }
 
     public Club createClub(ApplyClub applyClub) {
-        return Club.builder()
+        Club club = Club.builder()
                 .clubType(applyClub.getClubType())
                 .name(applyClub.getClubName())
+                .applyMemberList(new ArrayList<>()) // applyMemberList를 초기화합니다.
                 .build();
+
+        ApplyMember masterMember = ApplyMember.builder()
+                .member(applyClub.getMember())
+                .applyMemberStatus(ApplyMemberStatus.CLUB_MEMBER)
+                .club(club)
+                .build();
+        club.getApplyMemberList().add(masterMember);
+
+        return club;
     }
 
     public void updateImageRouteInfo(String imageRoute) {

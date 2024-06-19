@@ -12,22 +12,19 @@ import web.termproject.domain.status.ApplyMemberStatus;
 @Builder
 @AllArgsConstructor
 public class ApplyMember {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "APPLY_MEMBER_ID")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ApplyMemberStatus applyMemberStatus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "club_id")
+    private Club club;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    @JsonBackReference
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "club_id")
-    @JsonBackReference
-    private Club club;
+    @Enumerated(EnumType.STRING)
+    private ApplyMemberStatus applyMemberStatus;
 }

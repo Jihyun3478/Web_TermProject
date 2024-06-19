@@ -45,22 +45,24 @@ public class ApplyMemberServiceImpl implements ApplyMemberService {
     @Override
     public ResponseEntity<Resource> downloadFile() throws MalformedURLException {
         Path filePath = Paths.get(uploadDirectory).resolve("applyClubForm.hwp").normalize();
+        System.out.println("현재 작업 디렉토리: " + System.getProperty("user.dir"));
+        System.out.println("파일 경로: " + filePath.toString());
         Resource resource = new UrlResource(filePath.toUri());
 
-        // 파일이 존재하는지 확인
         if (!resource.exists()) {
             throw new RuntimeException("File not found " + "applyClubForm.hwp");
         }
 
-        // 다운로드할 파일의 MIME 타입 설정
-        String contentType;
+        String contentType = "application/x-hwp";
         try {
             contentType = Files.probeContentType(filePath);
+            if (contentType == null) {
+                contentType = "application/octet-stream";
+            }
         } catch (IOException e) {
             contentType = "application/octet-stream";
         }
 
-        // 다운로드할 파일의 응답 헤더 설정
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
@@ -113,6 +115,9 @@ public class ApplyMemberServiceImpl implements ApplyMemberService {
         String contentType;
         try {
             contentType = Files.probeContentType(filePath);
+            if (contentType == null) {
+                contentType = "application/x-hwp"; // .hwp 파일의 MIME 타입 직접 설정
+            }
         } catch (IOException e) {
             contentType = "application/octet-stream";
         }

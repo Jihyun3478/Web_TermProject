@@ -2,6 +2,7 @@ package web.termproject.service;
 
 import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,7 @@ import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.dto.response.ClubResponseDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.dto.response.ProfessorResponseDTO;
-import web.termproject.domain.entity.ApplyClub;
-import web.termproject.domain.entity.Club;
-import web.termproject.domain.entity.Member;
-import web.termproject.domain.entity.Professor;
+import web.termproject.domain.entity.*;
 import web.termproject.domain.status.ApplyClubStatus;
 import web.termproject.repository.ApplyClubRepository;
 import web.termproject.repository.ClubRepository;
@@ -28,6 +26,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class ApplyClubServiceImpl implements ApplyClubService {
 
     private final MemberRepository memberRepository;
@@ -92,19 +91,23 @@ public class ApplyClubServiceImpl implements ApplyClubService {
 
     @Override
     public ClubResponseDTO createClub(ApplyClub applyClub) {
-        Club club = new Club();
-        Club savedClub = club.createClub(applyClub);
-        savedClub.setApplyClub(applyClub);
-        clubRepository.save(savedClub);
+        Club club = new Club().createClub(applyClub); // 수정: 기존 Club 인스턴스를 이용하지 않고, 새 Club 인스턴스를 반환 받습니다.
+        club.setApplyClub(applyClub);
+        clubRepository.save(club);
 
         ClubResponseDTO responseDTO = ClubResponseDTO.builder()
-                .id(savedClub.getId())
-                .applyClubId(savedClub.getApplyClub().getId())
-                .clubType(savedClub.getClubType())
-                .name(savedClub.getName())
+                .id(club.getId())
+                .applyClubId(club.getApplyClub().getId())
+                .clubType(club.getClubType())
+                .name(club.getName())
                 .build();
         responseDTO.setProfessor(modelMapper.map(applyClub.getProfessor(), ProfessorResponseDTO.class));
         responseDTO.setMasterMember(modelMapper.map(applyClub.getMember(), MemberResponseDTO.class));
+
+        List<ApplyMember> applyMemberList = club.getApplyMemberList();
+        for (ApplyMember applyMember : applyMemberList) {
+            log.info("applyMember : {}", applyMember.getMember().getName());
+        }
 
         return responseDTO;
     }

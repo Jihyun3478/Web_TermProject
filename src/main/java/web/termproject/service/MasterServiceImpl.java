@@ -33,7 +33,7 @@ public class MasterServiceImpl implements MasterService {
     private final MemberService memberService;
 
     @Override
-    public List<ClubResponseDTO> getMasterClubsInfo(String loginId) throws BadRequestException {
+    public List<ClubResponseDTO> getMasterClubsInfo(String loginId) {
         Member findMember = memberService.findByLoginId(loginId);
         if(masterRepository.findClubsByMemberId(findMember.getId()).isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return masterRepository.findClubsByMemberId(findMember.getId()).stream()
