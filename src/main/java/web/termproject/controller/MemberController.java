@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import web.termproject.domain.dto.request.*;
+import web.termproject.domain.dto.request.board.ActivityPhotoRequestDTO;
+import web.termproject.domain.dto.request.board.ActivityVideoRequestDTO;
+import web.termproject.domain.dto.request.board.NoticeClubRequestDTO;
+import web.termproject.domain.dto.request.board.RecruitMemberRequestDTO;
 import web.termproject.domain.dto.response.ApplyClubResponseDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.ApplyClub;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.entity.Professor;
 import web.termproject.domain.status.ApplyClubStatus;
+import web.termproject.domain.status.BoardType;
 import web.termproject.domain.status.ClubType;
 import web.termproject.domain.status.RoleType;
 import web.termproject.exception.ApiResponse;
@@ -24,10 +29,7 @@ import web.termproject.exception.ResponseCode;
 import web.termproject.repository.MemberRepository;
 import web.termproject.repository.ProfessorRepository;
 import web.termproject.security.util.SecurityUtil;
-import web.termproject.service.AdminService;
-import web.termproject.service.ApplyClubService;
-import web.termproject.service.MemberService;
-import web.termproject.service.ProfessorService;
+import web.termproject.service.*;
 
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class MemberController {
     private final AdminService adminService;
     private final ProfessorService professorService;
     private final ApplyClubService applyClubService;
+    private final BoardService boardService;
 
     /* 회원가입 */
     @PostMapping("/api/signup")
@@ -98,6 +101,7 @@ public class MemberController {
         initProfessors();
         initApplyClubs();
         initClubs();
+        initBoardData();
     }
 
     private void initAdmins() {
@@ -128,7 +132,7 @@ public class MemberController {
         createMember("test5555", "test5555", "사용자5", "5555", "전자공학부", "555-5555-5555", "사용자5@kumoh.ac.kr", "남", "2001-05-05");
         createMember("test6666", "test6666", "사용자6", "6666", "전자공학부", "666-6666-6666", "사용자6@kumoh.ac.kr", "여", "2001-06-06");
         createMember("test7777", "test7777", "사용자7", "7777", "컴퓨터소프트웨어공학과", "777-7777-7777", "사용자7@kumoh.ac.kr", "여", "2001-07-07");
-        createMemberWithRole("test8888", "test8888", "사용자8", "8888", "컴퓨터소프트웨어공학과", "888-8888-8888", "사용자8@kumoh.ac.kr", "여", "2001-08-08", RoleType.MASTER_MEMBER);
+        createMemberWithRole("test8888", "test8888", "사용자8", "8888", "컴퓨터소프트웨어공학과", "888-8888-8888", "사용자8@kumoh.ac.kr", "여", "2001-08-08");
     }
 
     private void createMember(String loginId, String loginPw, String name, String stuNum, String major, String phoneNum, String email, String gender, String birthDate) {
@@ -146,7 +150,7 @@ public class MemberController {
         memberService.createMember(member);
     }
 
-    private void createMemberWithRole(String loginId, String loginPw, String name, String stuNum, String major, String phoneNum, String email, String gender, String birthDate, RoleType role) {
+    private void createMemberWithRole(String loginId, String loginPw, String name, String stuNum, String major, String phoneNum, String email, String gender, String birthDate) {
         SignupRequestDTO member = SignupRequestDTO.builder()
                 .loginId(loginId)
                 .loginPw(loginPw)
@@ -157,9 +161,9 @@ public class MemberController {
                 .email(email)
                 .gender(gender)
                 .birthDate(birthDate)
-                .role(role)
+                .role(RoleType.MASTER_MEMBER)
                 .build();
-        memberService.createMember(member);
+        memberService.createMasterMember(member);
     }
 
     private void initProfessors() {
@@ -238,5 +242,94 @@ public class MemberController {
         for (ApplyClub acceptedApplyClub : acceptedApplyClubs) {
             applyClubService.createClub(acceptedApplyClub);
         }
+    }
+
+    private void initBoardData() {
+        initNoticeClubData();
+        initRecruitMemberData();
+        initActivityPhotoData();
+        initActivityVideoData();
+    }
+
+    private void initNoticeClubData() {
+        NoticeClubRequestDTO notice1 = NoticeClubRequestDTO.builder()
+                .title("Notice 1")
+                .writer("test8888")
+                .content("This is the first notice.")
+                .boardType(BoardType.NOTICE_CLUB)
+                .imageRoute("/images/notice1.png")
+                .isPublic(true)
+                .clubId(1L)
+                .build();
+        boardService.saveNoticeClub(notice1, null, "test8888");
+
+        NoticeClubRequestDTO notice2 = NoticeClubRequestDTO.builder()
+                .title("Notice 2")
+                .writer("test8888")
+                .content("This is the second notice.")
+                .boardType(BoardType.NOTICE_CLUB)
+                .imageRoute("/images/notice2.png")
+                .isPublic(true)
+                .clubId(1L)
+                .build();
+        boardService.saveNoticeClub(notice2, null, "test8888");
+    }
+
+    private void initRecruitMemberData() {
+        RecruitMemberRequestDTO recruit1 = RecruitMemberRequestDTO.builder()
+                .title("Recruit 1")
+                .writer("test8888")
+                .content("This is the first recruit member post.")
+                .boardType(BoardType.RECRUIT_MEMBER)
+                .imageRoute("/images/recruit1.png")
+                .build();
+        boardService.saveRecruitMember(recruit1, null, "test8888");
+
+        RecruitMemberRequestDTO recruit2 = RecruitMemberRequestDTO.builder()
+                .title("Recruit 2")
+                .writer("test8888")
+                .content("This is the second recruit member post.")
+                .boardType(BoardType.RECRUIT_MEMBER)
+                .imageRoute("/images/recruit2.png")
+                .build();
+        boardService.saveRecruitMember(recruit2, null, "test8888");
+    }
+
+    private void initActivityPhotoData() {
+        ActivityPhotoRequestDTO photo1 = ActivityPhotoRequestDTO.builder()
+                .title("Activity Photo 1")
+                .writer("test8888")
+                .content("This is the first activity photo.")
+                .boardType(BoardType.ACTIVITY_PHOTO)
+                .imageRoute("/images/activity1.png")
+                .build();
+        boardService.saveActivityPhoto(photo1, null, "test8888");
+
+        ActivityPhotoRequestDTO photo2 = ActivityPhotoRequestDTO.builder()
+                .title("Activity Photo 2")
+                .writer("test8888")
+                .content("This is the second activity photo.")
+                .boardType(BoardType.ACTIVITY_PHOTO)
+                .imageRoute("/images/activity2.png")
+                .build();
+        boardService.saveActivityPhoto(photo2, null, "test8888");
+    }
+
+    private void initActivityVideoData() {
+        ActivityVideoRequestDTO video1 = ActivityVideoRequestDTO.builder()
+                .title("Activity Video 1")
+                .videoUrl("https://video.url/activity1")
+                .boardType(BoardType.ACTIVITY_VIDEO)
+                .writer("test8888")
+                .build();
+        boardService.saveActivityVideo(video1, "test8888");
+
+        ActivityVideoRequestDTO video2 = ActivityVideoRequestDTO.builder()
+                .title("Activity Video 2")
+                .videoUrl("https://video.url/activity2")
+                .boardType(BoardType.ACTIVITY_VIDEO)
+                .writer("test8888")
+                .build();
+        boardService.saveActivityVideo(video2, "test8888");
     }
 }

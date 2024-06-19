@@ -1,4 +1,4 @@
-=== 이미지 다운로드
+=== 가입신청서 다운로드
 
 include::{snippets}/applyMember-download/http-request.adoc[]
 include::{snippets}/applyMember-download/http-response.adoc[]

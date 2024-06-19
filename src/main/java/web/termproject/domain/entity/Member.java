@@ -70,6 +70,10 @@ public class Member {
         this.role = RoleType.MEMBER;
     }
 
+    public void addMasterMemberAuthority() {
+        this.role = RoleType.MASTER_MEMBER;
+    }
+
     public void addAdminAuthority() {
         this.role = RoleType.ADMIN;
     }

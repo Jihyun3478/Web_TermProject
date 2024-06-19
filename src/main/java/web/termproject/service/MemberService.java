@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface MemberService {
     MemberResponseDTO createMember(SignupRequestDTO signupRequestDTO);
+    MemberResponseDTO createMasterMember(SignupRequestDTO signupRequestDTO);
     JwtTokenDTO signIn(String username, String password);
     Member findByLoginId(String loginId);
     Member processOAuthPostLogin(Authentication authentication);
