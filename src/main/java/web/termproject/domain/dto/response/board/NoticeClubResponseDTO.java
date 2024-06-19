@@ -25,7 +25,7 @@ public class NoticeClubResponseDTO {
     private MultipartFile image;
     private String imageData;
     private RoleType roleType;
-    private boolean isPublic;
+    private Boolean isPublic;
     private String clubName;
     private Long clubId;
 }

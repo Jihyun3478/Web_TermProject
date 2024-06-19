@@ -44,5 +44,5 @@ public class Board extends BaseTimeEntity {
 
     private String imageRoute;
     private String videoRoute;
-    private boolean isPublic;
+    private Boolean isPublic;
 }
