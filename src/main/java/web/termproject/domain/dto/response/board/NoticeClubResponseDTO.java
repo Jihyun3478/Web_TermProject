@@ -2,8 +2,11 @@ package web.termproject.domain.dto.response.board;
 
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
-import web.termproject.domain.entity.Member;
+import web.termproject.domain.entity.ApplyClub;
 import web.termproject.domain.status.BoardType;
+import web.termproject.domain.status.RoleType;
+
+import java.util.List;
 
 @Data
 @Getter
@@ -21,4 +24,7 @@ public class NoticeClubResponseDTO {
     private String imageRoute;
     private MultipartFile image;
     private String imageData;
+    private RoleType roleType;
+    private boolean isPublic;
+    private String clubName;
 }

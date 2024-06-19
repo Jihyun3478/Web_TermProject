@@ -14,12 +14,16 @@ import web.termproject.domain.dto.request.JwtTokenDTO;
 import web.termproject.domain.dto.request.SignupRequestDTO;
 import web.termproject.domain.dto.response.MemberResponseDTO;
 import web.termproject.domain.entity.Member;
+import web.termproject.domain.status.ApplyMemberStatus;
 import web.termproject.domain.status.RoleType;
 import web.termproject.repository.MemberRepository;
 import web.termproject.security.service.JwtTokenProvider;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -100,4 +104,31 @@ public class MemberServiceImpl implements MemberService {
         }
         return byEmail.get();
     }
+
+    @Override
+    public List<Long> findClubIdsByLoginId(String loginId) {
+        Member member = memberRepository.findByLoginId(loginId);
+        if (member == null || member.getApplyMemberList()== null || member.getApplyMemberList().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return member.getApplyMemberList().stream()
+                .filter(applyClub -> applyClub.getApplyMemberStatus() == ApplyMemberStatus.CLUB_MEMBER)
+                .map(applyClub -> applyClub.getClub().getId())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findClubNamesByLoginId(String loginId) {
+        Member member = memberRepository.findByLoginId(loginId);
+        if (member == null || member.getApplyMemberList() == null || member.getApplyMemberList().isEmpty()) {
+            return Collections.emptyList();
+        }
+        return member.getApplyMemberList().stream()
+                .filter(applyClub -> applyClub.getApplyMemberStatus() == ApplyMemberStatus.CLUB_MEMBER)
+                .map(applyClub -> applyClub.getClub().getName())
+                .collect(Collectors.toList());
+    }
+
+
+
 }

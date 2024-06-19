@@ -21,6 +21,7 @@ import web.termproject.domain.entity.Club;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.BoardType;
 import web.termproject.repository.BoardRepository;
+import web.termproject.repository.ClubRepository;
 import web.termproject.repository.MemberRepository;
 
 import java.io.FileNotFoundException;
@@ -33,6 +34,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import web.termproject.domain.status.RoleType;
 
 @Service
 @RequiredArgsConstructor
@@ -41,8 +43,9 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final MemberService memberService;
     private final MemberRepository memberRepository;
-    private static final String FILE_SEPARATOR = System.getProperty("file.separator");
-    private static String uploadDirectory = System.getProperty("user.home") + FILE_SEPARATOR + "Desktop" + FILE_SEPARATOR + "uploads";
+    private final ClubRepository clubRepository;
+    private static String uploadDirectory = "C:\\Users\\82109\\Desktop\\uploads";
+
 
 
     //동아리 공지 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
@@ -50,14 +53,15 @@ public class BoardServiceImpl implements BoardService {
     public Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
+      /*  Club club = clubRepository.findById(boardRequestDTO.getClubId())
+                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));*/
 
-        // 이미지 파일 처리
         if (image != null && !image.isEmpty()) {
             try {
                 String imageFileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
                 Path imagePath = Paths.get(uploadDirectory, imageFileName);
                 Files.write(imagePath, image.getBytes());
-                board.setImageRoute(String.valueOf(imagePath));
+                board.setImageRoute(String.valueOf(imagePath));  // 이미지 경로 설정
             } catch (IOException e) {
                 throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
             }
@@ -66,13 +70,16 @@ public class BoardServiceImpl implements BoardService {
         board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.NOTICE_CLUB);
+        board.setPublic(boardRequestDTO.isPublic()); // 공개 여부 설정
 
-        System.out.println("Board Type: " + board.getBoardType()); // 디버그용 로그 추가
+       // System.out.println("Board Type: " + board.getBoardType()); // 디버그용 로그 추가
 
         boardRepository.save(board);
 
         return board.getId() != null;
     }
+
+
     //부원 모집 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
     @Override
     public Boolean saveRecruitMember(RecruitMemberRequestDTO boardRequestDTO, MultipartFile image, String loginId) {
@@ -138,11 +145,19 @@ public class BoardServiceImpl implements BoardService {
     // 동아리 공지 게시글 전체 조회
     @Override
     public List<NoticeClubResponseDTO> findAllAnnouncement() {
+        // 사용자가 속한 모든 동아리의 이름 목록을 가져옵니다.
+      //  List<String> clubNames = memberService.findClubNamesByLoginId(loginId);
+
+        // 동아리 이름 목록을 이용하여 해당 동아리의 공지글만 필터링하여 조회합니다.
         List<Board> boards = boardRepository.findByBoardType(BoardType.NOTICE_CLUB);
+
         return boards.stream()
                 .map(this::getNoticeClubResponseDTO)
                 .collect(Collectors.toList());
     }
+
+
+
 
     // 동아리 공지 특정 게시글 조회
     @Override
@@ -218,6 +233,17 @@ public class BoardServiceImpl implements BoardService {
         dto.setWriter(board.getMember().getName());
         dto.setBoardType(board.getBoardType());
         dto.setImageRoute(board.getImageRoute());
+        dto.setRoleType(board.getMember().getRole());
+/*
+        // 동아리 이름 설정
+        String clubName;
+        if (board.getClubName() != null) {
+            clubName = board.getClubName(); // Board 엔티티에 저장된 동아리 이름 사용
+        } else {
+            // 추가적인 로직이 필요하다면 여기에 구현
+            clubName = ""; // 혹은 null 처리
+        }
+        dto.setClubName(clubName);*/
 
         return dto;
     }
@@ -231,6 +257,7 @@ public class BoardServiceImpl implements BoardService {
         dto.setBoardType(board.getBoardType());
         dto.setWriter(board.getMember().getName());
         dto.setImageRoute(board.getImageRoute());
+        dto.setRoleType(board.getMember().getRole());
         return dto;
     }
 
@@ -244,6 +271,7 @@ public class BoardServiceImpl implements BoardService {
         dto.setMemberId(board.getMember().getId());
         dto.setWriter(board.getMember().getName());
         dto.setImageRoute(board.getImageRoute());
+        dto.setRoleType(board.getMember().getRole());
         return dto;
     }
 
@@ -256,19 +284,21 @@ public class BoardServiceImpl implements BoardService {
         dto.setMemberId(board.getMember().getId());
         dto.setWriter(board.getMember().getName());
         dto.setBoardType(board.getBoardType());
+        dto.setRoleType(board.getMember().getRole());
         return dto;
     }
 
     @Override
     public Resource getImage(String imagePath) throws MalformedURLException {
-        Path filePath = Paths.get(uploadDirectory).resolve(imagePath).normalize();
+        Path filePath = Paths.get(uploadDirectory, imagePath).normalize();
         Resource resource = new UrlResource(filePath.toUri());
-        if (resource.exists()) {
+        if (resource.exists() && resource.isReadable()) {
             return resource;
         } else {
-            throw new RuntimeException("File not found " + imagePath);
+            throw new RuntimeException("File not found or cannot read file: " + imagePath);
         }
     }
+
     @Override
     public Resource loadAsResource(String filename) {
         try {
@@ -285,4 +315,16 @@ public class BoardServiceImpl implements BoardService {
             throw new RuntimeException(e);
         }
     }
+
+    private boolean isClubMember(String loginId, Board board) {
+        // 사용자 ID를 이용하여 회원 정보 조회
+        Member member = memberRepository.findByLoginId(loginId);
+        if (member == null) {
+            return false; // 회원 정보가 없으면 false 반환
+        }
+
+        // Board에 연결된 Member와 조회된 Member가 동일한지 확인
+        return board.getMember().equals(member);
+    }
+
 }

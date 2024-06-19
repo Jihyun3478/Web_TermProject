@@ -15,6 +15,9 @@ public class NoticeClubRequestDTO {
     private String content;
     private BoardType boardType;
     private String imageRoute;
+    private boolean isPublic;
+    private Long clubId; // 동아리 ID 추가
+
 
     public Board toEntity() {
         return Board.builder()
