@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.BoardType;
+import web.termproject.domain.status.RoleType;
 
 @Data
 @Getter
@@ -21,4 +22,5 @@ public class ActivityPhotoResponseDTO {
     private BoardType boardType;
     private String imageRoute;
     private MultipartFile image;
+    private RoleType roleType;
 }

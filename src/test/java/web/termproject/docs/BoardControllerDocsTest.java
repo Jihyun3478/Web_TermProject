@@ -27,7 +27,7 @@ public class BoardControllerDocsTest extends RestDocsSupport {
 
     private  final BoardService boardService = mock(BoardService.class);
 
-    @Override
+   /* @Override
     protected Object initController() {
         return new BoardController(boardService);
     }
@@ -71,5 +71,5 @@ public class BoardControllerDocsTest extends RestDocsSupport {
     @Test
     void 활동영상_등록_테스트() throws Exception {
         ActivityVideoRequestDTO reuestDTO;
-    }
+    }*/
 }

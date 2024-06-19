@@ -3,6 +3,7 @@ package web.termproject.domain.dto.response.board;
 import lombok.*;
 import web.termproject.domain.entity.Member;
 import web.termproject.domain.status.BoardType;
+import web.termproject.domain.status.RoleType;
 
 @Data
 @Getter
@@ -17,4 +18,5 @@ public class ActivityVideoResponseDTO {
     private Long memberId;
     private String videoUrl;
     private BoardType boardType;
+    private RoleType roleType;
 }

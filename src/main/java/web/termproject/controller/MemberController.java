@@ -93,7 +93,7 @@ public class MemberController {
         return ResponseEntity.ok(ApiResponse.response(ResponseCode.OK, "동아리 신청 목록 조회", responseDTOS));
     }
 
-    @PostConstruct
+    /*@PostConstruct
     public void initData() {
         initAdmins();
         initMembers();
@@ -101,7 +101,7 @@ public class MemberController {
         initApplyClubs();
         initClubs();
     }
-
+*/
     private void initAdmins() {
         createAdmin("admin0000", "admin0000", "관리자", "0000", "컴퓨터소프트웨어공학과", "000-0000-0000", "admin@kumoh.ac.kr", "남", "2000-01-01");
     }
