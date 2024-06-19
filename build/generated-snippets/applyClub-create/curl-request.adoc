@@ -9,8 +9,8 @@ $ curl 'http://localhost:8080/applyClub/create' -i -X POST \
   "major" : "컴퓨터소프트웨어공학과",
   "stuNum" : "2024",
   "phoneNum" : "000-0000-0000",
-  "pname" : "교수님1",
   "pmajor" : "컴퓨터소프트웨어공학과",
-  "pphoneNum" : "222-2222-2222"
+  "pphoneNum" : "222-2222-2222",
+  "pname" : "교수님1"
 }'
 ----
