@@ -10,6 +10,15 @@ endif::[]
 :sectnums:
 :sectlinks:
 
+// == MemberController
+// include::api/member.adoc[]
+
+== ApplyClubController
+include::api/applyClub.adoc[]
+
+== AdminController
+include::api/admin.adoc[]
+
 == ApplyMemberController
 include::api/applyMember.adoc[]
 
@@ -18,12 +27,3 @@ include::api/image.adoc[]
 
 == MasterController
 include::api/master.adoc[]
-
-== MemberController
-include::api/member.adoc[]
-
-== ApplyClubController
-include::api/applyClub.adoc[]
-
-== AdminController
-include::api/admin.adoc[]

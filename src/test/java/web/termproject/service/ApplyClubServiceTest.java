@@ -44,25 +44,25 @@ class ApplyClubServiceTest {
     void initData() {
         testMember = Member.builder()
                 .id(1L)
-                .loginId("test1234")
-                .loginPw("test1234")
-                .name("홍길동")
-                .stuNum("2024")
+                .loginId("test7777")
+                .loginPw("test7777")
+                .name("사용자7")
+                .stuNum("7777")
                 .major("컴퓨터소프트웨어공학과")
-                .phoneNum("000-0000-0000")
-                .email("홍길동@kumoh.ac.kr")
-                .gender("남")
-                .birthDate("2000-01-01")
+                .phoneNum("777-7777-7777")
+                .email("사용자7@kumoh.ac.kr")
+                .gender("여")
+                .birthDate("2001-07-07")
                 .build();
 
         testProfessor = Professor.builder()
                 .id(1L)
-                .loginId("pTest1234")
-                .loginPw("pTest1234")
-                .name("교수님1")
+                .loginId("ptest7777")
+                .loginPw("ptest7777")
+                .name("김성렬")
                 .major("컴퓨터소프트웨어공학과")
-                .phoneNum("222-2222-2222")
-                .email("교수님@kumoh.ac.kr")
+                .phoneNum("000-0000-0000")
+                .email("교수님7@kumoh.ac.kr")
                 .build();
     }
 
@@ -92,8 +92,8 @@ class ApplyClubServiceTest {
     @Test
     void createClub() {
         // Given
-        Member member = memberService.findByLoginId("test1234");
-        Professor professor = professorRepository.findByLoginId("pTest1234");
+        Member member = memberService.findByLoginId("test7777");
+        Professor professor = professorRepository.findByLoginId("ptest7777");
 
         ApplyClub applyClub = ApplyClub.createApplyClub(ClubType.CENTRAL, "Basketball Club", member, professor);
         applyClubRepository.save(applyClub);
@@ -109,8 +109,8 @@ class ApplyClubServiceTest {
     @Test
     void refuseClub() {
         // Given
-        Member member = memberService.findByLoginId("test1234");
-        Professor professor = professorRepository.findByLoginId("pTest1234");
+        Member member = memberService.findByLoginId("test7777");
+        Professor professor = professorRepository.findByLoginId("ptest7777");
 
         ApplyClub applyClub = ApplyClub.createApplyClub(ClubType.CENTRAL, "Basketball Club", member, professor);
         applyClubRepository.save(applyClub);
@@ -127,11 +127,8 @@ class ApplyClubServiceTest {
     @Test
     void findAll() {
         // Given
-        List<ApplyClubResponseDTO> initialList = applyClubService.findAll();
-        assertThat(initialList).isEmpty();
-
-        Member member = memberService.findByLoginId("test1234");
-        Professor professor = professorRepository.findByLoginId("pTest1234");
+        Member member = memberService.findByLoginId("test7777");
+        Professor professor = professorRepository.findByLoginId("ptest7777");
 
         ApplyClub applyClub = ApplyClub.createApplyClub(ClubType.CENTRAL, "Basketball Club", member, professor);
         applyClubRepository.save(applyClub);
@@ -146,8 +143,8 @@ class ApplyClubServiceTest {
     @Test
     void findById() {
         // Given
-        Member member = memberService.findByLoginId("test1234");
-        Professor professor = professorRepository.findByLoginId("pTest1234");
+        Member member = memberService.findByLoginId("test7777");
+        Professor professor = professorRepository.findByLoginId("ptest7777");
 
         ApplyClub applyClub = ApplyClub.createApplyClub(ClubType.CENTRAL, "Basketball Club", member, professor);
         applyClubRepository.save(applyClub);

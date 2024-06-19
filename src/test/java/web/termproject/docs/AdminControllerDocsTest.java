@@ -20,6 +20,7 @@ import web.termproject.domain.status.ApplyClubStatus;
 import web.termproject.domain.status.ClubType;
 import web.termproject.domain.status.RoleType;
 import web.termproject.service.ApplyClubService;
+import web.termproject.service.MemberService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AdminControllerDocsTest extends RestDocsSupport {
 
     private final ApplyClubService applyClubService = mock(ApplyClubService.class);
+    private final MemberService memberService = mock(MemberService.class);
 
     private Member testMember;
     private Professor testProfessor;
@@ -46,7 +48,7 @@ class AdminControllerDocsTest extends RestDocsSupport {
 
     @Override
     protected Object initController() {
-        return new AdminController(applyClubService);
+        return new AdminController(applyClubService, memberService);
     }
 
     @BeforeEach

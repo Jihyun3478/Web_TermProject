@@ -133,6 +133,13 @@ public class MemberServiceImpl implements MemberService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Member findByName(String memberName) {
+        return memberRepository.findByName(memberName);
+    }
 
-
+    @Override
+    public void save(Member member) {
+        memberRepository.save(member);
+    }
 }

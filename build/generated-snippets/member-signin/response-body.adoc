@@ -1,8 +1,0 @@
-[source,json,options="nowrap"]
-----
-{
-  "grantType" : "Bearer",
-  "accessToken" : "access-token",
-  "refreshToken" : "refresh-token"
-}
-----
