@@ -1,19 +1,19 @@
-=== 회원가입
-
-include::{snippets}/member-signup/http-request.adoc[]
-include::{snippets}/member-signup/request-fields.adoc[]
-include::{snippets}/member-signup/http-response.adoc[]
-include::{snippets}/member-signup/response-fields.adoc[]
-
-=== 로그인
-
-include::{snippets}/member-signin/http-request.adoc[]
-include::{snippets}/member-signin/request-fields.adoc[]
-include::{snippets}/member-signin/http-response.adoc[]
-include::{snippets}/member-signin/response-fields.adoc[]
-
-=== 회원 정보 조회
-
-include::{snippets}/member-detail-info/http-request.adoc[]
-include::{snippets}/member-detail-info/http-response.adoc[]
-include::{snippets}/member-detail-info/response-fields.adoc[]
+// === 회원가입
+//
+// include::{snippets}/member-signup/http-request.adoc[]
+// include::{snippets}/member-signup/request-fields.adoc[]
+// include::{snippets}/member-signup/http-response.adoc[]
+// include::{snippets}/member-signup/response-fields.adoc[]
+//
+// === 로그인
+//
+// include::{snippets}/member-signin/http-request.adoc[]
+// include::{snippets}/member-signin/request-fields.adoc[]
+// include::{snippets}/member-signin/http-response.adoc[]
+// include::{snippets}/member-signin/response-fields.adoc[]
+//
+// === 회원 정보 조회
+//
+// include::{snippets}/member-detail-info/http-request.adoc[]
+// include::{snippets}/member-detail-info/http-response.adoc[]
+// include::{snippets}/member-detail-info/response-fields.adoc[]

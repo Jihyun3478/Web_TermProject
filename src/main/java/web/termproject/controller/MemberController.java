@@ -40,8 +40,6 @@ public class MemberController {
     private final AdminService adminService;
     private final ProfessorService professorService;
     private final ApplyClubService applyClubService;
-    private final MemberRepository memberRepository;
-    private final ProfessorRepository professorRepository;
 
     /* 회원가입 */
     @PostMapping("/api/signup")
@@ -129,7 +127,7 @@ public class MemberController {
         createMember("test4444", "test4444", "사용자4", "4444", "기계공학과", "444-4444-4444", "사용자4@kumoh.ac.kr", "여", "2001-04-04");
         createMember("test5555", "test5555", "사용자5", "5555", "전자공학부", "555-5555-5555", "사용자5@kumoh.ac.kr", "남", "2001-05-05");
         createMember("test6666", "test6666", "사용자6", "6666", "전자공학부", "666-6666-6666", "사용자6@kumoh.ac.kr", "여", "2001-06-06");
-        createMember("test7777", "test7777", "사용자7", "77777", "컴퓨터소프트웨어공학과", "777-7777-7777", "사용자7@kumoh.ac.kr", "여", "2001-07-07");
+        createMember("test7777", "test7777", "사용자7", "7777", "컴퓨터소프트웨어공학과", "777-7777-7777", "사용자7@kumoh.ac.kr", "여", "2001-07-07");
     }
 
     private void createMember(String loginId, String loginPw, String name, String stuNum, String major, String phoneNum, String email, String gender, String birthDate) {
@@ -179,8 +177,8 @@ public class MemberController {
     }
 
     private void createApplyClub(ClubType clubType, String clubName, ApplyClubStatus status, String memberName, String professorName) {
-        Member member = memberRepository.findByName(memberName);
-        Professor professor = professorRepository.findByName(professorName);
+        Member member = memberService.findByName(memberName);
+        Professor professor = professorService.findByName(professorName);
 
         if(status == ApplyClubStatus.REFUSE) {
             ApplyClubRequestDTO applyClubRequestDTO = ApplyClubRequestDTO.builder()

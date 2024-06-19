@@ -1,18 +1,18 @@
-=== Download Image
+=== 이미지 다운로드
 
 include::{snippets}/applyMember-download/http-request.adoc[]
 include::{snippets}/applyMember-download/http-response.adoc[]
 include::{snippets}/applyMember-download/curl-request.adoc[]
 include::{snippets}/applyMember-download/httpie-request.adoc[]
 
-=== Upload Files
+=== 파일 업로드
 
 include::{snippets}/applyMember-upload/http-request.adoc[]
 include::{snippets}/applyMember-upload/http-response.adoc[]
 include::{snippets}/applyMember-upload/curl-request.adoc[]
 include::{snippets}/applyMember-upload/httpie-request.adoc[]
 
-=== Get Club List
+=== 미가입 동아리 목록 조회
 
 include::{snippets}/applyMember-clubList/http-request.adoc[]
 include::{snippets}/applyMember-clubList/http-response.adoc[]

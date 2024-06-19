@@ -18,4 +18,9 @@ public class ProfessorServiceImpl implements ProfessorService {
 
         professorRepository.save(professor);
     }
+
+    @Override
+    public Professor findByName(String professorName) {
+        return professorRepository.findByName(professorName);
+    }
 }

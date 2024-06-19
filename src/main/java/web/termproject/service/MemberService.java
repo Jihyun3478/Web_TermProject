@@ -17,4 +17,8 @@ public interface MemberService {
     List<Long> findClubIdsByLoginId(String loginId);
 
     List<String> findClubNamesByLoginId(String loginId);
+
+    Member findByName(String memberName);
+
+    void save(Member member);
 }

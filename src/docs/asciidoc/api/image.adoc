@@ -1,4 +1,4 @@
-=== Get Image
+=== 이미지 조회
 
 include::{snippets}/image-display/http-request.adoc[]
 include::{snippets}/image-display/http-response.adoc[]
@@ -6,7 +6,7 @@ include::{snippets}/image-display/curl-request.adoc[]
 include::{snippets}/image-display/httpie-request.adoc[]
 
 
-=== Upload Image
+=== 이미지 업로드
 
 include::{snippets}/image-upload/http-request.adoc[]
 include::{snippets}/image-upload/http-response.adoc[]

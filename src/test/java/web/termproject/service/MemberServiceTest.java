@@ -28,8 +28,8 @@ class MemberServiceTest {
     @Test
     void 회원가입() {
         SignupRequestDTO signupRequestDTO = SignupRequestDTO.builder()
-                .loginId("test1111")
-                .loginPw("test1111")
+                .loginId("테스트1111")
+                .loginPw("테스트1111")
                 .name("이름")
                 .stuNum("학번")
                 .major("소속")
@@ -41,7 +41,7 @@ class MemberServiceTest {
 
         MemberResponseDTO memberResponseDTO = memberService.createMember(signupRequestDTO);
 
-        assertThat(memberResponseDTO.getLoginId()).isEqualTo("test1111");
+        assertThat(memberResponseDTO.getLoginId()).isEqualTo("테스트1111");
         assertThat(memberResponseDTO.getName()).isEqualTo("이름");
         assertThat(memberResponseDTO.getStuNum()).isEqualTo("학번");
         assertThat(memberResponseDTO.getMajor()).isEqualTo("소속");
@@ -53,7 +53,7 @@ class MemberServiceTest {
 
     @Test
     void 로그인() {
-        JwtTokenDTO jwtToken = memberService.signIn("test1234", "test1234");
+        JwtTokenDTO jwtToken = memberService.signIn("test1111", "test1111");
         assertThat(jwtToken).isNotNull();
     }
 
