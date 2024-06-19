@@ -28,4 +28,5 @@ public class NoticeClubResponseDTO {
     private Boolean isPublic;
     private String clubName;
     private Long clubId;
+    private String photoBase64;
 }

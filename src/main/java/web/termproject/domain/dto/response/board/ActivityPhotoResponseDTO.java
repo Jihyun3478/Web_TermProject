@@ -23,4 +23,5 @@ public class ActivityPhotoResponseDTO {
     private String imageRoute;
     private MultipartFile image;
     private RoleType roleType;
+    private String photoBase64;
 }

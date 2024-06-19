@@ -41,4 +41,6 @@ public interface ApplyMemberRepository extends JpaRepository<ApplyMember, Long> 
             "WHERE am.member.id = :memberId " +
             "AND am.club.id = :clubId")
     boolean existsApplyMemberByMemberIdAndClubId(@Param("clubId") Long clubId, @Param("memberId") Long memberId);
+
+
 }

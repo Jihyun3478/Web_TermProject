@@ -15,6 +15,7 @@ public class ActivityPhotoRequestDTO {
     private String content;
     private BoardType boardType;
     private String imageRoute;
+    private byte[] photo;
 
     public Board toEntity() {
         return Board.builder()

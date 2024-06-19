@@ -35,7 +35,9 @@ public class Board extends BaseTimeEntity {
     @JsonBackReference
     private Club club;
 
-
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private byte[] photo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

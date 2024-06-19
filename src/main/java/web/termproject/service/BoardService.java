@@ -14,16 +14,17 @@ import web.termproject.domain.dto.response.board.RecruitMemberResponseDTO;
 import web.termproject.domain.entity.Board;
 import web.termproject.domain.entity.Club;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
 public interface BoardService {
 
     //부원 모집 등록 -> 모든 게시글에 이미지 및 동영상 등록 가능
-    Boolean saveRecruitMember(RecruitMemberRequestDTO boardRequestDTO, MultipartFile image, String loginId);
+    Boolean saveRecruitMember(RecruitMemberRequestDTO boardRequestDTO, MultipartFile image, String loginId) throws IOException;
 
     //활동 사진 등록
-    Boolean saveActivityPhoto(ActivityPhotoRequestDTO boardRequestDTO, MultipartFile image, String loginId);
+    Boolean saveActivityPhoto(ActivityPhotoRequestDTO boardRequestDTO, MultipartFile image, String loginId) throws IOException;
 
     //활동 영상 등록
     Boolean saveActivityVideo(ActivityVideoRequestDTO boardRequestDTO, String loginId);
@@ -58,7 +59,7 @@ public interface BoardService {
     ActivityVideoResponseDTO getActivityVideo(Long boardId);
 
 
-    Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image, String loginId);
+    Boolean saveNoticeClub(NoticeClubRequestDTO boardRequestDTO, MultipartFile image, String loginId) throws IOException;
 
     Resource getImage(String imageRoute)throws MalformedURLException;
 
