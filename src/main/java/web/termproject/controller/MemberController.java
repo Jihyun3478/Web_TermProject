@@ -102,7 +102,7 @@ public class MemberController {
         initProfessors();
         initApplyClubs();
         initClubs();
-        initBoardData();
+//        initBoardData();
     }
 
     private void initAdmins() {
