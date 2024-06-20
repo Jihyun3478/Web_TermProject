@@ -51,15 +51,15 @@ public class BoardServiceImpl implements BoardService {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
         // 로그인한 사용자가 속한 applyMemberList 조회
-//        ApplyClub applyClub = applyClubRepository.findByMemberId(member.getId());
+        ApplyClub applyClub = applyClubRepository.findByMemberId(member.getId());
 
-        Club club = clubRepository.findById(boardRequestDTO.getClubId())
-                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));
+//        Club club = clubRepository.findById(boardRequestDTO.getClubId())
+//                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));
 
         // applyMemberList에서 동아리 ID 목록 추출
-//        Long clubId  = applyClub.getClub().getId();
-//        Club club = clubRepository.findById(clubId)
-//                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));
+        Long clubId  = applyClub.getClub().getId();
+        Club club = clubRepository.findById(clubId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 동아리를 찾을 수 없습니다."));
 
         board.setMember(member);
         board.setWriter(member.getName());
