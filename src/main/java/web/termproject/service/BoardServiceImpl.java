@@ -82,16 +82,7 @@ public class BoardServiceImpl implements BoardService {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
         // 이미지 파일 처리
-        if (image != null && !image.isEmpty()) {
-            try {
-                String imageFileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-                Path imagePath = Paths.get(UPLOAD_DIRECTORY, imageFileName);
-                Files.write(imagePath, image.getBytes());
-                board.setImageRoute(String.valueOf(imagePath));
-            } catch (IOException e) {
-                throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
-            }
-        }
+
         board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.RECRUIT_MEMBER);
@@ -111,16 +102,6 @@ public class BoardServiceImpl implements BoardService {
         Board board = boardRequestDTO.toEntity();
         Member member = memberService.findByLoginId(loginId);
         // 이미지 파일 처리
-        if (image != null && !image.isEmpty()) {
-            try {
-                String imageFileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-                Path imagePath = Paths.get(UPLOAD_DIRECTORY, imageFileName);
-                Files.write(imagePath, image.getBytes());
-                board.setImageRoute(String.valueOf(imagePath));
-            } catch (IOException e) {
-                throw new RuntimeException("이미지 파일 저장 중 오류가 발생했습니다.", e);
-            }
-        }
         board.setMember(member);
         board.setWriter(member.getName());
         board.setBoardType(BoardType.ACTIVITY_PHOTO);
