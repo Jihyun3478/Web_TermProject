@@ -11,7 +11,7 @@ import web.termproject.domain.status.BoardType;
 @NoArgsConstructor
 public class ActivityVideoRequestDTO {
     private String title;
-    private String videoUrl;//url
+    private String content;//url
     private BoardType boardType;
     private String writer;
 
@@ -19,7 +19,7 @@ public class ActivityVideoRequestDTO {
         return Board.builder()
                 .title(title)
                 .writer(writer)
-                .content(videoUrl)
+                .content(content)
                 .boardType(BoardType.ACTIVITY_VIDEO)
                 .build();
     }
