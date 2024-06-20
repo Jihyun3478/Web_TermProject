@@ -319,7 +319,7 @@ public class MemberController {
     private void initActivityVideoData() {
         ActivityVideoRequestDTO video1 = ActivityVideoRequestDTO.builder()
                 .title("Activity Video 1")
-                .videoUrl("https://video.url/activity1")
+                .content("https://video.url/activity1")
                 .boardType(BoardType.ACTIVITY_VIDEO)
                 .writer("test8888")
                 .build();
@@ -327,7 +327,7 @@ public class MemberController {
 
         ActivityVideoRequestDTO video2 = ActivityVideoRequestDTO.builder()
                 .title("Activity Video 2")
-                .videoUrl("https://video.url/activity2")
+                .content("https://video.url/activity2")
                 .boardType(BoardType.ACTIVITY_VIDEO)
                 .writer("test8888")
                 .build();
